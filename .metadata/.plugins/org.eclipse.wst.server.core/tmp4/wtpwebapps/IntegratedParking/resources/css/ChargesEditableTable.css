@@ -1,0 +1,24 @@
+@CHARSET "ISO-8859-1";
+
+.nameChargesTable{
+	border-collapse:collapse;
+	border: 1px solid #000000;
+}
+
+.nameChargesTableHeader{
+	text-align:center;
+	background:#B5B5B5;
+	border-bottom:1px solid #000000;
+	padding:2px;
+}
+
+.nameChargesTableOddRow{
+	text-align:center;
+	background: #FFFFFF;
+}
+
+.nameChargesTableEvenRow{
+	text-align:center;
+	background:~D3D3D3;
+}
+

@@ -1,0 +1,54 @@
+package com.ait.nav;
+
+import java.util.ArrayList;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
+@ManagedBean
+@SessionScoped
+public class TableData {
+	private String companyName,firstName,lastName;
+	private ArrayList<Name> names = new ArrayList<Name>();
+
+	public TableData() {
+		this.companyName = "My Company";
+		names.add(new Name("Steve", "Breen"));
+		names.add(new Name("Steve2", "Breen"));
+		names.add(new Name("Steve3", "Breen"));
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public ArrayList<Name> getNames() {
+		return names;
+	}
+	
+	public void editName(Name name){
+		name.setCanEdit(true);
+		
+	}
+	
+	public String saveChanges(){
+		for(Name name :names){
+			name.setCanEdit(false);
+		}
+		return null;
+	}
+	
+	public String deleteName(Name nameParam){
+		names.remove(nameParam);
+		return null;
+	}
+	public String addName(Name name){
+		final Name name=new Name(this.firstName, this.lastName);
+		names.add(name);
+		firstName=null;
+		lastName=null;
+		return null;
+	}
+	
+	
+}

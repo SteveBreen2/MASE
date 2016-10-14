@@ -1,0 +1,122 @@
+package week6;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class ArrayListPeople {
+	static Scanner sc = new Scanner(System.in);
+
+	public static int userChoice() {
+		System.out.println("Enter a number (1-7)\n" + "1:Add\n" + "2:Update\n" + "3:Delete\n" + "4:Delete All\n"
+				+ "5:Find Person\n" + "6:Display all\n" + "7:Exit");
+		return sc.nextInt();
+	}
+
+	public static void add(ArrayList<Person> people) {
+		System.out.println("Enter name of new Person: ");
+		String name = sc.next();
+		System.out.println("Enter age of new Person: ");
+		int age = sc.nextInt();
+		Person p=new Person(name,age);
+		
+		if (!people.isEmpty()) {
+			for (Person person : people) {
+				if (person.getName().equals(name)) {
+					System.out.println("Already created.");
+				} else {
+					
+					people.add(p);
+				}
+			}
+		} else {
+			
+			people.add(p);
+		}
+
+	}
+
+	public static void update(ArrayList<Person> people) {
+		System.out.println("Enter name of Person to update: ");
+		String name = sc.next();
+
+		for (Person person : people) {
+			if (person.getName().equalsIgnoreCase(name)) {
+				System.out.println("Enter new name for :" + name);
+				person.setName(sc.next());
+				System.out.println("Enter new age :");
+				person.setAge(sc.nextInt());
+			} else {
+				System.out.println("Unknown name: " + name);
+			}
+		}
+	}
+
+	public static void deletePerson(ArrayList<Person> people) {
+		System.out.println("Enter name of Person to delete: ");
+		Person toBeDeleted = null;
+		String name = sc.next();
+		for (Person person : people) {
+			if (person.getName().equalsIgnoreCase(name)) {
+				toBeDeleted = person;
+			}
+		}
+		people.remove(toBeDeleted);
+	}
+
+	public static void deleteEveryone(ArrayList<Person> people) {
+
+		people.clear();
+		System.out.println("List Emptied");
+	}
+
+	public static void display(ArrayList<Person> people) {
+
+		for (Person p : people) {
+			System.out.println(p);
+		}
+	}
+
+	public static void findPersonByName(ArrayList<Person> people) {
+		System.out.println("Enter name of Person: ");
+		String name = sc.next();
+		for (Person person : people) {
+			if (person.getName().equalsIgnoreCase(name)) {
+				System.out.println("Found: \n" + person);
+			}
+		}
+	}
+
+	public static void main(String args[]) {
+
+		ArrayList<Person> people = new ArrayList();
+		int choice = 0;
+
+		while (choice != 7) {
+			choice = userChoice();
+
+			switch (choice) {
+				case 1:
+					add(people);
+					break;
+				case 2:
+					update(people);
+					break;
+				case 3:
+					deletePerson(people);
+					break;
+				case 4:
+					deleteEveryone(people);
+					break;
+				case 5:
+					findPersonByName(people);
+					break;
+				case 6:
+					display(people);
+					break;
+
+			}
+		}
+
+	}
+
+}

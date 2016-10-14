@@ -1,0 +1,269 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:tab title="To do List" rendered="#{employee.isNotManager(employee)}">
+		<h:panelGrid columns="1" cellpadding="10"
+			rendered="#{employee.isServicer(null)}">
+
+			<h3 style="margin: 0 auto; text-align: center">Valeting Tasks</h3>
+			<p:dataTable value="#{taskList.getvTaskList()}" var="bq"
+				styleClass="bookingTable" headerClass="bookingTableHeader"
+				rowClasses="bookingTableOddRow,bookingTableEvenRow">
+				<p:column>
+					<f:facet name="header">Employee</f:facet>
+					<h:outputText value="#{bq.getAssignedName()}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">Customer ref</f:facet>
+					<h:outputText value="#{bq.bookingRef}" />
+				</p:column>
+				<p:column colspan="1">
+					<f:facet name="header">Make</f:facet>
+
+					<h:outputText value="#{bq.make}" />
+
+				</p:column>
+				<p:column colspan="1">
+					<f:facet name="header">Model</f:facet>
+
+					<h:outputText value="#{bq.model}" />
+
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Start date</f:facet>
+					<h:outputText value="#{bq.startDate}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">End date</f:facet>
+					<h:outputText value="#{bq.endDate}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">Task Status</f:facet>
+					<p:selectOneMenu id="console" rendered="#{bq.editable}"
+						value="#{bq.taskStatus}" style="width:70px">
+						<f:selectItem itemLabel="Not Started" itemValue="Not Started" />
+						<f:selectItem itemLabel="In Progress" itemValue="In Progress" />
+						<f:selectItem itemLabel="Completed" itemValue="Completed" />
+					</p:selectOneMenu>
+					<h:outputText value="#{bq.taskStatus}" rendered="#{not bq.editable}" />
+				</p:column>
+				<p:column>
+					<p:commandButton action="#{bq.setEditable(false)}" value="Update Status" 
+						ajax="false" rendered="#{bq.editable}" />
+					<p:commandButton action="#{bq.setEditable(true)}" value="Edit"
+						ajax="false" rendered="#{not bq.editable}" />
+				</p:column>
+			</p:dataTable>
+		</h:panelGrid>
+		
+		<h:panelGrid columns="1" cellpadding="10"
+			rendered="#{employee.isServicer(null)}">
+
+			<h3 style="margin: 0 auto; text-align: center">Service Tasks</h3>
+			<p:dataTable value="#{taskList.getsTaskList()}" var="bq"
+				styleClass="bookingTable" headerClass="bookingTableHeader"
+				rowClasses="bookingTableOddRow,bookingTableEvenRow">
+				<p:column>
+					<f:facet name="header">Employee</f:facet>
+					<h:outputText value="#{bq.getAssignedName()}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">Customer ref</f:facet>
+					<h:outputText value="#{bq.bookingRef}" />
+				</p:column>
+				<p:column colspan="1">
+					<f:facet name="header">Make</f:facet>
+
+					<h:outputText value="#{bq.make}" />
+
+				</p:column>
+				<p:column colspan="1">
+					<f:facet name="header">Model</f:facet>
+
+					<h:outputText value="#{bq.model}" />
+
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Start date</f:facet>
+					<h:outputText value="#{bq.startDate}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">End date</f:facet>
+					<h:outputText value="#{bq.endDate}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">Task Status</f:facet>
+					<p:selectOneMenu id="console" rendered="#{bq.editable}"
+						value="#{bq.taskStatus}" style="width:70px">
+						<f:selectItem itemLabel="Not Started" itemValue="Not Started" />
+						<f:selectItem itemLabel="In Progress" itemValue="In Progress" />
+						<f:selectItem itemLabel="Completed" itemValue="Completed" />
+					</p:selectOneMenu>
+					<h:outputText value="#{bq.taskStatus}" rendered="#{not bq.editable}" />
+				</p:column>
+				<p:column>
+					<p:commandButton action="#{bq.setEditable(false)}" value="Update Status" 
+						ajax="false" rendered="#{bq.editable}" />
+					<p:commandButton action="#{bq.setEditable(true)}" value="Edit"
+						ajax="false" rendered="#{not bq.editable}" />
+				</p:column>
+			</p:dataTable>
+		</h:panelGrid>
+		
+		
+		
+		
+		
+		<h:panelGrid columns="1" cellpadding="10"
+			rendered="#{employee.isOperator(null)}">
+
+			<h3 style="margin: 0 auto; text-align: center">Meet and Greet Tasks</h3>
+
+			<p:dataTable value="#{taskList.getMgTaskList()}" var="bq"
+				styleClass="bookingTable" headerClass="bookingTableHeader"
+				rowClasses="bookingTableOddRow,bookingTableEvenRow">
+
+				<p:column>
+					<f:facet name="header">Employee</f:facet>
+					<h:outputText value="#{bq.getAssignedName()}" />
+
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Customer ref</f:facet>
+					<h:outputText value="#{bq.bookingRef}" />
+
+				</p:column>
+
+
+
+				<p:column colspan="1">
+					<f:facet name="header">Make</f:facet>
+
+					<h:outputText value="#{bq.make}" />
+
+				</p:column>
+
+				<p:column colspan="1">
+					<f:facet name="header">Model</f:facet>
+
+					<h:outputText value="#{bq.model}" />
+
+				</p:column>
+
+
+
+				<p:column>
+					<f:facet name="header">Start date</f:facet>
+					<h:outputText value="#{bq.startDate}" />
+
+				</p:column>
+
+
+				<p:column>
+					<f:facet name="header">End date</f:facet>
+					<h:outputText value="#{bq.endDate}" />
+
+				</p:column>
+
+
+				<p:column>
+					<f:facet name="header">Task Status</f:facet>
+					<p:selectOneMenu id="console" rendered="#{bq.editable}"
+						value="#{bq.taskStatus}" style="width:70px">
+						<f:selectItem itemLabel="Not Started" itemValue="Not Started" />
+						<f:selectItem itemLabel="In Progress" itemValue="In Progress" />
+						<f:selectItem itemLabel="Completed" itemValue="Completed" />
+					</p:selectOneMenu>
+					<h:outputText value="#{bq.taskStatus}" rendered="#{not bq.editable}" />
+				</p:column>
+				<p:column>
+					<p:commandButton action="#{bq.setEditable(false)}" value="Update Status"
+						ajax="false" rendered="#{bq.editable}" />
+					<p:commandButton action="#{bq.setEditable(true)}" value="Edit"
+						ajax="false" rendered="#{not bq.editable}" />
+				</p:column>
+			</p:dataTable>
+		</h:panelGrid>
+		
+		<h:panelGrid columns="1" cellpadding="10"
+			rendered="#{employee.isOperator(null)}">
+
+			<h3 style="margin: 0 auto; text-align: center">Gold Customer Tasks</h3>
+
+			<p:dataTable value="#{taskList.getgTaskList()}" var="bq"
+				styleClass="bookingTable" headerClass="bookingTableHeader"
+				rowClasses="bookingTableOddRow,bookingTableEvenRow">
+
+				<p:column>
+					<f:facet name="header">Employee</f:facet>
+					<h:outputText value="#{bq.getAssignedName()}" />
+
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Customer ref</f:facet>
+					<h:outputText value="#{bq.bookingRef}" />
+
+				</p:column>
+
+
+
+				<p:column colspan="1">
+					<f:facet name="header">Make</f:facet>
+
+					<h:outputText value="#{bq.make}" />
+
+				</p:column>
+
+				<p:column colspan="1">
+					<f:facet name="header">Model</f:facet>
+
+					<h:outputText value="#{bq.model}" />
+
+				</p:column>
+
+
+
+				<p:column>
+					<f:facet name="header">Start date</f:facet>
+					<h:outputText value="#{bq.startDate}" />
+
+				</p:column>
+
+
+				<p:column>
+					<f:facet name="header">End date</f:facet>
+					<h:outputText value="#{bq.endDate}" />
+
+				</p:column>
+
+
+				<p:column>
+					<f:facet name="header">Task Status</f:facet>
+					<p:selectOneMenu id="console" rendered="#{bq.editable}"
+						value="#{bq.taskStatus}" style="width:70px">
+						<f:selectItem itemLabel="Not Started" itemValue="Not Started" />
+						<f:selectItem itemLabel="In Progress" itemValue="In Progress" />
+						<f:selectItem itemLabel="Completed" itemValue="Completed" />
+					</p:selectOneMenu>
+					<h:outputText value="#{bq.taskStatus}" rendered="#{not bq.editable}" />
+				</p:column>
+				<p:column>
+					<p:commandButton action="#{bq.setEditable(false)}" value="Update Status"
+						ajax="false" rendered="#{bq.editable}" />
+					<p:commandButton action="#{bq.setEditable(true)}" value="Edit"
+						ajax="false" rendered="#{not bq.editable}" />
+				</p:column>
+			</p:dataTable>
+		</h:panelGrid>
+		
+		
+	</p:tab>
+
+</ui:composition>

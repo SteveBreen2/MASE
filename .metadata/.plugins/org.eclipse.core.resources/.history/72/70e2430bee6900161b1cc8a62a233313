@@ -1,0 +1,137 @@
+package testCode;
+
+import static org.junit.Assert.*;
+
+import java.text.ParseException;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import javaCode.Customer;
+import javaCode.DetailsControl;
+
+public class DetailsControlTest {
+
+	private DetailsControl dc;
+
+	@Before
+	public void setUp() {
+		dc = new DetailsControl();
+	}
+	
+	@Test
+	public void testEditableAccessor() {
+		assertFalse(dc.isEditable());
+		dc.setEditable(true);
+		assertTrue(dc.isEditable());
+	}
+	
+	@Test
+	public void testPassAccessors() {
+		assertNull(dc.getPass());
+		dc.setPass("pass");
+		assertEquals("pass",dc.getPass());
+	}
+
+	@Test
+	public void testEmailAccessors() {
+		assertNull(dc.getEmail());
+		dc.setEmail("mail");
+		assertEquals("mail",dc.getEmail());
+	}
+	
+	@Test
+	public void testNameAccessors() {
+		assertNull(dc.getName());
+		dc.setName("name");
+		assertEquals("name",dc.getName());
+	}
+	
+	@Test
+	public void testNewpassAccessors() {
+		assertNull(dc.getNewpass());
+		dc.setNewpass("mail");
+		assertEquals("mail",dc.getNewpass());
+	}
+	
+	@Test
+	public void testStaffEditableAccessor() {
+		assertFalse(dc.isStaffEditable());
+		dc.setStaffEditable(true);
+		assertTrue(dc.isStaffEditable());
+	}
+	
+	@Test
+	public void testChangePassSuccess() throws ParseException {
+		Customer c = new Customer();
+		dc.setNewpass("newpass");
+		dc.changePass(c);
+		assertEquals("newpass", c.getPassword());
+	}
+	
+	@Test
+	public void testChangePassNull() throws ParseException {
+		Customer c = new Customer("none", "new", "none");
+		dc.setNewpass(null);
+		dc.changePass(c);
+		assertEquals("new", c.getPassword());
+	}
+	
+	@Test
+	public void testChangePassEmptyString() {
+		Customer c = new Customer("none", "new", "none");
+		dc.setNewpass("");
+		dc.changePass(c);
+		assertEquals("new", c.getPassword());
+	}
+	
+	@Test
+	public void testChangeNameSuccess() {
+		Customer c = new Customer();
+		dc.setName("newname");
+		dc.changeName(c);
+		assertEquals("newname", c.getName());
+	}
+
+	@Test
+	public void testChangeNameNull() {
+		Customer c = new Customer("new", "none", "none");
+		dc.setName(null);
+		dc.changeName(c);
+		assertEquals("new", c.getName());
+	}
+	
+	@Test
+	public void testChangeNameEmptyString() {
+		Customer c = new Customer("new", "none", "none");
+		dc.setName("");
+		dc.changeName(c);
+		assertEquals("new", c.getName());
+	}
+	
+	
+	@Test
+	public void testChangeEmailSuccess() {
+		Customer c = new Customer();
+		dc.setEmail("newname");
+		dc.changeEmail(c);
+		assertEquals("newname", c.getEmail());
+	}
+	
+	@Test
+	public void testChangeEmailNull() {
+		Customer c = new Customer("none", "none", "new");
+		dc.setEmail(null);
+		dc.changeEmail(c);
+		assertEquals("new", c.getEmail());
+	}
+	
+	@Test
+	public void testChangeEmailEmptyString() {
+		Customer c = new Customer("none", "none", "new");
+		dc.setEmail("");
+		dc.changeEmail(c);
+		assertEquals("new", c.getEmail());
+	}
+	
+}

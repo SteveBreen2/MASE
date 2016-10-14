@@ -1,0 +1,20 @@
+package agileDesignAndTesting;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import static junitparams.JUnitParamsRunner.$;
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
+
+@RunWith(JUnitParamsRunner.class)
+public class OrderTest {
+
+	@Test
+	@Parameters
+	public Object[] orderParams() {
+		return $($());
+	}
+
+}

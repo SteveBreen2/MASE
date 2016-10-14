@@ -1,0 +1,58 @@
+package testCode;
+
+import static org.junit.Assert.assertEquals;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import javaCode.BookingList;
+import javaCode.Booking;
+
+public class BookingListTest {
+
+	private Booking testBooking;
+	private BookingList testBookingList;
+	SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
+
+	@Before
+	public void startup() throws ParseException {
+
+		String startDateString = "22-08-2016";
+		String endDateString = "25-08-2016";
+		Date startDate = sdf.parse(startDateString);
+		Date endDate = sdf.parse(endDateString);
+		testBooking = new Booking(startDate, endDate, false, false, false);
+		testBookingList=new BookingList();
+	}
+
+	@Test 
+	public void getBookingListTest() throws ParseException {
+
+		ArrayList<Booking> bookingsConfirmation=new ArrayList<Booking>();
+		assertEquals(bookingsConfirmation,testBookingList.getBookings());
+		
+	}
+	@Test
+	public void findBookingsByRefTest() throws ParseException {
+		
+		testBookingList.addBooking(testBooking);
+		assertEquals(testBooking,testBookingList.findBookingsByRef(testBooking.getBookingRef()));
+		
+	}
+	@Test
+	public void dontFindBookingsByRefTest() throws ParseException {
+		
+		testBookingList.addBooking(testBooking);
+		assertEquals(null,testBookingList.findBookingsByRef(100));
+		
+	}
+	
+	
+	
+	
+}

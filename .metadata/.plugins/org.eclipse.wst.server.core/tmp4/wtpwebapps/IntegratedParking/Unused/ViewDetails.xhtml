@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+	<h:head>
+		<title>My Details</title>
+		<style type="text/css">
+			.js #fouc {display: none;} 
+		</style>
+		<script type="text/javascript">
+			document.documentElement.className = 'js';
+		</script>
+		 <link rel="shortcut icon" href="./resources/carIcon.ico" />
+		<h:outputStylesheet name="styles1.css" library="css" />
+		<h:outputStylesheet library="css" name="topStyle.css" type="text/css" />
+	</h:head>
+	<h:body>
+		<div id="fouc">
+			<ui:include src="Top.xhtml"/>
+		
+			<div id="mainContainer" style="height:80vh">
+		
+				<div class="viewDetails">
+		
+					<h:form onkeypress="if (event.keyCode == 13)  #{detailsControl.edit(null)}" >
+		
+						<h3>Your Details</h3>
+						<div id="box">
+						
+						</div>
+						<b class="formName">Old Email :</b>
+						<p:inputText class="formField" 
+									 editable="false" 
+									 size="40" 
+									 value="#{customer.email}"/>
+						<br/>
+						
+						<div class="formName">New Email : </div>
+						<p:inputText id="email"
+									 class="formField" 
+					             	 label="email" 
+					              	 size="40" 
+				             		 requiredMessage="Email Address Required"
+				             		 validatorMessage="Invalid email format" 
+				             		 value="#{detailsControl.email}">
+							<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						</p:inputText>
+						<p:watermark for="email" 
+					                 value="New email" />
+						<br/>
+						
+						
+						<b class="formName">Old Name : </b>
+						<p:inputText class="formField" 
+									 editable="false" 
+									 size="40" 
+									 value="#{customer.name}"/>
+						<br/>
+							
+						<div class="formName">New Name : </div>
+						<p:inputText class="formField" 
+								     size="40" 
+								     value="#{detailsControl.name}"/>
+						<br/>
+											
+						<b class="formName">Old Card Number : </b>
+						<p:inputText editable="false"
+									 class="formField"
+									 size="40" 
+									 value="#{customer.displayCard}"/>
+						<br/>
+		
+						<div class="formName">New Card Number : </div>
+						<p:password id="visa"
+									class="formField" 
+						            label="visa" 
+						            size="40" 
+						            validatorMessage="Invalid credit card" 
+						            value="#{detailsControl.newCard}">
+						            
+							<f:validateRegex pattern="^4\d{15}$" />
+						</p:password>
+						<p:watermark for="visa" 
+							         value="card number"/>
+						<br/>
+	
+						<b class="formName">Password : </b>
+						<p:password feedback="true" 
+									class="formField" 
+									required="true"
+									size="40"  
+									requiredMessage="cannot update details without password" 
+									value="#{detailsControl.pass}"/>
+						<br/>
+						<div class="formName">New Password : </div>
+						<p:password id="password" 
+					            	label="password"
+					            	class="formField"  
+					            	size="40" 
+					            	requiredMessage="Password Required"
+					            	validatorMessage="Invalid password -> 4 - 8 characters, mixture of upper/lower case letters and digits" 
+					           		value="#{detailsControl.newpass}" 
+					            	feedback="true">
+							<f:validateRegex pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$" />
+						</p:password>
+						<p:watermark for="password" 
+					           		 value="Password"/>
+						<br/>
+						<span class="loginButton">
+							<p:commandButton value="Submit" type="Submit" action="#{detailsControl.edit(null)}" ajax="false"/>
+						</span>
+		
+					</h:form>
+				</div>		
+			</div>
+		<div style="position:fixed; bottom:0; width:99%">
+			<ui:include src="Bottom.xhtml"/>
+		</div>
+		</div>
+	</h:body>
+</html>

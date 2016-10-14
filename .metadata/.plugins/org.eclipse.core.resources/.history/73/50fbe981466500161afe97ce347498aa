@@ -1,0 +1,33 @@
+package com.ait.drinks;
+
+public class Recipe {
+	private int coffee;
+	private int chocolate;
+	private String name;
+	private double price;
+	public int getCoffee() {
+		return coffee;
+	}
+	public void setCoffee(int coffee) {
+		this.coffee = coffee;
+	}
+	public int getChocolate() {
+		return chocolate;
+	}
+	public void setChocolate(int chocolate) {
+		this.chocolate = chocolate;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	public String getName() {
+		return name;
+	}
+	
+	public Recipe(String name,int coffee,int chocolate,double price){
+		
+	}
+}

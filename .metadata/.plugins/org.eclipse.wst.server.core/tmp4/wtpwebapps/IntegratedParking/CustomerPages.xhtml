@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+
+
+<h:head>
+	<title>Customer Control Centre</title>
+	<link rel="shortcut icon" href="./resources/carIcon.ico" />
+	<h:outputStylesheet name="OrdersEditableTable.css" library="css" />
+	<h:outputStylesheet name="ViewBookingsTable.css" library="css" />
+	<h:outputStylesheet name="styles1.css" library="css" />
+	<h:outputStylesheet library="css" name="topStyle.css" type="text/css" />
+</h:head>
+
+<h:body style="height:800px">
+	<ui:include src="Top.xhtml" />
+	<div id="mainContainer" style="height: 80%;">
+		<div style="box-shadow: 10px 10px 5px 0px rgba(227, 224, 227, 1);">
+			<h3 class="centerText">Customer Login</h3>
+			<p:panel rendered="#{not customer.loggedIn}">
+				<ui:include src="customerpages/CustomerLogin.xhtml" />
+			</p:panel>
+		</div>
+
+
+		<p:panel rendered="#{customer.loggedIn}">
+			
+				<ui:include src="customerpages/ViewBookings.xhtml" />
+				
+			
+		</p:panel>
+	</div>
+	
+		<ui:include src="Bottom.xhtml" />
+
+</h:body>
+</html>

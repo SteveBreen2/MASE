@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<!-- shows completed puchase  -->
+<h:head>
+	<title>Thank You</title>
+		<style type="text/css">
+			.js #fouc {display: none;} 
+		</style>
+		<script type="text/javascript">
+			document.documentElement.className = 'js';
+		</script>
+	<h:outputStylesheet name="styles1.css" library="css" />
+	<h:outputStylesheet library="css" name="topStyle.css" type="text/css" />
+</h:head>
+<body>
+	<div id="fouc">
+		<ui:include src="Top.xhtml"/>
+		<div id="mainContainer">
+	
+	
+			<div class="viewDetails">
+				
+				<h:form> 
+						<h1 class="centerText">Booking Information</h1>
+						<h3 style="color:black">The total Cost of your booking is:
+						
+							<h:outputText style="color:black" min="0" value="#{customer.tempBooking.getCost()}" >
+								<f:convertNumber currencyCode="EUR" type="currency" />
+							</h:outputText>
+						</h3>
+						<h3>
+							<h:outputText style="color:black" value="#{customer.tempBooking.startDate}">
+            					<f:convertDateTime pattern="dd MMM yyyy, HH:mm a" />
+         					</h:outputText>
+						</h3>
+						<h3>
+							<h:outputText style="color:black" value="#{customer.tempBooking.endDate}">
+            					<f:convertDateTime pattern="dd MMM yyyy, HH:mm a" />
+         					</h:outputText>
+						</h3>
+						<p:commandButton class="basicButton" onclick="PF('dlg').show();" value="Confirm"/>
+						<p:commandButton class="basicButton" onclick="PF('dlg2').show();" value="Cancel"/>
+						<p:dialog header="Complete" widgetVar="dlg" height="100">
+							<br/>
+							<h:outputText style="color:black" value="Confirm your Booking?"/>
+							<br/>
+							<br/>
+							<p:commandButton  value="Ok" action="#{customer.completeBooking(null)}"/>
+						</p:dialog>
+						<p:dialog header="Cancel" widgetVar="dlg2"  height="100">
+							<h:outputText value="Cancel your booking?"/>
+							<br/>
+							<br/>
+							<p:commandButton  value="Ok" action="home.jsf"/>
+						</p:dialog>
+				</h:form>
+			</div>
+		</div>
+			<ui:include src="Bottom.xhtml"/>
+	</div>
+</body>
+</html>

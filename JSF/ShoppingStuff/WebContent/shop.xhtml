@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+<title>Shopping Cart</title>
+<h:outputStylesheet name="styles.css" library="css"/>
+</h:head>
+<h:body>
+<h:form>
+<h2 id="heading">Products</h2>
+</h:form>
+
+
+
+<h:form>
+<h:selectOneListbox id="productsListBox">
+<f:selectItem itemValue="0" itemLabel="iPod" />
+<f:selectItem itemValue="1" itemLabel="iStation" />
+<f:selectItem itemValue="2" itemLabel="hdc Diamond phone" />
+<f:selectItem itemValue="3" itemLabel="HD TV" />
+<f:selectItem itemValue="4" itemLabel="Wireless Speakers" />
+<f:selectItem itemValue="5" itemLabel="Blu-ray player" />
+</h:selectOneListbox>
+</h:form>
+
+
+<h:form>
+<h2 id="heading">Manage My Cart</h2>
+</h:form>
+<h:form>
+<h:outputLabel>ProductID: </h:outputLabel>
+<h:inputText readonly="true" id="productID"></h:inputText>
+</h:form>
+<h:form>
+<h:outputLabel>Quantity: </h:outputLabel>
+<h:inputText readonly="true" id="quantityID"></h:inputText>
+</h:form>
+
+<h:form>
+
+<h:commandButton class="ActionButton" id="add" value="Add"/>
+<h:commandButton class="ActionButton" id="remove" value="Remove"/>
+<h:commandButton class="ActionButton" id="checkout" value="Checkout"/>
+
+
+</h:form>
+<h:form>
+
+<h2 id="heading"> Contents of Cart</h2>
+<p>Cart contents will be displayed here.</p>
+
+</h:form>
+</h:body>
+</html>

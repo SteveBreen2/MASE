@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Welcome!</title>
+	<h:outputStylesheet name="styles.css" library="css" />
+</h:head>
+<body>
+	<h2>Programmers at #{tableData.companyName}</h2>
+	<h:form>
+		<h:dataTable var="name" value="#{tableData.names}"
+			styleClass="nameTable" headerClass="nameTableHeader"
+			rowClasses="nameTableOddRow, nameTableEvenRow">
+			<h:column>
+				<f:facet name="header">First Name</f:facet>
+				<h:inputText value="#{name.firstName}" rendered="#{name.canEdit}" />
+				<h:outputText value="#{name.firstName}"
+					rendered="#{not name.canEdit}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Last Name</f:facet>
+				<h:inputText value="#{name.lastName}" rendered="#{name.canEdit}" />
+				<h:outputText value="#{name.lastName}"
+					rendered="#{not name.canEdit}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Edit</f:facet>
+
+				<h:commandLink value="Edit" action="#{tableData.editName(name)}"
+					rendered="#{not name.canEdit}" />
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Delete</f:facet>
+
+				<h:commandLink value="Delete" action="#{tableData.deleteName(name)}"
+					rendered="#{not name.canEdit}" />
+			</h:column>
+
+		</h:dataTable>
+		<h:commandButton value="Save" action="#{tableData.saveChanges}" />
+		<h3>Add Name</h3>
+		<table>
+		<tr>
+		<td>First Name :</td>
+		<td><h:inputText size="10" value="tableData.name"/></td>
+		</tr>
+		<tr>
+		<td>Last Name :</td>
+		<td><h:inputText size="10" value="tableData.name"/></td>
+		</tr>
+		
+		
+		</table>
+	</h:form>
+</body>
+</html>

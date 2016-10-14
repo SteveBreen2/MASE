@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    
+<h:head>
+	<title>Guess a number</title>
+	<h:outputStylesheet name="stylesheet1.css" library="css"/>
+</h:head>
+<body>
+	<f:view>
+	    <h:form>
+	        <h:outputText value="Guess a number between 1 and 100... "  />
+	        <h:inputText value="#{guessNumber.number}" />
+	        <h:commandButton value="Submit" action="#{guessNumber.mySubmitHandler}" />
+	        <p><h:outputText value="#{guessNumber.status}"/></p>
+	    </h:form>
+	</f:view>
+</body>
+</html>

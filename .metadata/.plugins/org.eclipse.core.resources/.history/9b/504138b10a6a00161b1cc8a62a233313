@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<title>Welcome!</title>
+	<h:outputStylesheet name="ViewBookingsTable.css" library="css" />
+	<h:outputStylesheet name="styles1.css" library="css" />
+</h:head>
+<body>
+	<ui:include src="Top.xhtml" />
+	<div id="mainContainer">
+		<h:form>
+			<p:dataTable value="#{customer.myBookingList.bookings}" var="b"
+				styleClass="bookingTable" headerClass="bookingTableHeader"
+				rowClasses="bookingTableOddRow,bookingTableEvenRow">
+				<p:column>
+					<f:facet name="header">Booking Ref</f:facet>
+					<h:outputText value="#{b.bookingRef}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">Start Date</f:facet>
+					<h:outputText value="#{b.formattedStartDate}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">End Date</f:facet>
+					<h:outputText value="#{b.formattedEndDate}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">Servicing</f:facet>
+
+					<p:graphicImage class="image" id="correctImage"
+						value="./resources/myCorrectImage.png"
+						rendered="#{b.servicing}"></p:graphicImage>
+					<p:graphicImage class="image" id="incorrectImage"
+						value="./resources/myIncorrectImage.png"
+						rendered="#{!booking.servicing}"></p:graphicImage>
+
+				</p:column>
+				<p:column>
+					<f:facet name="header">Valeting</f:facet>
+					<h:graphicImage class="image" id="correctImage2"
+						value="./resources/myCorrectImage.png"
+						rendered="#{b.valeting}"></h:graphicImage>
+					<p:graphicImage class="image" id="incorrectImage2"
+						value="./resources/myIncorrectImage.png"
+						rendered="#{!b.valeting}"></p:graphicImage>
+
+				</p:column>
+				<p:column>
+					<f:facet name="header">Meet &amp; Greet</f:facet>
+					<h:graphicImage class="image" id="correctImage3"
+						value="./resources/myCorrectImage.png"
+						rendered="#{b.meetAndGreet}"></h:graphicImage>
+					<p:graphicImage class="image" id="incorrectImage3"
+						value="./resources/myIncorrectImage.png"
+						rendered="#{!b.meetAndGreet}"></p:graphicImage>
+
+				</p:column>
+
+
+
+			</p:dataTable>
+				
+		</h:form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+@CHARSET "ISO-8859-1";
+
+.bookingTable{
+	border-collapse:collapse;
+	border: 1px solid #000000;
+}
+
+.bookingTableHeader{
+	text-align:center;
+	background:#B5B5B5;
+	border-bottom:1px solid #000000;
+	padding:2px;
+}
+
+.bookingTableOddRow{
+	text-align:center;
+	background: #FFFFFF;
+}
+
+.bookingTableEvenRow{
+	text-align:center;
+	background:~D3D3D3;
+}
+
+.image{
+    width:40px; 
+    height: 40px;
+   
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}

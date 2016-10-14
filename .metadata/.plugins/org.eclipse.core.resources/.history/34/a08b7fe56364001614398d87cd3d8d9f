@@ -1,0 +1,11 @@
+.nameTable{
+	border-collapse:collapse;
+	border:2px solid #555;
+}
+
+.nameTableHeader{
+	text-align:center;
+	background:B5B5B5;
+	border-bottom:1px solid #000;
+	padding:2px;
+}

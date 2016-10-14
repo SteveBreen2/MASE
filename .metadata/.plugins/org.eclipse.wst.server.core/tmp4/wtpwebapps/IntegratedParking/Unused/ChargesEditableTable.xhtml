@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+    
+    
+    
+<h:head>
+	<title>Charges Editable Table</title>
+	<style type="text/css">
+		.js #fouc {display: none;} 
+	</style>
+	<script type="text/javascript">
+		document.documentElement.className = 'js';
+	</script>
+	<ui:include src="Top.xhtml" />
+	<h:outputStylesheet name="ChargesEditableTable.css" library="css" />
+	<h:outputStylesheet library="css" name="topStyle.css" type="text/css" />
+</h:head>
+<!-- 	<ui:include src="Top.xhtml" /> -->
+<!-- 		<hr></hr> -->
+<!-- 	</div> -->
+<!-- 	<div id="mainContainer"> -->
+
+
+
+<h:body>
+	<div id="fouc">
+	<h3>VIEW Details Page</h3>
+	
+		<h:form>
+	
+	<!-- 						var="car" value="#{bean.data}" scrollable="true" scrollHeight="150" -->
+	<!-- <p:ajax event=”tabChange” listener=”#{ChargesTableData.onChange}” /> -->
+	
+	
+				<p:tabView dynamic="true" effect="fade" effectDuration="fast" orientation="Top">
+					<p:tab title="VIEW CHARGES">
+						<h:outputText value="Page 1" />
+					</p:tab>
+					<p:tab title="VIEW BILLS">
+					<h:outputText value="Page 2" />
+					</p:tab>
+					<p:tab title="VIEW ORDERS">
+						<h:outputText value="Page 3" />
+					</p:tab>
+					<p:tab title="VIEW STAFF">
+						<h:outputText value="Page 4" />
+					</p:tab>
+				</p:tabView>
+	
+	
+	
+				<p:themeSwitcher style="width:150px">
+					<f:selectItem itemLabel="Choose Theme" itemValue="" />
+					<f:selectItems value="#{bean.themes}" />
+				</p:themeSwitcher>
+	
+	
+				<p:dataTable 	var="name" value="#{chargesTableData.charges}" 
+	    						styleClass = "nameChargesTable"
+	    						headerClass ="nameChargesTableHeader"
+	    						rowClasses ="nameChargesTableOddRow,nameChargesTableEvenRow">
+	    		
+	    			<p:column>
+						<f:facet name="header">    Gold MemberShip </f:facet>
+	    				<h:inputText value = "#{name.goldMemberShipPrice}" rendered="#{name.canEdit}"/>
+	    				<h:outputText value = "#{name.goldMemberShipPrice}" rendered="#{not name.canEdit}" />
+	    			</p:column>
+					<p:column>
+						<f:facet name="header">    Meet and Greet </f:facet>
+	    				<h:inputText value = "#{name.meetAndGreetPrice}" rendered="#{name.canEdit}"/>
+	    				<h:outputText value = "#{name.meetAndGreetPrice}" rendered="#{not name.canEdit}"/>
+	    			</p:column>
+					<p:column>
+						<f:facet name="header">    Valeting</f:facet>
+	    				<h:inputText value = "#{name.valetingPrice}" rendered="#{name.canEdit}"/>
+	    				<h:outputText value = "#{name.valetingPrice}" rendered="#{not name.canEdit}"/>
+	    			</p:column>
+					<p:column>
+						<f:facet name="header">    Sevicing </f:facet>
+	    				<h:inputText value = "#{name.servicingPrice}" rendered="#{name.canEdit}"/>
+	    				<h:outputText value = "#{name.servicingPrice}" rendered="#{not name.canEdit}"/>
+	    			</p:column>
+		
+		
+		
+		
+					<p:column>
+						<f:facet name="header">     Total</f:facet>
+	    				#{charges.totalPrice},
+	    			</p:column>
+	
+	
+					<p:column>
+						<f:facet name="header">Edit</f:facet>
+							<h:commandLink value="Edit"
+								action="#{name.setCanEdit(true)}"
+								rendered="#{not name.canEdit}" />
+					</p:column>
+				
+					<p:column>
+						<f:facet name="header">Delete</f:facet>
+							<h:commandLink value="Delete"
+								action="#{chargesTableData.deleteCharge(name)}"
+								rendered="#{not charge.canEdit}" />
+					</p:column>
+				</p:dataTable>
+					<h:commandButton value="Save   Changes" action="#{chargesTableData.saveAction}"/>
+			</h:form>
+			<ui:include src="Bottom.xhtml" />
+		</div>	
+	</h:body>
+</html>

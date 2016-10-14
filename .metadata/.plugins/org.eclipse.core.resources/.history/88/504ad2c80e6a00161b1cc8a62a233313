@@ -1,0 +1,81 @@
+package testCode;
+
+import static org.junit.Assert.*;
+
+import java.util.Date;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import javaCode.DateUtils;
+
+public class DateUtilsTest 
+{
+	Date d;
+	@Before
+	public void init()
+	{
+		d = new Date();
+	}
+	
+	@Test
+	public void testFormatDate1()
+	{
+		d = new Date(0);
+		assertEquals("Thursday, January 1, 1970",DateUtils.formatDate(d));
+	}
+	
+	@Test
+	public void testFormatDate2()
+	{
+		d = null;
+		assertEquals("",DateUtils.formatDate(d));
+	}
+	
+	@Test
+	public void testFormatTime1()
+	{
+		d = new Date(0);
+		assertEquals("1:00:00 am on Thursday, January 1, 1970",DateUtils.formatTime(d));
+	}
+	
+	@Test
+	public void testFormatTime2()
+	{
+		d = null;
+		assertEquals("",DateUtils.formatTime(d));
+	}
+	
+	@Test
+	public void testNextDay()
+	{
+		d = new Date(0);
+		assertEquals(new Date(86400000), DateUtils.nextDay(d));
+	}
+	
+	@Test
+	public void testBetween1()
+	{
+		d = new Date(86400000);
+		Date before = new Date(0);
+		Date after = new Date();
+		assertTrue(DateUtils.between(d, before, after));
+	}
+	
+	@Test
+	public void testBetween2()
+	{
+		Date before = new Date(0);
+		Date after = new Date(86400000);
+		assertFalse(DateUtils.between(d, before, after));
+	}
+	
+	@Test
+	public void testBetween3()
+	{
+		d = new Date(0);
+		Date before = new Date();
+		Date after = new Date();
+		assertFalse(DateUtils.between(d, before, after));
+	}
+}

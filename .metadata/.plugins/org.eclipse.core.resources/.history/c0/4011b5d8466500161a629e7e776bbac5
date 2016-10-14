@@ -1,0 +1,28 @@
+package com.ait.test;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import com.ait.drinks.Recipe;
+
+public class RecipeTest {
+
+	@Test
+	public void testRecipeConstructor() {
+		Recipe recipe=new Recipe("My Drink",3,1,1.5);
+		assertEquals("My Drink",recipe.getName());
+		assertEquals(3,recipe.getCoffee());
+		assertEquals(1,recipe.getChocolate());
+		assertEquals(1.5,recipe.getPrice(),0.0001);
+	}
+	
+	@Test
+	public void testChangeCoffee() {
+		
+	}
+	public void testChangeChocolate() {}
+	public void testChangePrice() {}
+	
+
+}

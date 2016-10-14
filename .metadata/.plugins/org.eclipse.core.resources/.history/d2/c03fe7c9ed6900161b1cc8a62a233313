@@ -1,0 +1,25 @@
+package javaCode;
+
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
+
+@WebListener
+public class InitListener implements ServletContextListener {
+
+    public InitListener() { }
+
+    public void contextDestroyed(ServletContextEvent arg0)  { }
+
+    //do this when server starts
+    public void contextInitialized(ServletContextEvent arg0)  {
+    	Employee.createEmployee(new Employee("Bob", 111, "none"));
+    	Employee.createEmployee(new Employee("Bill", 112, "none"));
+    	Employee.createEmployee(new Employee("Jane", 113, "none"));
+    	RegistrationHandler.registerCustomer(new Customer("John","P4ss","e@mail.com"));
+    	RegistrationHandler.registerCustomer(new Customer("Betty", "P4ss", "m@ail.com"));
+    	
+    }
+    Customer initialCustomer=new Customer("John","P4ss","e@mail.com");
+	
+}

@@ -1,0 +1,19 @@
+1469524161571	Rename type 'Debugger'
+1469526339885	Delete element
+1469615374947	Encapsulate field 'rockNumber'
+1469616459819	Move compilation unit
+1469616463969	Move compilation unit
+1469616468601	Delete element
+1469616546706	Encapsulate field 'type'
+1469618567864	Encapsulate field 'theNumber'
+1469625810265	Rename type 'StaticExercise'
+1469625884888	Encapsulate field 'count'
+1469626876910	Encapsulate field 'theNumberOfHands'
+1469627082581	Delete element
+1469631675241	Rename type 'Phone'
+1469631729093	Delete element
+1469631785112	Move compilation unit
+1469634696565	Rename type 'Volume'
+1469635302087	Rename type 'VolumeEx'
+1469636285756	Rename package 'Examples'
+1469636297004	Delete element

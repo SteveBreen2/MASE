@@ -1,0 +1,3 @@
+CloneWizard_ImportProjects=true
+commit_dialog_history_messages=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<messages>\r\n<message>Handles unary operator after opening bracket, can use brackets as&\#x0A;multiplication symbol.</message>\r\n<message>Radians working.</message>\r\n<message>Fonts can be set for standardPanel</message>\r\n<message>Radio Buttons for Degrees/Radians/Grad</message>\r\n<message>Fixed problem with PI</message>\r\n<message>Pi tidied up.</message>\r\n<message>Menus created for future features</message>\r\n<message>Standard Button Added</message>\r\n<message>Menu Navigation for Matrices Tab</message>\r\n<message>Started work on Enter Button Keyboard Input</message>\r\n</messages>
+eclipse.preferences.version=1

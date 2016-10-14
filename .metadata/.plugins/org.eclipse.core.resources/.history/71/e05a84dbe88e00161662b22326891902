@@ -1,0 +1,94 @@
+package appliedMaths;
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author kfitzgerald
+ */
+
+public class Gabor {
+	CreateImage ci;
+	private double lamda = 0;
+	private double theta = 0;
+	private double varphi = 0;
+	private double upsi = 0;
+	private double bandW = 0;
+	private double B = 0;
+	private double sigma = 0;
+	private double kappa = 0;
+	private double[][] GaborGrid;
+	private double[][] GaborNorm;
+
+	int size = 0;
+	double toRadians = 180 / Math.PI, min = 500, max = -500, mean = 0;;
+	int gaussian = 0;
+	double rotation;
+	double GLFmean = 0;
+
+	// Standard Gabor no quantization
+	public Gabor(double l, double t, double v, double u, double b, int sze) {
+		lamda = l;
+		theta = t / toRadians;
+		varphi = v / toRadians;
+		upsi = u;
+		bandW = b;
+		kappa = (2 * Math.PI) / lamda;
+		Calculate_Sigma();
+		size = sze;
+		gaussian = sze / 2;
+		GaborGrid = new double[size][size];
+		GaborNorm = new double[size][size];
+		RunGabor();
+		NormaliseImage();
+	}
+
+	public void RunGabor() {
+		/*
+		 * Use the code provided along with your notes to code the Gabor
+		 * Equation in to generate the correct image
+		 */
+
+		for (int i = 0; i < GaborGrid.length; i++) {
+			for (int j = 0; j < GaborGrid.length; j++) {
+
+				GaborGrid[i][j] = (Math
+						.log1p(-(Math.pow(i, 2) + Math.pow(j, 2) * Math.pow(j, 2)) / 2 * Math.pow(sigma, 2))
+						* Math.cos((2 * Math.PI * i / lamda + varphi)));
+
+			}
+
+		}
+
+	}
+
+	public void NormaliseImage() {
+		/*
+		 * Your code to normalise the gabor image goes here.
+		 * 
+		 * The last line must be what is below this comment
+		 */
+		double min = 0;
+		double max = 0;
+		for (int i = 0; i < GaborGrid.length; i++) {
+			for (int j = 0; j < GaborGrid.length; j++) {
+				if(GaborGrid[i][j]<min){
+					min=GaborGrid[i][j];
+				}
+				if(GaborGrid[i][j]>max){
+					min=GaborGrid[i][j];
+				}
+
+			}
+		}
+
+		ci = new CreateImage(GaborNorm, "Gabor");
+	}
+
+	private void Calculate_Sigma() {
+		B = (1 / Math.PI) * (0.588705011) * ((Math.pow(2, bandW) + 1) / (Math.pow(2, bandW) - 1));
+		sigma = B * lamda;
+	}
+}

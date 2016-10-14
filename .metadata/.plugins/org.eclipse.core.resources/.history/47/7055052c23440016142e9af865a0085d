@@ -1,0 +1,53 @@
+package week1;
+
+import java.util.Scanner;
+
+public class AreaAndPerimeterStringReaderApp 
+{
+
+	public static void main(String[] args) 
+	{
+		//Declare Variables.
+		int area,perimeter;
+		String width,length;
+		//Create a scanner object.
+		Scanner sc=new Scanner(System.in);
+
+		//Display a welcome message
+		System.out.println("Welcome to the Area and Perimeter Calculator.\n");
+
+		
+		//Print out asking for Length.
+		System.out.print("Enter Length Details: ");
+
+		//Take in next int.
+		length=sc.nextInt();
+
+		//Print out asking for Width.
+		System.out.print("Enter Width Details: ");
+
+		//Take in next int.
+		width=sc.nextInt();
+
+		//Calculate area (length*width).
+		area=length*width;
+
+		//Print out results.
+		System.out.println("Area: "+area);
+
+		//Calculate perimeter (length*2 + width*2).
+		perimeter=(length*2)+(width*2);
+		
+		//Print out results.
+		System.out.println("Perimeter: "+perimeter);
+
+		//Print out a blank line.
+		System.out.println();
+
+		//Free up Scanner.
+		sc.close();
+	}
+	
+	
+
+}

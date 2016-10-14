@@ -1,0 +1,130 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<p:tab title="Assign Tasks" rendered="#{not employee.isOperator(null) and not employee.isServicer(null)}">
+		<h:panelGrid columns="7" cellpadding="10">
+		
+		<h3 style="margin: 0 auto; text-align: center">Service Providers</h3>
+			<p:dataTable value="#{taskList.getServiceProviderTasks()}" 			var="bq"
+						 styleClass="bookingTable" headerClass="bookingTableHeader"
+						 rowClasses="bookingTableOddRow,bookingTableEvenRow">
+
+				<p:column colspan="1">
+					<f:facet name="header">Customer ref</f:facet>
+																	
+					#{bq.bookingRef}
+									
+				</p:column>
+				
+				
+				
+				<p:column colspan="1">
+					<f:facet name="header">Start Date</f:facet>
+					<h:outputText value="#{bq.startDate}">
+						<f:convertDateTime pattern="dd MMM yyyy, HH:mm a" />
+					</h:outputText>											
+									
+				</p:column>
+				
+				<p:column colspan="1">
+					<f:facet name="header">End Date </f:facet>
+					
+					<h:outputText value="#{bq.endDate}">
+						<f:convertDateTime pattern="dd MMM yyyy, HH:mm a" />
+					</h:outputText>												
+									
+				</p:column>
+				
+				<p:column colspan="1">
+					<f:facet name="header">Task Type</f:facet>					
+					<h:outputText value="#{bq.getTypeString()}">
+					</h:outputText>																					
+				</p:column>
+				
+				<p:column colspan="2">
+					<f:facet name="header">Assigned Service Provider </f:facet>
+						<p:selectOneMenu rendered="#{bq.editable}" id="console" value="#{bq.assignedTo}"
+									   style="width:125px">
+						<f:selectItem itemLabel="#{bq.getAssignedName()}"/>
+						<f:selectItems itemLabel="Service Staff" value="#{registrationHandler.serviceProviders}" />
+						
+						</p:selectOneMenu>
+						<h:outputText value="#{bq.getAssignedName()}" rendered="#{not bq.editable}"/>
+				</p:column>
+				<p:column>
+				<p:commandButton value="Confirm" icon="ui-icon-check" ajax="false" rendered="#{bq.editable}"/>
+				<p:commandButton action="#{bq.setEditable(true)}" value="Edit" ajax="false" rendered="#{not bq.editable}"/>
+				</p:column>
+			</p:dataTable>
+
+		</h:panelGrid>
+		
+		<h:panelGrid columns="7" cellpadding="10" rendered="#{not (employee.isOperator(null)) and not (employee.isServicer(null))}">
+		
+		<h3 style="margin: 0 auto; text-align: center">Car Park Operatives</h3>
+		
+		
+			<p:dataTable value="#{taskList.getOperativeTasks()}" var="bq"
+				styleClass="bookingTable" headerClass="bookingTableHeader"
+				rowClasses="bookingTableOddRow,bookingTableEvenRow">
+				
+				
+
+				<p:column colspan="1">
+					<f:facet name="header">Customer ref</f:facet>
+																	
+					#{bq.bookingRef}
+									
+				</p:column>
+
+				<p:column colspan="2">
+					<f:facet name="header">Start Date</f:facet>
+					<h:outputText value="#{bq.startDate}">
+						<f:convertDateTime pattern="dd MMM yyyy, HH:mm a" />
+					</h:outputText>
+
+				</p:column>
+
+				<p:column colspan="2">
+					<f:facet name="header">End Date </f:facet>
+
+					<h:outputText value="#{bq.endDate}">
+						<f:convertDateTime pattern="dd MMM yyyy, HH:mm a" />
+					</h:outputText>
+
+				</p:column>
+				
+				
+				<p:column colspan="1">
+					<f:facet name="header">Task Type</f:facet>					
+					<h:outputText value="#{bq.getTypeString()}">
+					</h:outputText>																					
+				</p:column>
+
+
+				<p:column colspan="2">
+					<f:facet name="header">Assigned Car Park Operative </f:facet>
+					<p:selectOneMenu rendered="#{bq.editable}" id="console"
+						value="#{bq.assignedTo}" style="width:125px">
+						<f:selectItem itemLabel="#{bq.getAssignedName()}" />
+						<f:selectItems itemLabel="Service Staff"
+							value="#{registrationHandler.carParkOperators}" />
+
+					</p:selectOneMenu>
+					<h:outputText value="#{bq.getAssignedName()}"
+						rendered="#{not bq.editable}" />
+				</p:column>
+				<p:column>
+					<p:commandButton value="Confirm" icon="ui-icon-check" ajax="false"
+						rendered="#{bq.editable}" />
+					<p:commandButton action="#{bq.setEditable(true)}" value="Edit"
+						ajax="false" rendered="#{not bq.editable}" />
+				</p:column>
+			</p:dataTable>
+		</h:panelGrid>
+
+	</p:tab>
+</ui:composition>

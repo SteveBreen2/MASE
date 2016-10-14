@@ -1,0 +1,26 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">		
+				
+		<h:form rendered="#{not employee.loggedIn}">
+	<div class="formHeight"  >
+		<h3 class="centerText">Staff Login</h3>
+		<p:panel rendered="#{not employee.loggedIn}" style="box-shadow: 10px 10px 5px 0px rgba(227, 224, 227, 1); height:200px">
+	
+			<h3 class="centerText">Please Enter Details</h3>
+			<div >
+			<b class="formName">ID :</b>
+			<p:inputText class="formField" required="true" requiredMessage="Staff ID Required" value="#{employee.idNumber}"/><br/>
+			
+			 <b class="formName">Password : </b>
+			<p:password class="formField" required="true" requiredMessage="Password Required" value="#{employee.password}" feedback="false"/><br/>
+			</div>
+			<p:commandButton class="basicButton" action="#{registrationHandler.staffAction(employee, true)}" value="Login" ajax="false" style="float:right;"/><br/>
+			<p:commandLink action="AdminDetailsTables.jsf" ajax="true"></p:commandLink>
+		</p:panel>	
+	</div>
+		</h:form>
+</ui:composition>

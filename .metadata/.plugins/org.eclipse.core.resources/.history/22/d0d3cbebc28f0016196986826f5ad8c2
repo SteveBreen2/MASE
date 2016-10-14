@@ -1,0 +1,31 @@
+package agileDesignAndTesting;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import static junitparams.JUnitParamsRunner.$;
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
+
+@RunWith(JUnitParamsRunner.class)
+public class OrderTest {
+
+	Order o=new Order();
+	@Test
+	@Parameters
+	public Object[] orderParams() {
+		return $($(5, 50), $(6, 60), $(99, 990), $(100, 900), $(101, 909), $(499, 4491), $(500, 4500));
+
+	}
+
+	@Test
+	@Parameters(method = "orderParams")
+	public static void test(double num,double total) {
+		assertEquals(total,);
+	}
+}
+
+/*
+ * 4,5,6 99,100,101 299,500,501
+ */

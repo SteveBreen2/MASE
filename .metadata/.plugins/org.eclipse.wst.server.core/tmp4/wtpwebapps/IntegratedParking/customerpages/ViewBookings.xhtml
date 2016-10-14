@@ -1,0 +1,153 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">		
+	<h:form>
+		<h:panelGrid columns="1" cellpadding="10">	
+		<h3 style="text-align: center;">Your Bookings</h3>
+		<p:dataTable value="#{customer.myBookingList.bookings}" var="b"
+					 styleClass="bookingTable" headerClass="bookingTableHeader"
+					 rowClasses="bookingTableOddRow,bookingTableEvenRow"
+					 class="formHeight">
+			<p:column>
+				<f:facet name="header">Booking Ref</f:facet>
+				<h:outputText value="#{b.bookingRef}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">Start Date</f:facet>
+				<h:outputText value="#{b.startDate}" >
+		         	<f:convertDateTime pattern="dd MMM yyyy, HH:mm a" />
+		       	</h:outputText>
+			</p:column>
+			<p:column>
+				<f:facet name="header">End Date</f:facet>
+				<h:outputText value="#{b.endDate}" >
+		           	<f:convertDateTime pattern="dd MMM yyyy, HH:mm a" />
+		        </h:outputText>
+			</p:column>
+			<p:column>
+				<f:facet name="header">Make</f:facet>
+				<h:outputText value="#{b.make}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">Model</f:facet>
+				<h:outputText value="#{b.model}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">Servicing</f:facet>
+			
+				<p:graphicImage class="image" id="correctImage"
+								value="./resources/myCorrectImage.png"
+								rendered="#{b.servicing}"></p:graphicImage>
+				<h:outputText value="#{chargesControl.charges.servicingPrice}" rendered="#{!b.servicing}" >
+					<f:convertNumber currencyCode="EUR" type="currency"/>
+				</h:outputText>
+				<p:commandButton value="Add" action="#{b.addServicing()}" rendered="#{!b.servicing}" ajax="false"/>
+			
+			</p:column>
+			<p:column>
+				<f:facet name="header">Valeting</f:facet>
+				<h:graphicImage class="image" id="correctImage2"
+								value="./resources/myCorrectImage.png"
+								rendered="#{b.valeting}"></h:graphicImage>
+				<h:outputText value="#{chargesControl.charges.valetingPrice}" rendered="#{!b.valeting}" style="padding-right:10px;"  >
+					<f:convertNumber currencyCode="EUR" type="currency"/>
+				</h:outputText>
+				<p:commandButton value="Add" action="#{b.addValeting()}" rendered="#{!b.valeting}" ajax="false"/>
+		
+			</p:column>
+			<p:column>
+				<f:facet name="header">Meet &amp; Greet</f:facet>
+				<h:graphicImage class="image" id="correctImage3"
+								value="./resources/myCorrectImage.png"
+								rendered="#{b.meetAndGreet}"/>
+				<h:outputText value="#{chargesControl.charges.meetAndGreetPrice}" rendered="#{!b.meetAndGreet}" >
+					<f:convertNumber currencyCode="EUR" type="currency"/>
+				</h:outputText>
+				<p:commandButton value="Add" action="#{b.addMeetAndGreet()}" rendered="#{!b.meetAndGreet}" ajax="false"/>
+			
+			</p:column>
+		</p:dataTable>
+		</h:panelGrid>
+		<h3 style="text-align: center;">Your Details</h3>
+		<p:panel style= "float:center;" class="detailsPanel" >			
+			<div id="box1">
+			<b class="formName">Email :</b>
+			<h:outputText class="formField" editable="false" size="40"
+				value="#{customer.email}" />
+			<br />
+
+			<h:outputText class="formName" rendered="#{detailsControl.editable}"
+				value="New Email: " />
+			<p:inputText rendered="#{detailsControl.editable}" id="email"
+				class="formField" label="email" size="40"
+				requiredMessage="Email Address Required"
+				validatorMessage="Invalid email format"
+				value="#{detailsControl.email}">
+				<f:validateRegex
+					pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+			</p:inputText>
+			<p:watermark for="email" value="New email" />
+			<br />
+
+			<b class="formName">Name : </b>
+			<h:outputText class="formField" editable="false" size="40"
+				value="#{customer.name}" />
+			<br />
+
+			<h:outputText class="formName" rendered="#{detailsControl.editable}"
+				value="New Name: " />
+			<p:inputText rendered="#{detailsControl.editable}" class="formField"
+				size="40" value="#{detailsControl.name}" />
+			<br />
+
+			<b class="formName">Card Number : </b>
+			<h:outputText editable="false" class="formField" size="40"
+				value="#{customer.displayCard}" />
+			<br />
+
+			<h:outputText class="formName" rendered="#{detailsControl.editable}"
+				value="New Card Number : " />
+			<p:inputMask rendered="#{detailsControl.editable}" id="visa"
+				value="#{detailsControl.newCard}"
+				mask="9999-9999-9999-9999" class="formField" label="visa" size="40"
+				validatorMessage="Invalid credit card" password="true">
+				<f:validateRegex pattern="^4\d{3}([\ \-]?)\d{4}\1\d{4}\1\d{4}$" />
+			</p:inputMask>
+			<p:watermark for="visa" value="card number" />
+			<br />
+
+			<h:outputText class="formName" rendered="#{detailsControl.editable}"
+				value="Password: " />
+			<p:password rendered="#{detailsControl.editable}" feedback="true"
+				class="formField" required="true" size="40"
+				requiredMessage="cannot update details without password"
+				value="#{detailsControl.pass}" />
+			<br />
+			<h:outputText class="formName" rendered="#{detailsControl.editable}"
+				value="New Password: " />
+			<p:password rendered="#{detailsControl.editable}" id="password"
+				label="password" class="formField" size="40"
+				requiredMessage="Password Required"
+				validatorMessage="Invalid password -> 4 - 8 characters, mixture of upper/lower case letters and digits"
+				value="#{detailsControl.newpass}" feedback="true">
+				<f:validateRegex pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$" />
+			</p:password>
+			<p:watermark for="password" value="Password" />
+			<br />
+			<br />
+			<div id="buttonBox">
+			<p:commandButton
+					rendered="#{detailsControl.editable}" value="Submit" type="Submit"
+					action="#{detailsControl.edit(customer)}" ajax="false" style="margin: 0 auto;"/>
+			<p:commandButton
+					rendered="#{not detailsControl.editable}" type="Submit"
+					value="Edit" action="#{detailsControl.setEditable(true)}"
+					ajax="false" style="margin: 0 auto;"/>
+			</div>
+			</div>
+		</p:panel>
+		</h:form>
+</ui:composition>

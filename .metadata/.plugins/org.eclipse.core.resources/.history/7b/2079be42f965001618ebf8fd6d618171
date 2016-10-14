@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+	<ui:composition template="OrderingFile.xhtml">
+		<ui:define name="title">Title</ui:define>
+		<ui:define name="top">
+			<h:form>
+			
+				<p:growl id="messages" />
+				
+				<p:menubar>
+					<ui:remove>
+						<p:submenu label="Navigation" icon="ui-icon-document">
+							<p:submenu label="Home" icon="ui-icon-contact">
+								<p:menuitem value="Project" url="#" />
+								<p:menuitem value="Other" url="#" />
+							</p:submenu>
+							<p:menuitem value="Open" url="#" />
+							<p:separator />
+							<p:menuitem value="Quit" url="#" />
+						</p:submenu>
+					</ui:remove>
+					
+					<p:menuitem value="Home" url="index.xhtml" icon="ui-icon-home" />
+
+					<p:menuitem>
+						<h:inputText 
+						id="username"
+						value="#{userLogin.username}"
+						required="true" 
+						style="margin-right:10px; 
+						width:80px" 
+						placeholder="Username" />
+						
+					</p:menuitem>
+					
+					<p:menuitem>
+						<h:inputText  
+						id="password" 
+						value="#{userLogin.password}" 
+						required="true" 
+						style="margin-right:10px; 
+						width:80px" 
+						placeholder="Password" />
+					</p:menuitem>
+					
+					<p:menuitem>
+						<h:commandButton 
+						type="button" 
+						value="Login"
+						icon="icon-chat-empty"
+						action="#{userLogin.attemptLogin()}">
+						</h:commandButton>
+						</p:menuitem>
+						
+				</p:menubar>
+			</h:form>
+
+		</ui:define>
+		<ui:define name="content">
+			<h:outputText value="You are in the main content">
+			</h:outputText>
+			<h:outputText value="#{userLoghin.test()}"/>
+			<br></br>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

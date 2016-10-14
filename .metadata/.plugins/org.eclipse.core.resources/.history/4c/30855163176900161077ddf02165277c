@@ -1,0 +1,47 @@
+package cse_java_3;
+
+public class Prisoner {
+	private String inmateNumber;
+	private String name;
+	private double sentence;
+
+	public String getInmateNumber() {
+		return inmateNumber;
+	}
+
+	public void setInmateNumber(String inmateNumber) {
+		this.inmateNumber = inmateNumber;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public double getSentence() {
+		return sentence;
+	}
+
+	public void setSentence(double sentence) {
+		this.sentence = sentence;
+	}
+	
+	public Prisoner(){
+		
+	}
+	public Prisoner(String inmateNumber,String name,double sentence){
+		this.name=name;
+		this.inmateNumber=inmateNumber;
+		this.sentence=sentence;
+		
+	}
+	
+	@Override
+	public String toString(){
+		return("[Prisoner{Name="+name+", Inmate Number="+inmateNumber+", Sentence: "+sentence+"}]\n");
+	}
+
+}

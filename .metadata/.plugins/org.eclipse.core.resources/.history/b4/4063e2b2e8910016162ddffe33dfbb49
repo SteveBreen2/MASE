@@ -1,0 +1,77 @@
+package javaCode;
+
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+import javax.imageio.ImageIO;
+
+public class MandelbrotSetMultiThreaded {
+
+	final static String fileName = "MandleBrot";
+	private double newRealNumber, oldRealNumber, newImaginaryNumber, oldImaginaryNumber,realPixel, imaginaryPixel;
+	private int maxIterations = 5000, screenHeight = 1080, screenWidth = 1920,pixelColour;
+	public BufferedImage image;
+
+	
+	public MandelbrotSetMultiThreaded(int width,int height){
+		this.screenWidth=width;
+		this.screenHeight=height;
+		image = new BufferedImage(screenWidth, screenHeight,BufferedImage.TYPE_4BYTE_ABGR);
+		
+		
+	}
+	
+	public int[] calculateComplex(){
+		
+	}
+	
+	public static void main(String[] args) {
+		
+		
+		for (int pixelY = 0; pixelY < screenHeight; pixelY++) {
+			for (int pixelX = 0; pixelX < screenWidth; pixelX++) {
+				realPixel = 1.5 * (pixelX - screenWidth / 2);
+				imaginaryPixel= (pixelY - screenHeight / 2);
+				
+
+				newRealNumber=newImaginaryNumber=oldRealNumber=oldImaginaryNumber=0;
+				
+				int iteration = 0;
+				for (int i= 0; i< maxIterations; i++) {
+				
+					oldRealNumber = newRealNumber;
+					oldImaginaryNumber = newImaginaryNumber;
+
+					newRealNumber = Math.pow(oldRealNumber, 2) - Math.pow(oldImaginaryNumber, 2) + realPixel;
+					newImaginaryNumber = 2 * oldRealNumber * oldImaginaryNumber + imaginaryPixel;
+					
+					iteration++;
+					if (Math.pow(newRealNumber, 2) + Math.pow(newImaginaryNumber, 2) > 4) {
+						break;
+					}
+				}
+
+				if ( iteration < maxIterations) {
+					System.out.println("Iterations["+iteration+"]");
+					pixelColour = Color.HSBtoRGB(iteration%256, 255, 255*iteration);
+				}
+				else
+				{
+					System.out.println("Called iterations>=max");
+					pixelColour = Color.HSBtoRGB(iteration%256, 255, 0);
+				}
+				image.setRGB(pixelX, pixelY, pixelColour);
+				iteration=0;
+			}
+
+		}
+
+		try {
+			ImageIO.write(image, "png", new File(fileName + ".png"));
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error Writing Image");
+		}
+	}
+}

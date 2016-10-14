@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+	<h:head>
+		<title>My Details</title>
+	</h:head>
+	<h:body>
+	NAVIGATION BANNER HERE
+		<h:form>
+			<h3>Your Details</h3>
+			<p:messages/>
+			<b>ID : #{employee.idNumber}</b><br/>
+			<b>Old Name : </b><p:inputText editable="false" value="#{employee.name}"/><br/>
+			<h:panelGroup rendered="#{detailsControl.editable}">
+				New Name : 
+				<p:inputText editable="#{detailsControl.editable}" value="#{detailsControl.name}" rendered="#{detailsControl.editable}"/>
+				<br/>
+			</h:panelGroup>
+			
+			<h:panelGroup rendered="#{detailsControl.editable}">
+				<b>Password : </b><p:password feedback="true" required="true" requiredMessage="cannot update details without password" value="#{detailsControl.pass}"/><br/>
+				<b>New Password : </b><p:password rendered="#{detailsControl.editable}" feedback="true" value="#{detailsControl.newpass}"/><br/>
+			</h:panelGroup>
+			<h:commandButton value="Edit Details" action="#{detailsControl.setEditable(true)}" ajax="false"/>
+			<h:commandButton value="Submit" action="#{detailsControl.edit()}" ajax="false"/>
+		</h:form>		
+	</h:body>
+</html>

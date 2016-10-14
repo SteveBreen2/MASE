@@ -1,0 +1,46 @@
+package agileDesignAndTesting;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import junitparams.JUnitParamsRunner;
+import static junitparams.JUnitParamsRunner.$;
+import junitparams.Parameters;
+
+@RunWith(JUnitParamsRunner.class)
+public class MarkCheckerTest {
+
+	@Parameters
+	public Object[] basicParameters() {
+		int one[]={10,10,10,10,10};
+		int two[]={15,15,15,15,15};
+		return $($(one,two,0));
+		
+	}
+
+}
+
+
+/*
+ 
+20,20,20,20,20
+20,20,20,20,16
+
+20,20,20,20,20
+20,20,20,20,17
+
+20,20,20,20,20
+20,20,20,20,18
+
+20,20,20,20,20
+20,20,20,20,9
+
+20,20,20,20,20
+20,20,20,20,10
+
+20,20,20,20,20
+20,20,20,20,11
+
+*/

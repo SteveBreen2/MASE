@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+	<h:head>
+		<title>Register Now</title>
+	</h:head>
+	<h:body>
+	NAVIGATION BANNER HERE create
+		<h:form>
+			<h3>Please Enter Details</h3>
+			<p:messages/>
+			<b>Name :</b><p:inputText required="true" requiredMessage="Name Required" value="#{employee.name}"/><br/>
+			<b>ID :</b><p:spinner required="true" requiredMessage="Email Address Required" value="#{employee.idNumber}"/><br/>
+			<b>Password : </b><p:password required="true" requiredMessage="Password Required" value="#{employee.password}" feedback="true"/><br/>
+			<p:commandButton action="#{registrationHandler.staffRegister}" value="Submit" ajax="false"/>
+		</h:form>		
+	</h:body>
+</html>

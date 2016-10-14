@@ -1,0 +1,23 @@
+package agileDesignAndTesting;
+
+public class MarkChecker {
+	
+	public int checkMarks(int[] markerOne,int[] markerTwo){
+		boolean firstFlag=false;
+		boolean secondFlag=false;
+		double sumOne = 0,sumTwo=0;
+		for(int i=0;i<markerOne.length;i++){
+			if (Math.abs(markerOne[i]-markerTwo[i])>3){
+				firstFlag=true;
+				sumOne+=markerOne[i];
+				sumTwo+=markerTwo[i];
+				
+			}
+			if(Math.abs(sumOne-sumTwo>10)){
+				
+			}
+		}
+		
+	}
+
+}

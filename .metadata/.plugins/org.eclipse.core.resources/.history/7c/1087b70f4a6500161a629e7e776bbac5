@@ -1,0 +1,34 @@
+package com.ait.test;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import com.ait.drinks.CoffeeMachine;
+
+public class CoffeeMachineTest {
+
+	CoffeeMachine coffeeMachine;
+	@Before
+	public void startup(){
+		//assertEquals();
+		coffeeMachine=new CoffeeMachine();
+	}
+	@Test
+	public void testInitialInventoryZero() {
+		assertEquals(0,coffeeMachine.getChocolate());
+		assertEquals(0,coffeeMachine.getCoffee());
+	}
+	@Test
+	public void testUpdateInventory() {
+		coffeeMachine.updateInventory(30, 20);
+		assertEquals(20,coffeeMachine.getChocolate());
+		assertEquals(30,coffeeMachine.getCoffee());
+	}
+	@Test
+	public void testAddRecipeOK(){
+		assertEquals("OK",coffeeMachine.addRecipe("Latee", 1, 2, 2.50));
+	}
+
+}

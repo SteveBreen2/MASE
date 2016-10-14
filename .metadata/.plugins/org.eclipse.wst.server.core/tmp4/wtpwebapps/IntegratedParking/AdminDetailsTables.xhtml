@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+
+
+<h:head>
+	<title>Administrator Control Centre</title>
+	<link rel="shortcut icon" href="./resources/carIcon.ico" />
+	<h:outputStylesheet name="OrdersEditableTable.css" library="css" />
+	<h:outputStylesheet name="ViewBookingsTable.css" library="css" />
+	<h:outputStylesheet name="styles1.css" library="css" />
+	<h:outputStylesheet library="css" name="topStyle.css" type="text/css" />
+</h:head>
+
+<h:body>
+	<ui:include src="Top.xhtml"/>
+	<div id="mainContainer">
+				<ui:include src="staffpages/StaffLogin.xhtml"/>
+		
+		<p:panel id="empLoggedIn" rendered="#{employee.loggedIn}">
+		<h:form>
+			<p:commandButton value="Change password" type="button"
+							 onclick="PF('dlg2').show();" />
+		</h:form>
+		<p:dialog header="Change password" widgetVar="dlg2" modal="true"
+			height="140">
+			<h:form>
+				<div>Password :</div>
+				<p:password class="formField" required="true" size="40"
+					requiredMessage="cannot update details without password"
+					value="#{employee.oldPass}" />
+				<br />
+				<br />
+				<div>New Password :</div>
+				<p:password id="password" label="password" class="formField"
+					size="40" value="#{employee.newPass}" feedback="true">
+				</p:password>
+				<br />
+				<br />
+				<p:commandButton value="Confirm" action="#{employee.changePassword(employee)}"
+					onclick="PF('dlg2').close();" />
+			</h:form>
+		</p:dialog>
+
+		
+		<h3 style="margin: 0 auto; text-align: center">Management Centre</h3>
+		<h:form>
+		
+			<p:tab title="Mangement Duties">
+			
+				<p:tabView>
+					<ui:include src="staffpages/ChargesDetailsTable.xhtml"/>
+					<ui:include src="staffpages/BillingDetailsTable.xhtml"/>
+					<ui:include src="staffpages/OrdersDetailsTable.xhtml"/>
+					
+					<ui:include src="staffpages/StaffManagementDetailsTable.xhtml"/>
+					<ui:include src="staffpages/AssignTasks.xhtml" />
+  				    <ui:include src="staffpages/ParkingSpaces.xhtml" />
+					<ui:include src="staffpages/EmployeeToDoList.xhtml" />
+					<ui:include src="staffpages/ServiceProvidersTasks.xhtml" />
+					<ui:include src="staffpages/CarParkOperativeTask.xhtml"/>
+					
+					
+				</p:tabView>
+				
+				
+			</p:tab>		
+		</h:form>
+		</p:panel>
+	</div>
+		<ui:include src="Bottom.xhtml" />
+</h:body>
+</html>

@@ -1,0 +1,66 @@
+package javaCode;
+
+import java.text.ParseException;
+import java.util.ArrayList;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
+@ManagedBean
+@SessionScoped
+public class BookingList {
+
+	// A or B 
+	private ArrayList<Booking> bookings= new ArrayList<Booking>();
+
+	public ArrayList<Booking> getBookings() {
+		return bookings;
+	}
+
+	public BookingList() throws ParseException {
+		
+		
+
+	}
+
+	public Booking findBookingsByRef(int bookingRef) {
+
+		for (Booking booking : bookings) {
+			if (booking.getBookingRef() == bookingRef) {
+				return booking;
+			}
+	 	}
+		return null;
+
+	}
+
+	public String addBooking(Booking b) {
+		bookings.add(b);
+		b=null;
+		return null;
+	}
+	
+	
+	public String doAction(Booking b) {
+		
+		Customer c = Helper.getBean("customer", Customer.class);
+		if(c.isLoggedIn()){
+			if (!b.getStartDate().before(b.getEndDate())){				
+				return (null);
+			}else{
+				System.out.println("successful");
+				bookings.add(b);
+				return("AdditionalPurchases.jsf");
+			}
+		}
+		else{
+			if (!b.getStartDate().before(b.getEndDate())){
+				System.out.println("fail");
+				return (null);
+			}
+			else{
+				return "Login.jsf";
+			}
+		}
+	}
+
+}

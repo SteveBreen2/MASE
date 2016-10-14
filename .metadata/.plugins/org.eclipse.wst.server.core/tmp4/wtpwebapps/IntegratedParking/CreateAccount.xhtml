@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+	<h:head>
+		<title>Register Now</title>
+		<style type="text/css">
+			.js #fouc {display: none;} 
+		</style>
+		<script type="text/javascript">
+			document.documentElement.className = 'js';
+		</script>
+		<h:outputStylesheet name="styles1.css" library="css" />
+		<h:outputStylesheet library="css" name="topStyle.css" type="text/css" />
+	</h:head>
+	<h:body>
+		<div id="fouc">
+			<ui:include src="Top.xhtml"/>
+			<div id="mainContainer" style="width:80%">
+				<div class="viewDetailsCreate"  style="color:black;  " >
+				
+					<h:form>
+					
+						<p:growl id="msg" />
+						
+						
+						<h3 class="centerText" >Please Enter Details</h3>
+						
+						<b class="formName">Name :</b>
+						<p:inputText required="true"
+									 id="name"
+									 label="name"
+									 class="formField"
+								     size="40"  
+									 requiredMessage="Name Required" 
+									 value="#{customer.name}"
+									 />
+						
+						<p:watermark for="name" 
+						             value="Name" />
+						<br/>
+						<b class="formName" >Email :</b>				
+						<p:inputText id="email"
+									 class="formField" 
+						             label="email" 
+						             size="40" 
+						             required="true" 
+						             requiredMessage="Email Address Required"
+						             validatorMessage="Invalid email format" 
+						             value="#{customer.email}"
+						             >
+							<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						</p:inputText>
+						<p:watermark for="email" 
+						             value="Email" />
+						<br/>
+						
+						<b class="formName" >Password : </b>
+						<p:password required="true"  
+						            id="password"
+						            class="formField" 
+						            label="password" 
+						            size="40" 
+						            requiredMessage="Password Required"
+						            validatorMessage="Invalid password -> 4 - 8 characters, mixture of upper/lower case letters and digits" 
+						            value="#{customer.password}" 
+						            feedback="true"
+						         
+						            >
+							<f:validateRegex pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$" />
+						</p:password>
+						<p:watermark for="password" 
+						             value="Password"/>
+						<br/>
+						
+						<b class="formName" >Visa : </b>
+						<p:inputMask id="visa" 
+									 value="#{customer.visa}"
+									 required="true" 
+									 mask="9999-9999-9999-9999"
+									 class="formField" 
+						             label="visa" 
+						             size="40" 
+						             requiredMessage="Visa Required"
+						             validatorMessage="Invalid credit card"
+						             password="true"
+						             >
+	
+							<f:validateRegex pattern="^4\d{3}([\ \-]?)\d{4}\1\d{4}\1\d{4}$" />
+						</p:inputMask>
+						
+						<p:watermark for="visa" 
+						             value="Card Number"/>
+						<br/>
+						
+						<b class="formName" >
+							Purchase Gold Membership? :
+							<h:outputText  min="0" value="#{charges.goldMemberShipPrice}" >
+								<f:convertNumber currencyCode="EUR" type="currency" />
+							</h:outputText>
+							
+						 </b>
+
+						<p:selectBooleanCheckbox style="padding-left:110px"  value="#{customer.goldCustomer}">
+							<p:ajax update="msg" listener="#{selectBooleanView.addMessage}" />
+						</p:selectBooleanCheckbox>
+
+
+
+						<br/>
+						
+						<p:commandButton class="basicButton" action="#{registrationHandler.customerAction(customer, false)}"
+						                 value="Submit" 
+						                 ajax="true"
+						                 icon="ui-icon-check"
+						                 style="float:right" />
+
+					
+					
+					</h:form>
+
+
+
+
+
+			</div>
+			</div>
+				<ui:include src="Bottom.xhtml" />
+		</div>		
+	</h:body>
+</html>

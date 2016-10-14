@@ -1,0 +1,151 @@
+package testCode;
+
+import static org.junit.Assert.*;
+
+import java.text.ParseException;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import javaCode.Booking;
+import javaCode.BookingList;
+import javaCode.Customer;
+
+public class CustomerTest {
+
+	private Customer c;
+	private Booking b;
+	
+	@Before
+	public void setUp() throws ParseException {
+		c = new Customer("name","pass","email");
+		b=new Booking();
+		c.getMyBookingList().addBooking(b);
+	}
+	
+	@Test
+	public void testDefaultConstructor() throws ParseException {
+		Customer cust = new Customer();
+		assertNotNull(cust);
+	}
+	@Test
+	public void testToString() {
+		assertEquals("name : name, pass : pass, email : email", c.toString());
+	}
+	
+	@Test
+	public void testConstructor() {
+		assertNotNull(c);
+		assertEquals("name", c.getName());
+		assertEquals("pass", c.getPassword());
+		assertEquals("email", c.getEmail());
+	}
+	
+	@Test
+	public void testNameAccessors() {
+		c.setName("new");
+		assertEquals("new", c.getName());
+	}
+	
+	@Test
+	public void testPassAccessors() {
+		c.setPassword("newPass");
+		assertEquals("newPass", c.getPassword());
+	}
+	
+	@Test
+	public void testEmailAccessors() {
+		c.setEmail("newEmail");
+		assertEquals("newEmail", c.getEmail());
+	}
+	
+	@Test
+	public void testLoggedInAccessors() {
+		assertFalse(c.isLoggedIn());
+		c.setLoggedIn(true);
+		assertTrue(c.isLoggedIn());
+	}
+		
+	@Test
+	public void testCheckIsLoggedInBox() {
+		
+		assertEquals("PF('dlg1').show();", c.checkLoggedInBox());
+	}
+	@Test
+	public void testCheckIsNotLoggedInBox() {
+		c.setLoggedIn(true);
+		assertEquals("", c.checkLoggedInBox());
+	}
+	
+	@Test
+	public void testCheckBox() {
+		
+		assertEquals("PF('dlg2').show();", c.checkBox());
+	}
+	@Test
+	public void testNegativeCheckBox() {
+		c.setLoggedIn(true);
+		assertEquals("", c.checkBox());
+	}
+	
+	@Test
+	public void testGetVisa()
+	{
+		c.setVisa("1234567444444444");
+		assertEquals("1234567444444444", c.getVisa());
+	}
+	
+	@Test
+	public void testCheckLogin1()
+	{
+		c.setLoggedIn(true);
+		assertEquals("ViewBookings.jsf", c.checkLoggedIn(1));
+	}
+	
+	@Test
+	public void testCheckLogin2()
+	{
+		c.setLoggedIn(true);
+		assertEquals("ViewDetails.jsf", c.checkLoggedIn(2));
+	}
+	
+	@Test
+	public void testCheckLogin3()
+	{
+		c.setLoggedIn(true);
+		assertEquals("", c.checkLoggedIn(3));
+	}
+	
+	@Test
+	public void testCheckLogin4()
+	{
+		c.setLoggedIn(false);
+		assertEquals("", c.checkLoggedIn(2));
+	}
+	
+	@Test
+	public void testGetBookingList() throws ParseException
+	{
+		BookingList b = new BookingList();
+		c.setMyBookingList(b);
+		assertEquals(b, c.getMyBookingList());
+	}
+	
+	@Test
+	public void testGoldCustomerAccessors() {
+		assertFalse(c.isGoldCustomer());
+		c.setGoldCustomer(true);
+		assertTrue(c.isGoldCustomer());
+	}
+	
+	@Test
+	public void testDisplayCard() {
+		c.setVisa("4111111111112345");
+		assertEquals("XXXX-XXXX-XXXX-2345", c.getDisplayCard());
+	}
+	@Test
+	public void testBooking() {
+		c.setVisa("4111111111112345");
+		assertEquals(b, c.getDisplayCard());
+	}
+}

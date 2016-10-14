@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<title>Jump Start</title>
+	<style type="text/css">
+		.js #fouc {display: none;} 
+	</style>
+	<script type="text/javascript">
+		document.documentElement.className = 'js';
+	</script>
+	<link rel="shortcut icon" href="./resources/carIcon.ico" />
+	<h:outputStylesheet name="ViewBookingsTable.css" library="css" />
+	<h:outputStylesheet name="styles1.css" library="css" />
+	<h:outputStylesheet library="css" name="topStyle.css" type="text/css" />
+</h:head>
+<body>
+	<div id="fouc">
+		<ui:include src="Top.xhtml" />
+		<div id="mainContainer" style="height:80vh">
+			<div class="jumpStart">
+				<h3 class="centerText">Request a Jump Start</h3>
+				<h:form>
+					<h2>Gold Members may press the button to Request a Jump Start</h2>
+					<p:commandButton action="#{taskList.jumpStart(customer)}" 
+									 value="Jump Start"
+									 rendered="#{customer.goldCustomer}"
+								 	 ajax="false"/>
+				</h:form>
+			</div>
+		</div>
+		<div style="position:fixed; bottom:0; width:99%">
+			<ui:include src="Bottom.xhtml"/>
+		</div>
+			<ui:include src="Bottom.xhtml"/>
+	</div>
+</body>
+</html>

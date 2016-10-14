@@ -1,0 +1,98 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<div id="container">
+
+		<p:tab id="Spaces" title="Parking Spaces"
+			rendered="#{employee.isManager(null)}">
+
+			<h:head>
+<h:outputStylesheet name="Parking.css" library="css" />
+	
+
+
+			</h:head>
+
+			<h:body>
+
+				<div id="parkingContainer">
+					<h:form>
+						<h3 style="margin: 0 auto; text-align: center">Choose a date
+							from below:</h3>
+						<p:panelGrid  columns="6" border="3" style="width:100%">
+							<h3>From:</h3>
+							<p:calendar mindate="#{customer.tempBooking.today}"
+								value="#{customer.tempBooking.startDate}"
+								pattern="MM/dd/yy HH:mm" minHour="9" maxHour="18">
+								<p:ajax event="dateSelect" update="selection" />
+								<p:ajax event="dateSelect" update="cal2" />
+								<p:ajax event="dateSelect" update="count" />
+							</p:calendar>
+							<h:outputText value="#{customer.tempBooking.startDate}"
+								id="selection">
+								<f:convertDateTime pattern="dd MMM yyyy, HH:mm a" />
+							</h:outputText>
+							<h3>To:</h3>
+
+							<p:calendar mindate="#{customer.tempBooking.startDate}"
+								value="#{customer.tempBooking.endDate}" pattern="MM/dd/yy HH:mm"
+								minHour="9" maxHour="18" id="cal2">
+								<p:ajax event="dateSelect" update="selection" />
+								<p:ajax event="dateSelect" update="count" />
+							</p:calendar>
+
+							<h:outputText value="#{customer.tempBooking.endDate}"
+								id="selection2">
+								<f:convertDateTime pattern="dd MMM yyyy, HH:mm a" />
+							</h:outputText>
+
+
+
+						</p:panelGrid>
+						<p:panelGrid   border="3" style="width:100%" styleClass="buttonPanel" columnClasses="center">
+							
+								<p:column>
+									<h3>Free Spaces:</h3>
+								</p:column>
+								<p:column>
+									<h:outputText id="count"
+										value="#{parkingLot.getParkingLot().freeSpaceCount(customer.tempBooking.startDate,customer.tempBooking.endDate)}">
+									</h:outputText>
+									</p:column>
+									<p:column>
+								<h3>Spaces to Add:</h3>
+							</p:column>
+							
+							<p:column>
+							<h:inputText id="bufferSpaces"
+							value="#{parkingLot.bufferSpaces}"
+							></h:inputText>
+							</p:column>
+				
+								<p:column>
+									<p:commandButton update="count"
+										action="#{parkingLot.getParkingLot().enableBufferSpaces()}"
+										value="Enable Buffer Spaces">
+										<p:ajax />
+									</p:commandButton>
+								</p:column>
+								<p:column>
+									<p:commandButton update="count" style="float:center"
+										action="#{parkingLot.getParkingLot().disableBufferSpaces()}"
+										value="Disable Buffer Spaces">
+										<p:ajax />
+									</p:commandButton>
+								</p:column>
+						</p:panelGrid>
+
+
+
+
+					</h:form>
+				</div>
+			</h:body>
+		</p:tab>
+	</div>
+</ui:composition>

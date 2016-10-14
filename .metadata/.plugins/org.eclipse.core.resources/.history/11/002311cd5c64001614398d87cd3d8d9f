@@ -1,0 +1,12 @@
+package com.ait.nav;
+
+import java.util.ArrayList;
+
+public class TableData {
+private String companyName;
+private ArrayList<Name> names=new ArrayList<Name>();
+
+public TableData(){
+	this.companyName="My Company";
+}
+}

@@ -1,0 +1,66 @@
+package agileDesignAndTesting;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import junitparams.JUnitParamsRunner;
+import static junitparams.JUnitParamsRunner.$;
+import junitparams.Parameters;
+
+@RunWith(JUnitParamsRunner.class)
+public class MarkCheckerTest {
+
+	@Parameters
+	public Object[] basicParameters() {
+		int one[]={20,20,20,20,20};
+		int two[]={20,20,20,20,16};
+		int three[]={20,20,20,20,17};
+		int four[]={20,20,20,20,18};
+		int five[]={20,20,20,20,9};
+		int six[]={20,20,20,20,10};
+		int seven[]={20,20,20,20,11};
+		
+		return $($(one,two,1),
+				$(one,three,0),
+				$(one,four,0),
+				$(one,five,2),
+				$(one,six,0),
+				$(one,seven,0)
+				);
+		
+	}
+	
+	@Test
+	@Parameters(method="basicParameters")
+	public static void basicTest(int[] one,int[] two,int answer){
+		MarkChecker m= new MarkChecker();
+		assertEquals(answer, m.checkMarks(one, two));
+		
+	}
+
+}
+
+
+/*
+ 
+20,20,20,20,20
+20,20,20,20,16
+
+20,20,20,20,20
+20,20,20,20,17
+
+20,20,20,20,20
+20,20,20,20,18
+
+20,20,20,20,20
+20,20,20,20,9
+
+20,20,20,20,20
+20,20,20,20,10
+
+20,20,20,20,20
+20,20,20,20,11
+
+*/

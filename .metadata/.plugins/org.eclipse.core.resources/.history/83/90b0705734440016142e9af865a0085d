@@ -1,0 +1,64 @@
+package week1;
+
+import java.util.Scanner;
+
+public class GradeConverter {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		String letterGrade="";
+		//Sentinel variable
+		String choice="y";
+
+		//Create a scanner object.
+		Scanner sc=new Scanner(System.in);
+
+		//Welcome message with a blank line.
+		System.out.println("Welcome to the Letter Grade Converter.\n");
+
+		//Perform the actions until the input isn't equal to upper/lower y.
+
+		while(choice.equalsIgnoreCase("y")){
+			System.out.print("\nEnter numerial grade: ");
+			//Integer variable for input
+			int numericalGrade=sc.nextInt();
+
+			//Check if Out Of Bounds
+			if(numericalGrade>100 || numericalGrade<0){
+				//Print out Results
+				System.out.println("Error in Grade Input:"+numericalGrade);
+			}
+			else{
+
+				if(numericalGrade>=85 )
+					letterGrade="A";
+
+				else if(numericalGrade>=70)
+					letterGrade="B";
+
+				else if(numericalGrade>=55)
+					letterGrade="C";
+
+				else if(numericalGrade>=40)
+					letterGrade="D";
+
+				else if(numericalGrade>=40)
+					letterGrade="E";
+
+				else if(numericalGrade<40)
+					letterGrade="Failed";
+
+				//Print out Results
+				System.out.println("Grade: "+letterGrade+"\n");
+
+			}
+
+			System.out.print("Continue (y/n): ");
+			choice=sc.next();
+		}
+		System.out.println("Exiting");
+		sc.close();
+	}
+
+}

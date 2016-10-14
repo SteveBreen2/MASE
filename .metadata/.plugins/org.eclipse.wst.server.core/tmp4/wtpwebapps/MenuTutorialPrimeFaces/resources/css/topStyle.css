@@ -1,0 +1,11 @@
+@CHARSET "ISO-8859-1";
+
+#top {
+	padding: 10px;
+	background-color: #444444;
+}
+
+.text-input{
+	margin-right: 90px;
+	border:solid 1px #e0e0e0;
+}

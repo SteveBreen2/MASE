@@ -1,0 +1,8 @@
+package agileDesignAndTesting;
+
+public class NameValidator {
+
+	public static boolean isValid(String s){
+		
+	}
+}

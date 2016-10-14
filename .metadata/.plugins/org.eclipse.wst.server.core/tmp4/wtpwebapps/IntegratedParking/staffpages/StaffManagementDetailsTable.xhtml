@@ -1,0 +1,100 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">		
+	<p:tab title="STAFF - Managment" rendered="#{employee.isManager(null)}">
+		<h:panelGrid columns="1" cellpadding="10">
+			<p:dataTable value="#{registrationHandler.employees}"
+							var="emp" styleClass="bookingTable"
+							headerClass="bookingTableHeader"
+							rowClasses="bookingTableOddRow,bookingTableEvenRow">
+
+				<h3>Add Employee</h3>
+				
+				<p:column>
+					<f:facet name="header">ID</f:facet>
+					
+					<h:outputText value="#{emp.idNumber}"
+								   />
+
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Name</f:facet>
+					<p:inputText value="#{emp.name}"
+								rendered="#{emp.canEdit}" />
+					<h:outputText value="#{emp.name}"
+							rendered="#{not emp.canEdit}" />
+				</p:column>
+
+				
+
+				<p:column>
+					<f:facet name="header">Job Title</f:facet>
+					<p:inputText value="#{emp.jobTitle}"
+								 rendered="#{emp.canEdit}" />
+					<h:outputText value="#{emp.jobTitle}"
+						          rendered="#{not emp.canEdit}" />
+
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Edit</f:facet>
+					<h:commandLink value="Edit"
+								   action="#{emp.setCanEdit(true)}"
+								   rendered="#{not emp.canEdit}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Delete</f:facet>
+					<h:commandLink value="Delete"
+								   action="#{registrationHandler.deleteEmployee(employee, emp)}"
+								   rendered="#{not emp.canEdit}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">Save</f:facet>
+					<h:commandLink value="Save" action="#{emp.saveActions}" />
+				</p:column>
+
+			</p:dataTable>
+
+		</h:panelGrid>
+
+		<h3 style="margin: 0 auto; text-align: center">Add Employee</h3>
+
+		<table align="center">
+			<tr>
+				<td>Name:</td>
+				<td><p:inputText size="10" value="#{employeeAdder.name}" /></td>
+			</tr>
+			<tr>
+				<td>id Number:</td>
+				<td><p:inputText size="10" value="#{employeeAdder.idNumber}" /></td>
+			</tr>
+				
+			<tr>
+				<td>Job Title:</td>
+				<td>	
+						<p:selectOneMenu id="console"
+									value="#{employeeAdder.jobTitle}" style="width:125px">
+						<f:selectItem itemLabel="Management" itemValue="Management" />
+						<f:selectItem itemLabel="Operative" itemValue="Operative" />
+						<f:selectItem itemLabel="Service Provider"
+								  itemValue="Service Provider" />
+					</p:selectOneMenu>
+				</td>
+			</tr>
+			<tr>
+				<td>Password:</td>
+				<td><p:password size="10" value="#{employeeAdder.password}" /></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><p:commandButton value="Add Employee"
+									 action="#{employeeAdder.addEmployee()}" ajax="false" /></td>
+			</tr>
+		</table>
+	</p:tab>
+</ui:composition>

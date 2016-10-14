@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<modules>
+  <module moduleId="org.eclipse.jst.jee.server:JSFApp" serverId="Tomcat v7.0 Server at localhost"/>
+  <module moduleId="org.eclipse.jst.jee.server:Setup" serverId="Tomcat v7.0 Server at localhost"/>
+  <module moduleId="org.eclipse.jst.jee.server:TablesJSF" serverId="Tomcat v7.0 Server at localhost (3)"/>
+  <module moduleId="org.eclipse.jst.jee.server:Cart" serverId="Tomcat v7.0 Server at localhost"/>
+  <module moduleId="org.eclipse.jst.jee.server:ShoppingStuff" serverId="Tomcat v7.0 Server at localhost"/>
+  <module moduleId="org.eclipse.jst.jee.server:NavigationTutorial" serverId="Tomcat v7.0 Server at localhost"/>
+  <module moduleId="org.eclipse.jst.jee.server:JsfApp" serverId="Tomcat v7.0 Server at localhost (2)"/>
+  <module moduleId="org.eclipse.jst.jee.server:Beans" serverId="Tomcat v7.0 Server at localhost (2)"/>
+  <module moduleId="org.eclipse.jst.jee.server:MenuTutorialPrimeFaces" serverId="Tomcat v7.0 Server at localhost (5)"/>
+  <module moduleId="org.eclipse.jst.jee.server:First TomCat" serverId="Tomcat v7.0 Server at localhost"/>
+  <module moduleId="org.eclipse.jst.jee.server:IntegratedParking" serverId="Tomcat v7.0 Server at localhost (5)"/>
+  <module moduleId="org.eclipse.jst.jee.server:First Dynamic" serverId="Tomcat v7.0 Server at localhost"/>
+</modules>

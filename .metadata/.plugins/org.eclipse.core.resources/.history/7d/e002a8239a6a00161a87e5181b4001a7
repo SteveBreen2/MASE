@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<title>Home</title>
+	
+	<h:outputStylesheet name="styles1.css" library="css" />
+</h:head>
+<body>
+	<ui:include src="Top.xhtml" />
+		<hr></hr>
+	
+	<div id="mainContainer">
+	<h1 class="title">Welcome to Integrated Parking, some of your parking needs met! </h1>
+		<div id="bookFormContainer">
+			<h:form>
+				<h3>Choose a date from below: </h3>
+				<b>From:</b> 
+				<p:calendar ajax="true"
+							mindate="#{booking.today}"
+							showButtonPanel="true"
+							navigator="true" 
+							value="#{booking.startDate}"
+							required = "true"
+							requiredMessage = "please select a date"/><br/>
+				<b>To:</b> 
+				<p:calendar 
+							mindate="#{booking.startDate}"
+							showButtonPanel="true" 
+							navigator="true" 
+							effect="explode" 
+							value="#{booking.endDate}"
+							required = "true"
+							requiredMessage = "please select a date"/><br/>
+				<p:dialog header="AHHHH!!" widgetVar="dlg2" showEffect="bounce" hideEffect="bounce" height="100">
+	    			<h:outputText value="Invalid/No date selected." />
+				</p:dialog>
+				<p:commandButton action="#{customer.myBookingList.doAction(booking)}" value="Book" onclick="#{customer.checkBox()}"/>
+			</h:form>
+		</div>
+	</div>
+</body>
+</html>

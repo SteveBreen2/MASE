@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+    
+    
+    
+<h:head>
+	<title>Orders  Editable  Table</title>
+	<ui:include src="Top.xhtml" />
+	<h:outputStylesheet name="OrdersEditableTable.css" library="css" />
+	
+</h:head>
+
+
+
+<h:body>
+				<h3>VIEW-----DETAILS</h3>
+	<h:form>
+
+
+			<p:tabView dynamic="true" 
+						effect="fade" 
+						effectDuration="slow" 
+						orientation="Top" >
+<!-- 						activeIndex="#{some.tabindex}" cache="true" > -->
+				
+				<p:tab id="Charges" title="CHARGES">
+				
+					<h:panelGrid columns="1" cellpadding="10">
+					
+							<p:dataTable 	var="name" value="#{chargesTableData.charges}" 
+    										styleClass = "nameChargesTable"
+    										headerClass ="nameChargesTableHeader"
+    										rowClasses ="nameChargesTableOddRow,nameChargesTableEvenRow">
+    										
+    										
+    										
+   
+    										
+    										
+    										
+    										
+    		
+    											<p:column>
+													<f:facet name="header">    Gold MemberShip </f:facet>
+    												<h:inputText value = "#{name.goldMemberShipPrice}" rendered="#{name.canEdit}"/>
+    												<h:outputText value = "#{name.goldMemberShipPrice}" rendered="#{not name.canEdit}" />
+    											</p:column>
+												
+												<p:column>
+													<f:facet name="header">    Meet and Greet </f:facet>
+    												<h:inputText value = "#{name.meetAndGreetPrice}" rendered="#{name.canEdit}"/>
+    												<h:outputText value = "#{name.meetAndGreetPrice}" rendered="#{not name.canEdit}"/>
+    											</p:column>
+												
+												<p:column>
+													<f:facet name="header">    Valeting</f:facet>
+    												<h:inputText value = "#{name.valetingPrice}" rendered="#{name.canEdit}"/>
+    												<h:outputText value = "#{name.valetingPrice}" rendered="#{not name.canEdit}"/>
+    											</p:column>
+											
+												<p:column>
+													<f:facet name="header">    Sevicing </f:facet>
+    												<h:inputText value = "#{name.servicingPrice}" rendered="#{name.canEdit}"/>
+    												<h:outputText value = "#{name.servicingPrice}" rendered="#{not name.canEdit}"/>
+    											</p:column>
+	
+	
+	
+	
+												<p:column>
+													<f:facet name="header">     Total</f:facet>
+    												#{charges.totalPrice},
+    											</p:column>
+
+
+												<p:column>
+													<f:facet name="header">Edit</f:facet>
+													<h:commandLink value="Edit"
+																	action="#{name.setCanEdit(true)}"
+																	rendered="#{not name.canEdit}" />
+												</p:column>
+			
+												<p:column>
+													<f:facet name="header">Delete</f:facet>
+													<h:commandLink value="Delete"
+																	action="#{chargesTableData.deleteCharge(name)}"
+																	rendered="#{not charge.canEdit}" />
+												</p:column>
+									</p:dataTable>
+										
+									<h:outputText value="Page 2" />	
+									<h:commandButton value="Save Changes" action="#{chargesTableData.saveAction}"/>
+					</h:panelGrid>
+			</p:tab>
+		
+		
+		
+		
+			<p:tab id="Bills" title="BILLS">
+	      						<h:outputText value = "page2"/>
+			</p:tab>
+						
+			
+			
+
+			
+			<p:tab title="ORDERS">
+					<h:panelGrid columns="1" cellpadding="10">
+                			<p:dataTable 	var="order" value="#{OrdersTableData.orders}" 
+    										styleClass = "nameOrdersTable"
+    										headerClass ="nameOrdersTableHeader"
+    										rowClasses ="nameOrdersTableOddRow,nameOrdersTableEvenRow">
+    		
+    									<p:column>
+											<f:facet name="header">    Order ID </f:facet>
+    											<h:inputText value = "#{order.getOrderID}" rendered="#{order.canEdit}"/>
+    											<h:outputText value = "#{order.getOrderID}" rendered="#{not order.canEdit}" />
+    									</p:column>
+										
+										<p:column>
+											<f:facet name="header">    Item Name </f:facet>
+    											<h:inputText value = "#{order.getItemName}" rendered="#{order.canEdit}"/>
+    											<h:outputText value = "#{order.getItemName}" rendered="#{not order.canEdit}"/>
+    									</p:column>
+										
+										<p:column>
+											<f:facet name="header">    Item Cost </f:facet>
+    											<h:inputText value = "#{order.getItemCost}" rendered="#{order.canEdit}"/>
+    											<h:outputText value = "#{order.getItemCost}" rendered="#{not order.canEdit}"/>
+    									</p:column>
+		
+										<p:column>
+											<f:facet name="header">     Total</f:facet>
+    										#{orders.calculateTotal},
+    									</p:column>
+										
+										<p:column>
+											<f:facet name="header">Edit</f:facet>
+												<h:commandLink value="Edit"
+																action="#{order.setCanEdit(true)}"
+																rendered="#{not order.canEdit}" />
+										</p:column>
+										
+										<p:column>
+											<f:facet name="header">Delete</f:facet>
+												<h:commandLink value="Delete"
+																action="#{ordersTableData.deleteOrder(name)}"
+																rendered="#{not order.canEdit}" />
+										</p:column>
+							</p:dataTable>
+            		</h:panelGrid>
+						<h:commandButton value="Save   Changes" action="#{ordersTableData.saveAction}"/>
+			</p:tab>
+			
+			
+			
+			
+			<p:tab title="STAFF">
+	       		<h:panelGrid columns="1" cellpadding="10">
+		  					<p:dataTable 
+		  					          
+		  					         var="employee1"
+		  					         value="#{employeeTableData.employee}" 
+		  			                styleClass="bookingTable" 
+									headerClass="bookingTableHeader"
+									rowClasses="bookingTableOddRow,bookingTableEvenRow">
+								
+										<p:column>
+											<f:facet name="header">Name</f:facet>
+											<p:inputText value="#{employee.name}" rendered="#{employee.canEdit}"/>
+											<h:outputText value="#{employee.name}" rendered="#{not employee.canEdit}"/>
+						
+										</p:column>
+										
+										<p:column>
+											<f:facet name="header">ID</f:facet>
+											<p:inputText value="#{employee.idNumber}" rendered="#{employee.canEdit}"/>
+											<h:outputText value="#{employee.idNumber}" rendered="#{not employee.canEdit}"/>
+						
+										</p:column>
+										
+										<p:column>
+											<f:facet name="header">Job Title</f:facet>
+											<p:inputText value="#{employee.jobTitle}" rendered="#{employee.canEdit}"/>
+											<h:outputText value="#{employee.jobTitle}" rendered="#{not employee.canEdit}"/>
+			
+										</p:column>
+			
+										<p:column>
+											<f:facet name="header">Edit</f:facet>
+			    							<h:commandLink value="Edit" 
+			    											action="#{registrationHander.setCanEdit(true)}" 
+			    											rendered="#{not employee.canEdit}" />
+										</p:column>
+										
+										<p:column>
+											<f:facet name = "header">Delete</f:facet>
+											<h:commandLink value = "Delete" 
+															action ="#{employee.deleteEmployee(idNumber)}"
+															rendered = "#{not employee.canEdit}"/>
+										</p:column>
+				
+							</p:dataTable>
+							
+				<h:outputText value="Page 4" />	
+					<h3>Add Employee</h3>
+			<table>
+			<tr>
+			<td>Name:</td>
+			<td><h:inputText size = "10" value = "#{employee.name}"/></td>
+			</tr>
+			<tr>
+			<td>id Number: </td>
+			<td><h:inputText size = "10" value = "#{employee.idNumber}"/></td>
+			</tr>
+			<tr>
+			<td>Password:</td>
+			<td><h:inputText size = "10" value = "#{employee.password}"/></td>
+			</tr>
+			<tr>
+			<td>Job Title:</td>
+			<td><h:inputText size = "10" value = "#{employee.jobTitle}"/></td>
+			</tr>
+			
+			<tr>
+			<td>
+			</td>
+			<td><h:commandButton value = "Add Employee"  action="#{RegistrationHandler.registerEmployee}"/></td></tr>
+			
+			</table>
+		</h:panelGrid>
+		
+				</p:tab>
+			
+		</p:tabView>
+
+             
+
+
+		
+		</h:form>
+	</h:body>
+</html>

@@ -1,0 +1,107 @@
+package javaCode;
+
+import java.io.Serializable;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
+@ManagedBean
+@SessionScoped
+public class Customer implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+
+	private String name;
+	private String password;
+	private String email;
+	private boolean loggedIn=false;
+	private String visa;
+
+	public Customer() {
+		this("none", "none", "none");
+	}
+	
+	public Customer(String name, String pass, String email) {
+		this.setName(name);
+		this.setPassword(pass);
+		this.setEmail(email);
+		this.setLoggedIn(false);
+		this.setVisa("");
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String pass) {
+		this.password = pass;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public boolean isLoggedIn() {
+		return loggedIn;
+	}
+
+	public void setLoggedIn(boolean loggedIn) {
+		this.loggedIn = loggedIn;
+	}
+
+	public String getVisa() {
+		return this.visa;
+	}
+
+	public void setVisa(String visa) {
+		this.visa = visa;
+	}
+	
+	@Override
+	public String toString() {
+		return "name : " + this.getName() + ", pass : " + this.getPassword() + ", email : " + this.getEmail();
+	}
+	
+	public String checkLoggedInBox() {
+		if(!this.isLoggedIn()) {
+			return "PF('dlg1').show();";
+		} else {
+			return "";
+		}
+	}
+	
+	public String checkBox() {
+		if(!this.isLoggedIn()) {
+			return "PF('dlg2').show();";
+		} else {
+			return "";
+		}
+	}
+	public String checkLoggedIn(int i) {
+		System.out.println("isLoggedin:"+isLoggedIn());
+		if(this.isLoggedIn()) {
+			if(i == 1) {
+				return "ViewBookings.jsf";
+			}
+			else if(i == 2) {
+				return "ViewDetails.jsf";
+			} else {
+				return "";
+			}
+		} else {
+			return "";
+		}
+	}
+}

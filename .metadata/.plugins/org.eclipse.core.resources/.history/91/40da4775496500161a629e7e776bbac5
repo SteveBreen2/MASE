@@ -1,0 +1,48 @@
+package com.ait.drinks;
+
+import java.util.ArrayList;
+
+public class CoffeeMachine {
+
+	private double moneyInserted;
+	private int coffee,chocolate;
+	private boolean waterTempOK;
+	private ArrayList<Recipe> recipies;
+	public boolean isWaterTempOK() {
+		return waterTempOK;
+	}
+	public void setWaterTempOK(boolean waterTempOK) {
+		this.waterTempOK = waterTempOK;
+	}
+	public int getCoffee() {
+		return coffee;
+	}
+	public int getChocolate() {
+		return chocolate;
+	}
+	public CoffeeMachine(){
+		recipies=new ArrayList<>();
+		this.chocolate=0;
+		this.coffee=0;
+		this.moneyInserted=0;
+		this.waterTempOK=false;
+	
+	}
+	
+	public void updateInventory(int coffee,int chocolate){
+		this.coffee=coffee;
+		this.chocolate=chocolate;
+	}
+	
+	public String addRecipe(String name,int coffee,int chocolate,double price){
+		boolean exists=false;
+		for(Recipe r:recipies){
+			
+			if(r.getName().equalsIgnoreCase(name)){
+				exists=true;
+			}
+		}
+	}
+	
+	
+}

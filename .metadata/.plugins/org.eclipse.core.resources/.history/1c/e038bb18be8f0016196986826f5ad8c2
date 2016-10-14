@@ -1,0 +1,25 @@
+package agileDesignAndTesting;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized.Parameters;
+
+import junitparams.JUnitParamsRunner;
+
+@RunWith(JUnitParamsRunner.class)
+public class NameValidatorTest {
+
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+	}
+
+	@Test
+	@Parameters(method=)
+	public void test() {
+		fail("Not yet implemented");
+	}
+
+}

@@ -1,0 +1,133 @@
+package javaCode;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Scanner;
+import java.util.Stack;
+import java.awt.List;
+import java.lang.Object.*;
+
+public class ShuntingYard {
+
+	static Scanner sc = new Scanner(System.in);
+
+	public enum Operator {
+		ADD, SUBTRACT, MULTIPLY, DIVIDE;
+	}
+
+	public static void main(String args[]) {
+		HashMap<String, Operator> operatorMap = new HashMap<String, Operator>();
+
+		operatorMap.put("+", Operator.ADD);
+		operatorMap.put("-", Operator.SUBTRACT);
+		operatorMap.put("*", Operator.MULTIPLY);
+		operatorMap.put("/", Operator.DIVIDE);
+
+		//System.out.println(Arrays.toString(toShuntingYard("2 + ( 3 * ( 8 - 4 ) )", operatorMap).toArray()));
+		System.out.println(solveShuntingYard(toShuntingYard("2 + ( 3 * ( 8 - 4 ) )", operatorMap), operatorMap));
+
+	}
+
+	public static Stack<String> toShuntingYard(String expression, HashMap operatorMap) {
+
+		Stack<String> left = new Stack();
+		Stack<String> bottom = new Stack();
+
+		String phrase = "2 + ( 3 * ( 8 - 4 ) )";
+		ArrayList<String> myList = new ArrayList<String>(Arrays.asList(phrase.split(" ")));
+
+		for (String currentElement : myList) {
+
+			// If an operator
+			if (operatorMap.containsKey(currentElement)) {
+				//
+				{
+					bottom.push(currentElement);
+
+				}
+			}
+
+			// If "("
+			else if (currentElement.equals("(")) {
+				bottom.push(currentElement);
+
+			}
+
+			// If ")"
+			else if (currentElement.equals(")")) {
+
+				while (!bottom.peek().equals("(")) {
+					left.push(bottom.pop());
+				}
+				bottom.pop();
+
+			}
+
+			// If number
+			else {
+				left.push(currentElement);
+			}
+
+		}
+		while (!bottom.isEmpty()) {
+			left.push(bottom.peek());
+			bottom.pop();
+		}
+
+		return left;
+	}
+
+	public static int solveShuntingYard(Stack<String> expression, HashMap operatorMap) {
+
+		int answer = 0;
+		
+		int value3 = 0;
+
+		Stack<String> bottom = new Stack<String>();
+		System.out.println(Arrays.toString(expression.toArray()));
+		
+		int size=expression.size();
+		
+		for (int i = 0; i < size; i++) {
+			
+			System.out.println("Expression: "+expression.elementAt(i));
+			// If an Operator
+
+			if (!expression.elementAt(i).equals("+")&&!expression.elementAt(i).equals("-")&&!expression.elementAt(i).equals("*")&&!expression.elementAt(i).equals("/")) {
+				bottom.push(expression.elementAt(i));
+				System.out.println("Called");
+			}
+
+			 else {
+				 System.out.println("Called2");
+				int value1 = Integer.valueOf(bottom.pop());
+				int value2 = Integer.valueOf(bottom.pop());
+				
+				switch(expression.elementAt(i)){
+					
+					case "+":
+						bottom.push(String.valueOf(value1+value2));
+						break;
+					case "-":
+						bottom.push(String.valueOf(value2-value1));
+						break;
+					case "*":
+						bottom.push(String.valueOf(value1*value2));
+						break;
+					case "/":
+						bottom.push(String.valueOf(value1/value2));
+						break;
+				}
+				
+			}
+			System.out.println("Current run: "+i);
+			System.out.println("Bottom: "+bottom.peek());
+			System.out.println("\n");
+		}
+
+		System.out.println(Arrays.toString(bottom.toArray()));
+		return answer;
+
+	}
+}

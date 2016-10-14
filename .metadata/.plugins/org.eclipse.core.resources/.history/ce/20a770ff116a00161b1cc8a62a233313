@@ -1,0 +1,136 @@
+package testCode;
+
+import static org.junit.Assert.*;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import javaCode.Booking;
+import javaCode.BookingList;
+import javaCode.Booking;
+
+public class BookingTest {
+
+	private Booking testBooking;
+	SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
+
+	@Before
+	public void startup() throws ParseException {
+		String startDateString = "22-08-2016";
+		String endDateString = "25-08-2016";
+		Date startDate = sdf.parse(startDateString);
+		Date endDate = sdf.parse(endDateString);
+		testBooking = new Booking(startDate, endDate, false, false, false);
+	}
+
+	@Test
+	public void bookSpaceTest() throws ParseException {
+
+		assertEquals(0, testBooking.getBookingRef());
+	}
+	@Test
+	public void defaultConstructorTest() throws ParseException {
+		
+		Booking defaultBooking=new Booking();
+		
+		String startDateString = "01-01-2016";
+		String endDateString = "02-01-2016";
+		Date startDate = sdf.parse(startDateString);
+		Date endDate = sdf.parse(endDateString);
+		
+		assertEquals(startDate,defaultBooking.getStartDate());
+		assertEquals(endDate,defaultBooking.getEndDate());
+		assertFalse(defaultBooking.isMeetAndGreet());
+		assertFalse(defaultBooking.isValeting());
+		assertFalse(defaultBooking.isServicing());
+	}
+
+	@Test
+	public void getStartDateTest() throws ParseException {
+
+		String dateInString = "22-08-2016";
+		Date date = sdf.parse(dateInString);
+		assertEquals(date, testBooking.getStartDate());
+	}
+
+	@Test
+	public void getFormattedStartDateTest() throws ParseException {
+
+		assertEquals("22-08-2016", testBooking.getFormattedStartDate());
+	}
+
+	@Test
+	public void getEndDateTest() throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
+		String dateInString = "25-08-2016";
+		Date date = sdf.parse(dateInString);
+		assertEquals(date, testBooking.getEndDate());
+	}
+
+	@Test
+	public void getFormattedEndDateTest() throws ParseException {
+
+		assertEquals("25-08-2016", testBooking.getFormattedEndDate());
+	}
+
+	@Test
+	public void changeEndDateTest() throws ParseException {
+
+		String dateInString = "30-08-2016";
+		Date date = sdf.parse(dateInString);
+
+		testBooking.setEndDate(date);
+		assertEquals(date, testBooking.getEndDate());
+	}
+
+	@Test
+	public void changeStartDateTest() throws ParseException {
+
+		String dateInString = "30-08-2016";
+		Date date = sdf.parse(dateInString);
+
+		testBooking.setStartDate(date);
+		assertEquals(date, testBooking.getStartDate());
+	}
+
+	@Test
+	public void setServicing() {
+
+		testBooking.setServicing(true);
+		assertEquals(true, testBooking.isServicing());
+
+	}
+
+	@Test
+	public void setMeetAndGreet() {
+
+		testBooking.setMeetAndGreet(true);
+		assertTrue(testBooking.isMeetAndGreet());
+
+	}
+
+	@Test
+	public void setValeting() {
+
+		testBooking.setValeting(true);
+		assertTrue(testBooking.isValeting());
+
+	}
+
+	@Test
+	public void testGetToday() {
+		Date today = new Date();
+		assertEquals(today, testBooking.getToday());
+	}
+
+	@Test
+	public void testToString() {
+		//
+		assertEquals("Booking Ref: 3", testBooking.toString());
+	}
+
+}

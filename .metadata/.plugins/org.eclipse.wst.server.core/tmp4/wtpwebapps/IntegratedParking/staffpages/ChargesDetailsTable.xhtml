@@ -1,0 +1,63 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<p:tab id="Charges" title="Set Service Charges" rendered="#{employee.isManager(null)}">
+		<p:panelGrid columns="3" id="bookFormContainer"
+					 styleClass="chargesTable" headerClass="nameChargesTableHeader"
+					 rowClasses="nameChargesTableOddRow,nameChargesTableEvenRow">
+			<f:facet name="header">
+				Charges
+			</f:facet>
+
+			<h:outputText value="Gold Membership :" />
+			<h:outputText min="0"
+						  value="#{chargesControl.goldMemberShipPrice}">
+				<f:convertNumber currencyCode="EUR" type="currency" />
+			</h:outputText>
+			<p:spinner min="0" id="gold"
+					   value="#{chargesControl.goldMemberShipPrice}" 
+					   stepFactor=".01"/>
+
+			<h:outputText value="Meet and Greet :" />
+			<h:outputText min="0" value="#{chargesControl.meetAndGreetPrice}">
+				<f:convertNumber currencyCode="EUR" type="currency" />
+			</h:outputText>
+			<p:spinner min="0" id="meetgreet"
+					   value="#{chargesControl.meetAndGreetPrice}" 
+					   stepFactor=".01"/>
+
+			<h:outputText value="Servicing Price :" />
+			<h:outputText min="0" value="#{chargesControl.servicingPrice}">
+				<f:convertNumber currencyCode="EUR" type="currency" />
+			</h:outputText>
+			<p:spinner id="servicing"
+					   value="#{chargesControl.servicingPrice}" 
+					   stepFactor=".01"/>
+
+			<h:outputText value="Valeting Price :" />
+			<h:outputText min="0" value="#{chargesControl.valetingPrice}">
+				<f:convertNumber currencyCode="EUR" type="currency" />
+			</h:outputText>
+			<p:spinner min="0" id="valet"
+					   value="#{chargesControl.valetingPrice}" 
+				   	   stepFactor=".01"/>
+
+			<h:outputText value="Daily Parking Fee:" />
+			<h:outputText min="0"
+						 value="#{chargesControl.charges.dailyParkingPrice}">
+				<f:convertNumber currencyCode="EUR" type="currency" />
+			</h:outputText>
+			<p:spinner min="0" id="total"
+					   value="#{chargesControl.dailyParkingPrice}" 
+					   stepFactor=".01"/>
+						   
+		</p:panelGrid>
+		<div style="text-align: center">
+			<p:commandButton value="Save Changes"
+							 ajax="false" />
+		</div>
+	</p:tab>
+</ui:composition>

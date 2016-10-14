@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+	<h:head>
+		<title>Login</title>
+		<style type="text/css">
+			.js #fouc {display: none;} 
+		</style>
+		<script type="text/javascript">
+			document.documentElement.className = 'js';
+		</script>
+		<link rel="shortcut icon" href="./resources/carIcon.ico" />
+		<h:outputStylesheet name="styles1.css" library="css" />
+		<h:outputStylesheet library="css" name="topStyle.css" type="text/css" />
+	</h:head>
+	<h:body>
+		<div id="fouc">
+			<ui:include src="Top.xhtml"/>
+			<div id="mainContainer" style="height:80vh">
+		
+				<div  class="viewDetails">
+					<h1>Already have an account? Login here</h1>
+					<h:form>
+					
+						<h3>Please Enter Details</h3>
+						
+						<b class="formName">Email :</b>
+						<p:inputText id="email"
+									 class="formField" 
+						             label="email" 
+						             size="40" 
+						             required="true" 
+						             requiredMessage="Email Address Required" 
+						             validatorMessage="Invalid email format" 
+						             value="#{customer.email}">
+							<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						</p:inputText>
+						<p:watermark for="email" 
+						             value="Email Address" />
+						<br/>
+						
+						<b class="formName">Password : </b>
+						<p:password id="password"
+									class="formField" 
+						            label="password"
+						            size="40" 
+						            required="true" 
+						            requiredMessage="Password Required" 
+						            validatorMessage="Password must be 4-8 characters and contain upper/lowecase letters and numbers" 
+						            value="#{customer.password}" 
+						            >
+							<f:validateRegex pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$" />
+						</p:password>
+						<br/>
+						
+						<p:commandButton action="#{registrationHandler.customerAction(null, true)}"
+										 class="loginButton" 
+						                 value="Login" 
+						                 ajax="false"/>
+						<br/>
+						
+					</h:form>
+					
+					<h:form>
+						<p:commandLink action="CreateAccount.jsf" 
+						               ajax="false" style="color:white;">
+							New user? Register Now
+						</p:commandLink>
+					</h:form>
+					
+				</div>
+			</div>
+		<div style="position:fixed; bottom:0; width:99%">
+			<ui:include src="Bottom.xhtml"/>
+		</div>
+		</div>		
+	</h:body>
+</html>

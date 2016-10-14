@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<!--      testing  -->
+<h:head>
+	<title>testing</title>
+	<h:outputStylesheet name="styles1.css" library="css" />
+</h:head> 
+<body> 
+	<ui:include src="Top.xhtml"/>
+	<h3>Input data using Spinner and Calendar</h3>
+	<div id="mainContainer">
+		<h:form>
+			<b>input user:</b> 
+			<p:inputText value="#{purchase.associatedUser}"
+						required = "true"
+						requiredMessage = "please enter a userName"/><br/>
+			<b>Choose Arrival date:</b> 
+			<p:calendar showButtonPanel="true" 
+						navigator="true" 
+						effect="explode" 
+						value="#{booking.startDate}"
+						required = "true"
+						requiredMessage = "please select a date"/><br/>
+			<b>Choose Return date:</b> 
+			<p:calendar showButtonPanel="true" 
+						navigator="true" 
+						effect="explode" 
+						value="#{booking.endDate}"
+						required = "true"
+						requiredMessage = "please select a date"/><br/>
+			<b>Meet and Greet Service:</b> 
+			<p:selectBooleanCheckbox value="#{purchase.meetAndGreet}"/><br/>
+			<b>Gold Membership:</b> 
+			<p:selectBooleanCheckbox value="#{purchase.goldMem}"/><br/>
+			<b>Servicing:</b> 
+			<p:selectBooleanCheckbox value="#{purchase.servicing}"/><br/>
+			<b>Valeting:</b> 
+			<p:selectBooleanCheckbox value="#{purchase.valeting}"/><br/>
+			<p:commandButton action="#{purchase.doAction}" value="Submit"/>
+		</h:form>
+	</div>
+</body> 
+</html>

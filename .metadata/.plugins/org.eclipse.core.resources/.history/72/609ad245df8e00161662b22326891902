@@ -1,0 +1,297 @@
+package com.ait.calculator;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Scanner;
+import java.util.Stack;
+
+import javax.swing.JButton;
+import javax.swing.JRadioButton;
+
+import com.ait.calculator.ShuntingYard.Operator;
+
+import java.awt.List;
+import java.lang.Object.*;
+
+public class ShuntingYard {
+
+	final static double VALUE_OF_PI = 3.141592654;
+	final static double VALUE_OF_E = 2.718281828;
+
+	static HashMap<String, Operator> operatorMap = new HashMap<String, Operator>();
+
+	static Scanner sc = new Scanner(System.in);
+
+	public static void initaliseOperators() {
+		operatorMap.put("+", Operator.ADD);
+		operatorMap.put("-", Operator.SUBTRACT);
+		operatorMap.put("*", Operator.MULTIPLY);
+		operatorMap.put("/", Operator.DIVIDE);
+		operatorMap.put("^", Operator.EXPONENT);
+		operatorMap.put("#", Operator.UNARY_MINUS);
+		operatorMap.put("~", Operator.UNARY_PLUS);
+	}
+
+	public enum Operator {
+		ADD(1), SUBTRACT(2), MULTIPLY(3), DIVIDE(4), EXPONENT(5), UNARY_MINUS(6), UNARY_PLUS(6);
+		private int precedence;
+
+		// Con
+		Operator(int precedence) {
+			this.precedence = precedence;
+		}
+	}
+
+	public static String cleanString(String expression) {
+		initaliseOperators();
+
+		System.out.println("Entered with: [" + expression + "]");
+		StringBuilder sb = new StringBuilder(expression);
+		int j = 0;
+		// Remove all spaces
+		removeBlankSpace(sb);
+
+		for (int i = 0; i < sb.length() - 1; i++) {
+			System.out.println("Iteration: " + i);
+			System.out.println("Char(i):" + sb.charAt(i));
+
+			// If i is a number
+			if (Character.isDigit(sb.charAt(i))) {
+
+				// if i+1 is an operator
+				if (operatorMap.containsKey(Character.toString(sb.charAt(i + 1)))) {
+					// Insert a space between them
+					sb.insert(i + 1, " ");
+				}
+				// if i+1 is a decimal point/number
+				else if (sb.charAt(i + 1) == '.' || Character.isDigit(sb.charAt(i + 1))) {
+					// do nothing
+
+				}
+				// if i+1 is an open bracket
+				else if (sb.charAt(i + 1) == '(') {
+					// Insert a Space * and Space
+					sb.insert(i + 1, " * ");
+				}
+			}
+			// if I is an operator
+			else if (operatorMap.containsKey(Character.toString(sb.charAt(i)))) {
+				System.out.println("!");
+
+				// If I+1 is a "("
+				if (sb.charAt(i + 1) == '(') {
+					// Insert a Space between them
+					sb.insert(i + 1, " ");
+				}
+				// If I+1 is a number
+				else if (Character.isDigit(sb.charAt(i + 1))) {
+			
+					// Insert Space between them
+					sb.insert(i + 1, " ");
+				}
+
+				// If I+1 is a -
+				else if (sb.charAt(i + 1) == '-') {
+
+					
+					// Insert Space between them - Space between them #
+					sb.replace(i, i + 2, Character.toString(sb.charAt(i))+" # ");
+
+				}
+				// If I+1 is a +
+				else if (sb.charAt(i + 1) == '+') {
+
+					
+					// Insert Space between them - Space between them ~
+					sb.replace(i, i + 2, Character.toString(sb.charAt(i))+" ~ ");
+
+				}
+
+			}
+			//If I is a (
+			else if(sb.charAt(i)=='('){
+				//if I+1 is a +
+				if(sb.charAt(i + 1) == '+'){
+					sb.replace(i, i+2, "( #");
+				}
+				//if I+1 is a +
+				else if(sb.charAt(i + 1) == '-'){
+					sb.replace(i, i+2, "( ~");
+				}
+				//If a number of another bracket
+				else{
+					
+					sb.insert(i+1," ");
+				}
+			}
+			// If I is a space
+			else {
+				// Do nothing
+			}
+		}
+		System.out.println("Cleaned: [" + sb.toString() + "]");
+		return sb.toString();
+	}
+
+	public static Stack<String> toShuntingYard(String expression) {
+
+		Stack<String> left = new Stack<String>();
+		Stack<String> bottom = new Stack<String>();
+
+		expression = cleanString(expression);
+		String phrase = expression;
+		ArrayList<String> myList = new ArrayList<String>(Arrays.asList(phrase.split(" ")));
+
+		for (int i = 0; i < myList.size(); i++) {
+			// U operator
+			if (myList.get(i).equals("#")) {
+				double holder = Double.valueOf(myList.get(i + 1));
+				holder = holder * -1;
+				String stringHolder = Double.toString(holder);
+				left.push(stringHolder);
+				break;
+			}
+			// U operator
+			if (myList.get(i).equals("~")) {
+				double holder = Double.valueOf(myList.get(i + 1));
+				String stringHolder = Double.toString(holder);
+				left.push(stringHolder);
+				break;
+			}
+
+			// If an operator
+			if (operatorMap.containsKey(myList.get(i))) {
+
+				while (!bottom.isEmpty() && isHigerPrec(myList.get(i), bottom.peek())) {
+					System.out.println("Entered2");
+					left.push(bottom.pop());
+				}
+				bottom.push(myList.get(i));
+
+			}
+
+			// If "("
+			else if (myList.get(i).equals("(")) {
+				bottom.push(myList.get(i));
+
+			}
+
+			// If ")"
+			else if (myList.get(i).equals(")")) {
+
+				while (!bottom.peek().equals("(")) {
+					left.push(bottom.pop());
+				}
+				bottom.pop();
+			}
+
+			// If number
+			else {
+				left.push(myList.get(i));
+			}
+
+		}
+		while (!bottom.isEmpty()) {
+			left.push(bottom.peek());
+			bottom.pop();
+		}
+
+		return left;
+	}
+
+	public static double solveShuntingYard(Stack<String> expression, JRadioButton degrees, JRadioButton radians) {
+
+		double value1;
+		double value2;
+
+		Stack<String> bottom = new Stack<String>();
+
+		for (int i = 0; i < expression.size(); i++) {
+
+			// If not an Operator
+			// Pi
+			if (expression.elementAt(i).charAt(0) == '\u03C0') {
+				bottom.push(String.valueOf(VALUE_OF_PI));
+			}
+			// Standard Positive digit
+			else if (!operatorMap.containsKey(expression.elementAt(i))) {
+				bottom.push(expression.elementAt(i));
+
+			}
+
+			else {
+
+				switch (expression.elementAt(i)) {
+
+					case "+":
+						value1 = Double.valueOf(bottom.pop());
+						value2 = Double.valueOf(bottom.pop());
+						bottom.push(String.valueOf(value1 + value2));
+						break;
+					case "-":
+						value1 = Double.valueOf(bottom.pop());
+						value2 = Double.valueOf(bottom.pop());
+						bottom.push(String.valueOf(value2 - value1));
+						break;
+					case "*":
+						value1 = Double.valueOf(bottom.pop());
+						value2 = Double.valueOf(bottom.pop());
+						bottom.push(String.valueOf(value1 * value2));
+						break;
+					case "/":
+						value1 = Double.valueOf(bottom.pop());
+						value2 = Double.valueOf(bottom.pop());
+						bottom.push(String.valueOf(value2 / value1));
+						break;
+					case "^":
+						value1 = Double.valueOf(bottom.pop());
+						value2 = Double.valueOf(bottom.pop());
+						bottom.push(String.valueOf(Math.pow(value2, value1)));
+						break;
+
+				}
+
+			}
+
+		}
+
+		/*
+		 * Degrees/Radians
+		 */
+
+		if (radians.isSelected()) {
+			return Math.toRadians(Double.valueOf(bottom.pop()));
+		} else {
+			return Double.valueOf(bottom.pop());
+		}
+
+	}
+
+	private static boolean isHigerPrec(String current, String bottom) {
+		return (operatorMap.containsKey(bottom)
+				&& operatorMap.get(bottom).precedence >= operatorMap.get(current).precedence);
+	}
+
+	public static double cos(double d) {
+		return Math.cos(d);
+	}
+
+	public static double sin(double d) {
+		return Math.sin(d);
+	}
+
+	public static void removeBlankSpace(StringBuilder sb) {
+		int j = 0;
+		// Loop through sb
+		for (int i = 0; i < sb.length(); i++) {
+			// If not a white assign
+			if (!Character.isWhitespace(sb.charAt(i))) {
+				sb.setCharAt(j++, sb.charAt(i));
+			}
+		}
+		// Crop from j->end
+		sb.delete(j, sb.length());
+	}
+
+}

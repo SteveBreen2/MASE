@@ -1,0 +1,14 @@
+package com.ait.exam;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class RecipeTest {
+
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
+
+}

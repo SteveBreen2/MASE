@@ -1,0 +1,105 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<p:tab id="Bills" title="Customer Billing" rendered="#{employee.isManager(null)}">
+
+		<p:dataTable var="thisOrder" value="#{billsTableData.bills}"
+					 styleClass="bookingTable" headerClass="bookingTableHeader"
+					 rowClasses="bookingTableOddRow,bookingTableEvenRow" rows="10">
+
+			<p:column>
+				<f:facet name="header">    Customer </f:facet>
+				<h:outputText value="#{thisOrder.person}"/>
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">    Description </f:facet>
+			    <h:outputText value="#{thisOrder.getTypeBillsPage()}"
+							   />
+
+			</p:column>
+			
+			
+			
+					<p:column>
+						<f:facet name="header">Servicing</f:facet>
+	
+						<p:graphicImage class="image" id="correctImage"
+							value="./resources/myCorrectImage.png"
+							rendered="#{thisOrder.servicing and thisOrder.isGCNoEdit()}"/>
+						<p:graphicImage class="image" id="incorrectImage"
+							value="./resources/myIncorrectImage.png"
+							rendered="#{!thisOrder.servicing and thisOrder.isGCNoEdit()}"/>
+	
+						<h:outputText rendered="#{thisOrder.isGC()}" value="N/A"/>
+						<p:commandButton value="Add" action="#{thisOrder.setServicing(true)}" rendered="#{!thisOrder.servicing and thisOrder.isGCEdit()}"/>
+						<p:commandButton value="Remove" action="#{thisOrder.setServicing(false)}" rendered="#{thisOrder.servicing and thisOrder.isGCEdit()}"/>
+					</p:column>
+					
+					<p:column>
+						<f:facet name="header">Valeting</f:facet>
+						<h:graphicImage class="image" id="correctImage2"
+							value="./resources/myCorrectImage.png"
+							rendered="#{thisOrder.valeting and thisOrder.isGCNoEdit()}"/>
+						<p:graphicImage class="image" id="incorrectImage2"
+							value="./resources/myIncorrectImage.png"
+							rendered="#{!thisOrder.valeting and thisOrder.isGCNoEdit()}"/>
+	
+						<h:outputText rendered="#{thisOrder.isGC()}" value="N/A"/>
+						<p:commandButton value="Add" action="#{thisOrder.setValeting(true)}" rendered="#{!thisOrder.valeting and thisOrder.isGCEdit()}" ajax="false"/>
+						<p:commandButton value="Remove" action="#{thisOrder.setValeting(false)}" rendered="#{thisOrder.valeting and thisOrder.isGCEdit()}" ajax="false"/>
+					</p:column>
+					
+					<p:column>
+						<f:facet name="header">Meet &amp; Greet</f:facet>
+						<h:graphicImage class="image" id="correctImage3"
+							value="./resources/myCorrectImage.png"
+							rendered= "#{thisOrder.meetAndGreet and thisOrder.isGCNoEdit()}"/>
+						<p:graphicImage class="image" id="incorrectImage3"
+							value="./resources/myIncorrectImage.png"
+							rendered="#{!thisOrder.meetAndGreet and thisOrder.isGCNoEdit()}"/>
+
+						<h:outputText rendered="#{thisOrder.isGC()}" value="N/A"/>
+						<p:commandButton value="Add" action="#{thisOrder.setMeetAndGreet(true)}" rendered="#{!thisOrder.meetAndGreet and thisOrder.isGCEdit()}" ajax="false"/>
+						<p:commandButton value="Remove" action="#{thisOrder.setMeetAndGreet(false)}" rendered="#{thisOrder.meetAndGreet and thisOrder.isGCEdit()}" ajax="false"/>
+					</p:column>
+
+			<p:column>
+				<f:facet name="header">    Cost </f:facet>
+				<h:outputText value="#{thisOrder.cost}">
+					<f:convertNumber currencyCode="EUR" type="currency" />
+				</h:outputText>
+				<f:facet name="footer">
+					<h:outputText value="#{billsTableData.total}">
+						<f:convertNumber currencyCode="EUR" type="currency" />
+					</h:outputText>
+				</f:facet>
+			</p:column>
+
+			<p:column rendered="#{!thisOrder.isGC()}">
+				<f:facet name="header">Delete</f:facet>
+				<h:commandLink value="Delete"
+							   action="#{billsTableData.deleteBill(thisOrder)}"
+							   rendered="#{not thisOrder.canEdit and not thisOrder.isGC()}" />
+				<h:outputText rendered="#{thisOrder.isGC()}" value="N/A"/>
+			</p:column>
+			<p:column rendered="#{!thisOrder.isGC()}">
+				<f:facet name="header">Edit</f:facet>
+				<h:commandLink value="Edit"
+							   action="#{thisOrder.setCanEdit(true)}"
+							   rendered="#{not thisOrder.canEdit and not thisOrder.isGC()}" />
+				<h:outputText rendered="#{thisOrder.isGC()}" value="N/A"/>
+			</p:column>
+			<p:column rendered="#{!thisOrder.isGC()}">
+				<f:facet name="header">Save</f:facet>
+				<h:commandLink value="Save" action="#{thisOrder.saveAction}" rendered="#{not thisOrder.isGC()}" />
+				<h:outputText rendered="#{thisOrder.isGC()}" value="N/A"/>
+			</p:column>
+		</p:dataTable>
+
+	</p:tab>
+</ui:composition>

@@ -1,0 +1,123 @@
+package agileDesignAndTesting;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import junitparams.JUnitParamsRunner;
+import static junitparams.JUnitParamsRunner.$;
+import junitparams.Parameters;
+
+
+
+@RunWith(JUnitParamsRunner.class)
+public class MarkCheckerTest {
+
+	static MarkCheckerTest m;
+	
+	@Before
+	public static void setup(){
+		m=new MarkCheckerTest();
+	}
+	
+
+	@Parameters
+	public Object[] basicParameters() {
+		int one[] = { 20, 20, 20, 20, 20 };
+
+		// Variance between individual scores
+		int i1[] = { 20, 20, 20, 20, 16 };
+		int i2[] = { 20, 20, 20, 20, 17 };
+		int i3[] = { 20, 20, 20, 20, 18 };
+		int i4[] = { 20, 20, 20, 20, 19 };
+		int i5[] = { 20, 20, 20, 20, 20 };
+
+		// Variance in total score
+		int v1[] = { 18, 17, 18, 18, 18 };//11
+		int v2[] = { 18, 18, 18, 18, 18 };//10
+		int v3[] = { 18, 18, 18, 18, 19 };//9
+		int v4[] = { 20, 20, 20, 20, 18 };//2
+		int v5[] = { 20, 20, 20, 20, 19 };//1
+		int v6[] = { 20, 20, 20, 20, 20 };//0
+
+		return $($(one, i1, 1), 
+				$(one, i2, 0), 
+				$(one, i3, 0),
+				$(one, i4, 0),
+				$(one, i5, 0),
+				
+				
+				$(one, v1, 2), 
+				$(one, v2, 0), 
+				$(one, v3, 0),
+				$(one, v4, 0),
+				$(one, v5, 0),
+				$(one, v6, 0));
+
+	}
+
+	@Parameters
+	public Object[] illegalParameters() {
+		int low[] = { -1, 20, 20, 20, 20 };
+		int normal[] = { 20, 20, 20, 20, 20 };
+		int high[] = { 21, 20, 20, 20, 20 };
+		
+		return $($(low, normal, 0),
+				$(high, normal, 0));
+	}
+	
+	@Parameters
+	public Object[] illegalArraySizeParameters() {
+		int small[] = { 20, 20, 20, 20 };
+		int normal[] = { 20, 20, 20, 20, 20 };
+		int big[] = { 20, 20, 20, 20, 20,20 };
+		
+		return $($(small, normal, 0),
+				$(big, normal, 0));
+	}
+	
+	
+
+	@Test
+	@Parameters(method = "basicParameters")
+	public static void basicTest(int[] one, int[] two, int answer) {
+		MarkChecker m = new MarkChecker();
+		assertEquals(answer, m.checkMarks(one, two));
+
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	@Parameters(method = "illegalParameters")
+	public static void illegalTest(int[] one, int[] two, int answer) {
+		MarkChecker m = new MarkChecker();
+		m.checkMarks(one, two);
+		
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	@Parameters(method = "illegalArraySizeParameters")
+	public static void illegalArraySize(int[] one, int[] two, int answer) {
+		MarkChecker m = new MarkChecker();
+		m.checkMarks(one, two);
+		
+	}
+
+}
+
+/*
+ * 
+ * 20,20,20,20,20 20,20,20,20,16
+ * 
+ * 20,20,20,20,20 20,20,20,20,17
+ * 
+ * 20,20,20,20,20 20,20,20,20,18
+ * 
+ * 20,20,20,20,20 20,20,20,20,9
+ * 
+ * 20,20,20,20,20 20,20,20,20,10
+ * 
+ * 20,20,20,20,20 20,20,20,20,11
+ * 
+ */

@@ -1,0 +1,291 @@
+@CHARSET "ISO-8859-1";
+
+#navContainer {
+	text-align: center;
+	height: 85px;
+	width: 70%;
+	margin: 0 auto;
+}
+
+.navMenuButtons {
+	color: black;
+	margin-left: 5px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#mainContainer {
+	padding-top: 25px;
+	width: 80%;
+	margin: 0 auto;
+	padding-bottom: 40px;
+	/* 	background-color:#CCC; */
+}
+
+#buttonContainer {
+	z-index: 3;
+	box-shadow: 10px 10px 5px 0px rgba(227, 224, 227, 1);
+}
+
+#bookFormContainer {
+	text-align: center;
+	background-color: grey;
+	width: 600px;
+	height: 400px;
+	margin: 0 auto;
+	z-index: 3;
+	box-shadow: 10px 10px 5px 0px rgba(227, 224, 227, 1);
+}
+
+#j_idt53:homeForm {
+	margin: 0 auto;
+}
+
+.home1 {
+	margin-top: 30px;
+	margin: 0 auto;
+	width: 80%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+		rgba(0, 0, 0, 0.19);
+	/* 	 background-color:#CCC; */
+}
+
+.home2 {
+	margin-top: 30px;
+	margin: 0 auto;
+	width: 80%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+		rgba(0, 0, 0, 0.19);
+	margin-bottom: 30px;
+}
+
+.dateGrid {
+	margin-top: 30px;
+	margin: 0 auto;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+		rgba(0, 0, 0, 0.19);
+		width:100%;
+}
+
+.dateGrid table td{
+	text-align:center;
+	}
+	
+#PaddingTextHolder{
+	style="width:100%"
+}
+
+.leftText {
+	text-align: left;
+	padding-left: 30px;
+	padding-top: 20px;
+	background-color: #036;
+	padding-bottom: 20px;
+	color: #CC9;
+}
+
+.rightText {
+	text-align: right;
+	padding-right: 30px;
+	padding-top: 20px;
+	background-color: #036;
+	padding-bottom: 20px;
+	color: #CC9;
+}
+
+.centerText {
+	text-align: center;
+	padding-left: 30px;
+	padding-top: 20px;
+	background-color: #036;
+	padding-bottom: 20px;
+	color: #CC9;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	background: red; /* For browsers that do not support gradients */
+	border-style: solid;
+	border-width: 5px;
+	background: linear-gradient(to right, #F0F0F0, white, #F0F0F0);
+	border-width: 5px; /* Standard syntax */
+	border-color: #333366;
+	border-width: 5px;
+}
+
+.homeImg1 {
+	width: 150px;
+	height: 150px;
+}
+
+.title {
+	float: center;
+	text-align: center;
+	color: white;
+	height: 260px;
+	font: cursive;
+}
+
+#titleImageDiv {
+	height: 100%;
+	float: center;
+}
+
+.mgmtPanel {
+	height: 400px;
+	position: relative;
+	border-style: outset;
+	border-color: grey;
+	z-index: 3;
+}
+
+#footer {
+	height: 40px;
+	background-color: #036;
+}
+
+#t1 {
+	float: right;
+	font-size: 65%;
+	color: white;
+}
+
+.chargesTable {
+	text-align: center;
+	border-collapse: collapse;
+	border: 1px #000000;
+	border-style: outset;
+	margin: auto;
+}
+
+.viewDetailsCreate {
+	position: relative;
+	background-color: white;
+	z-index: 3;
+	box-shadow: 10px 10px 5px 0px rgba(227, 224, 227, 1);
+	margin: 0 auto;
+	height: 250px;
+	border-radius: 5px;
+}
+
+.viewDetails {
+	position: relative;
+	top: 5%;
+	padding: 10px;
+	padding-top: 20px;
+	background-color: white;
+	color: white;
+	text-align: center;
+	z-index: 3;
+	box-shadow: 10px 10px 5px 0px rgba(227, 224, 227, 1);
+	margin: 0 auto;
+	height: 400px;
+	border-radius: 5px;
+}
+.additionalServiceTitle{
+	color:black;
+	font-family: Arial, Helvetica, sans-serif;
+	float:left;
+	font-weight: bold;
+}
+
+.formName {
+	display: inline-block;
+	float: left;
+	clear: left;
+	width: 250px;
+	text-align: center;
+	display: inline-block;
+	float: left;
+	margin-bottom: 5px;
+}
+
+.formField {
+	display: inline-block;	
+	margin-bottom: 5px;
+}
+
+.staffFormName {
+	display: inline-block;
+	float: left;
+	clear: left;
+	width: 250px;
+	text-align: left;
+	display: inline-block;
+	float: left;
+	font-size:20px;
+	font-family:Arial,Helvetica,sans-serif; 
+	color:#CCCC99;
+}
+
+.staffFormField {
+	display: inline-block;
+	background-color: white;
+}
+
+.formButton {
+	position: relative;
+	top: 65%;
+	right: 50%;
+}
+
+.loginButton {
+	position: relative;
+	top: 80px;
+	right: 1%;
+}
+
+.detailsButton {
+	position: relative;
+	top: 100%
+}
+
+.additionalPanel {
+	position: relative;
+	top: 80px;
+	left: 20%;
+}
+
+.formHeight {
+	height: 100%;
+}
+.detailsPanel{
+	width: 55%;
+	margin: 0 auto;
+}
+#box1{
+	padding-top:15px;
+	padding-left: 100px;
+	padding-right: 40px;
+}
+#buttonBox{
+	padding-left: 200px;
+}
+.basicButton {
+	color: #CCCC99;
+	font-weight: bold;
+	background: #003366;
+	transition-duration: 0.4s;
+	font-family:Arial,Helvetica,sans-serif;
+	
+}
+.basicButton:hover {
+   color: #003366;
+   background: #CCCC99;
+   
+   }
+     
+.standardMenuButton {
+	color: black;
+	border:none;
+	background-image:opacity: 0.5;
+	text-align:right;
+	font-family:Arial,Helvetica,sans-serif;
+}
+
+.loginContainer{
+	width:100%;
+	
+}
+
+

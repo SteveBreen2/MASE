@@ -1,0 +1,61 @@
+package testCode;
+
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import javaCode.Charges;
+import javaCode.ChargesTableData;
+
+public class ChargesTableDataTest 
+{
+	ChargesTableData ctd;
+	ArrayList<Charges> c;
+	
+	@Before
+	public void init()
+	{
+		ctd = new ChargesTableData();
+		c = ctd.getCharges();
+	}
+	
+	@Test
+	public void testDefaultValues()
+	{
+		assertEquals(150, c.get(0).getGoldMemberShipPrice(), 0.0001);
+		assertEquals(50, c.get(0).getMeetAndGreetPrice(), 0.0001);
+		assertEquals(80, c.get(0).getValetingPrice(), 0.0001);
+		assertEquals(140, c.get(0).getServicingPrice(), 0.0001);
+		
+		assertEquals(150, c.get(1).getGoldMemberShipPrice(), 0.0001);
+		assertEquals(30, c.get(1).getMeetAndGreetPrice(), 0.0001);
+		assertEquals(80, c.get(1).getValetingPrice(), 0.0001);
+		assertEquals(190, c.get(1).getServicingPrice(), 0.0001);
+		
+		assertEquals(150, c.get(2).getGoldMemberShipPrice(), 0.0001);
+		assertEquals(20, c.get(2).getMeetAndGreetPrice(), 0.0001);
+		assertEquals(80, c.get(2).getValetingPrice(), 0.0001);
+		assertEquals(100, c.get(2).getServicingPrice(), 0.0001);
+	}
+	
+	@Test
+	public void testEditCharge()
+	{
+		ctd.editCharge(c.get(0));
+		assertTrue(c.get(0).isCanEdit());
+		ctd.saveAction();
+		assertFalse(c.get(0).isCanEdit());
+	}
+	
+	@Test
+	public void testDeleteCharge()
+	{
+		ctd.deleteCharge(c.get(2));
+		ctd.deleteCharge(c.get(1));
+		ctd.deleteCharge(c.get(0));
+		assertTrue(c.isEmpty());
+	}
+}

@@ -1,0 +1,52 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">		
+				
+				<head><h:outputStylesheet name="styles1.css" library="css" /></head>
+	<div  class="loginContainer" >
+		<h3 class="centerText" >Please Enter Details</h3>
+			<h:form >
+
+				<b class="formName">Email :</b>
+				<p:inputText id="email"
+							 class="formField" 
+							 label="email" 
+							 size="40" 
+							 required="false" 
+							 requiredMessage="Email Address Required" 
+							 validatorMessage="Invalid email format" 
+						     value="#{customer.email}">
+					<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+				</p:inputText>
+				<p:watermark for="email" 
+				             value="Email Address" />
+				<br/>
+				<b class="formName">Password : </b>
+				<p:password id="password"
+					    	class="formField" 
+				            label="password"
+				            size="40" 
+							required="false" 
+							requiredMessage="Password Required" 
+							validatorMessage="Password must be 4-8 characters and contain upper/lowecase letters and numbers" 
+							value="#{customer.password}" >
+					<f:validateRegex pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$" />
+				</p:password>
+				<br/>
+				<p:commandButton action="#{registrationHandler.customerAction(customer, true)}"
+								 class="basicButton" 
+							     value="Login" 
+							     ajax="false"
+							     style="float:right;"/>
+				<br/>
+				<p:commandLink action="CreateAccount.xhtml" 
+							   ajax="false" 
+							   style="color:black;">
+					New user? Register Now
+				</p:commandLink>
+			</h:form>
+	</div>
+</ui:composition>

@@ -1,0 +1,19 @@
+package com.ait.test;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class CoffeeMachineTest {
+
+	@Before
+	public void startup(){
+		//assertEquals();
+	}
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
+
+}

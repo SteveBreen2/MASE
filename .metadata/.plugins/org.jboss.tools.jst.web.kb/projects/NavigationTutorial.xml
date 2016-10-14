@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kb-project>
+ <depends-on-projects/>
+ <used-by-projects/>
+ <paths>
+  <path value="C:/xampp/tomcat/lib/tomcat-util.jar"/>
+  <path value="C:/xampp/tomcat/lib/tomcat7-websocket.jar"/>
+  <path value="C:/xampp/tomcat/lib/catalina.jar"/>
+  <path value="C:/xampp/tomcat/lib/catalina-tribes.jar"/>
+  <path value="C:/xampp/tomcat/lib/tomcat-i18n-fr.jar"/>
+  <path value="C:/Users/A00190204/Desktop/Java Workspace/libraries/JSF 2.2 (Mojarra 2.2.0)/mojarra-2.2.0-FCS/lib/javax.faces.jar">
+   <libraries>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-javax.faces.jar/meta-inf/html_basic.tld" project="NavigationTutorial"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-javax.faces.jar/meta-inf/jsf_core.tld" project="NavigationTutorial"/>
+    </library>
+    <library class="facelet">
+     <id class="model-object"
+      path="FileSystems/lib-javax.faces.jar/meta-inf/mojarra_ext.taglib.xml" project="NavigationTutorial"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-javax.faces.jar/meta-inf/mojarra_ext.tld" project="NavigationTutorial"/>
+    </library>
+   </libraries>
+  </path>
+  <path value="C:/xampp/tomcat/lib/ecj-4.4.jar"/>
+  <path value="/NavigationTutorial/WebContent/WEB-INF/faces-config.xml">
+   <libraries>
+    <library class="faces-config">
+     <id class="model-object"
+      path="FileSystems/WEB-INF/faces-config.xml" project="NavigationTutorial"/>
+    </library>
+   </libraries>
+  </path>
+  <path value="C:/xampp/tomcat/lib/catalina-ha.jar"/>
+  <path value="C:/xampp/tomcat/lib/jasper.jar"/>
+  <path value="C:/Users/A00190204/Desktop/Java Workspace/NavigationTutorial/WebContent/WEB-INF/lib/jstl-1.2.jar">
+   <libraries>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/c-1_0-rt.tld" project="NavigationTutorial"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/c-1_0.tld" project="NavigationTutorial"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/c.tld" project="NavigationTutorial"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/fmt-1_0-rt.tld" project="NavigationTutorial"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/fmt-1_0.tld" project="NavigationTutorial"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/fmt.tld" project="NavigationTutorial"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/fn.tld" project="NavigationTutorial"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/permittedtaglibs.tld" project="NavigationTutorial"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/scriptfree.tld" project="NavigationTutorial"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/sql-1_0-rt.tld" project="NavigationTutorial"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/sql-1_0.tld" project="NavigationTutorial"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/sql.tld" project="NavigationTutorial"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/x-1_0-rt.tld" project="NavigationTutorial"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/x-1_0.tld" project="NavigationTutorial"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-jstl-1.2.jar/meta-inf/x.tld" project="NavigationTutorial"/>
+    </library>
+   </libraries>
+  </path>
+  <path value="C:/xampp/tomcat/lib/tomcat-i18n-ja.jar"/>
+  <path value="C:/xampp/tomcat/lib/servlet-api.jar"/>
+  <path value="C:/xampp/tomcat/lib/tomcat-i18n-es.jar"/>
+  <path value="C:/xampp/tomcat/lib/tomcat-dbcp.jar"/>
+  <path value="C:/xampp/tomcat/lib/el-api.jar"/>
+  <path value="C:/xampp/tomcat/lib/jsp-api.jar"/>
+  <path value="C:/xampp/tomcat/lib/websocket-api.jar"/>
+  <path value="C:/Users/A00190204/Desktop/Java Workspace/NavigationTutorial/WebContent/WEB-INF/lib/javax.faces-2.2.8.jar">
+   <libraries>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-javax.faces-2.2.8.jar/meta-inf/html_basic.tld" project="NavigationTutorial"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-javax.faces-2.2.8.jar/meta-inf/jsf_core.tld" project="NavigationTutorial"/>
+    </library>
+    <library class="facelet">
+     <id class="model-object"
+      path="FileSystems/lib-javax.faces-2.2.8.jar/meta-inf/mojarra_ext.taglib.xml" project="NavigationTutorial"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-javax.faces-2.2.8.jar/meta-inf/mojarra_ext.tld" project="NavigationTutorial"/>
+    </library>
+   </libraries>
+  </path>
+  <path value="C:/xampp/tomcat/lib/catalina-ant.jar"/>
+  <path value="C:/xampp/tomcat/lib/jasper-el.jar"/>
+  <path value="C:/xampp/tomcat/lib/tomcat-api.jar"/>
+  <path value="C:/xampp/tomcat/lib/annotations-api.jar"/>
+  <path value="C:/xampp/tomcat/lib/tomcat-coyote.jar"/>
+  <path value="C:/xampp/tomcat/lib/tomcat-jdbc.jar"/>
+  <path value="C:/Users/A00190204/Desktop/Java Workspace/NavigationTutorial/WebContent/WEB-INF/lib/jsp-api-2.0.jar"/>
+ </paths>
+ <validation>
+  <core validator-id="jsf-verification">
+   <linked-resource declaration="true" name="%1;" path="%0"/>
+  </core>
+  <core validator-id="jboss.jsf.core"/>
+  <el>
+   <linked-el length="50" name="%2" offset="957" path="%3"/>
+   <linked-el length="52" name="%2" offset="554" path="%3"/>
+   <linked-el length="52" name="%2" offset="451" path="%3"/>
+   <linked-el length="50" name="%2" offset="768" path="%3"/>
+   <linked-el length="50" name="%4" offset="957" path="%3"/>
+   <linked-el length="52" name="%4" offset="554" path="%3"/>
+   <linked-el length="52" name="%4" offset="451" path="%3"/>
+   <linked-el length="50" name="%4" offset="768" path="%3"/>
+   <linked-el length="17" name="%5" offset="371" path="%2"/>
+   <linked-el length="50" name="%6" offset="1146" path="%3"/>
+   <linked-el length="49" name="%7" offset="1533" path="%3"/>
+   <linked-el length="36" name="%7" offset="615" path="%0"/>
+   <linked-el length="49" name="%8" offset="1419" path="%3"/>
+   <linked-el length="36" name="%8" offset="406" path="%0"/>
+   <linked-el length="17" name="%9" offset="371" path="%2"/>
+   <linked-el length="49" name="%10" offset="1419" path="%3"/>
+   <linked-el length="49" name="%10" offset="1533" path="%3"/>
+   <linked-el length="50" name="%10" offset="1146" path="%3"/>
+   <linked-el length="36" name="%10" offset="615" path="%0"/>
+   <linked-el length="36" name="%10" offset="406" path="%0"/>
+  </el>
+ </validation>
+ <aliases>
+  <alias path="index.xhtml" value="%1"/>
+  <alias path="/NavigationTutorial/WebContent/index.xhtml" value="%3"/>
+  <alias path="/NavigationTutorial/src/NavigationController.java" value="%2"/>
+  <alias path="NavigationController" value="%4"/>
+  <alias path="param" value="%5"/>
+  <alias path="navigationController.returnPage" value="%6"/>
+  <alias path="/NavigationTutorial/WebContent/WEB-INF/faces-config.xml" value="%0"/>
+  <alias path="navigationController.processPage2" value="%7"/>
+  <alias path="navigationController.processPage1" value="%8"/>
+  <alias path="param.pageId" value="%9"/>
+  <alias path="navigationController" value="%10"/>
+ </aliases>
+ <includes/>
+ <uris>
+  <uri value="http://xmlns.jcp.org/jsf/core">
+   <prefix>f</prefix>
+  </uri>
+  <uri value="http://xmlns.jcp.org/jsf/html">
+   <prefix>h</prefix>
+  </uri>
+  <uri value="http://java.sun.com/jsf/core">
+   <prefix>f</prefix>
+  </uri>
+  <uri value="http://java.sun.com/jsf/html">
+   <prefix>h</prefix>
+  </uri>
+ </uris>
+</kb-project>

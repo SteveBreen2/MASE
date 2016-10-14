@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://java.sun.com/jsf/html">
+
+<h:head>
+
+	<!-- StyleSheets imports go here -->
+	<h:outputStylesheet library="css" name="contentStyle.css"
+		type="text/css" />
+	<h:outputStylesheet library="css" name="bottomStyle.css"
+		type="text/css" />
+	<h:outputStylesheet library="css" name="containerStyle.css"
+		type="text/css" />
+	<h:outputStylesheet library="css" name="topStyle.css" type="text/css" />
+
+
+</h:head>
+
+<body>
+	<div id="container">
+		<!-- Structure goes here -->
+		<div id="top" class="topSection">
+			<ui:insert name="top">Top Section</ui:insert>
+		</div>
+		<div>
+			
+			<div id="content" class="contentSection">
+				<ui:insert name="content">Main Content</ui:insert>
+			</div>
+
+			<div id="bottom" class="bottomSection">
+				<h:form>
+					<ui:insert name="bottom">
+						<p:outputLabel value="Copyright Placeholder" />
+						<br />
+						<h:link outcome="privacy" value="Privacy Policy and Terms of Use" />
+					</ui:insert>
+				</h:form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

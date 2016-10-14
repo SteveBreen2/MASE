@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<title>Additional Purchases</title>
+		<style type="text/css">
+			.js #fouc {display: none;} 
+		</style>
+		<script type="text/javascript">
+			document.documentElement.className = 'js';
+		</script>
+	 <link rel="shortcut icon" href="./resources/carIcon.ico" />
+	<h:outputStylesheet name="styles1.css" library="css" />
+	<h:outputStylesheet library="css" name="topStyle.css" type="text/css" />
+</h:head>
+<h:body>
+	<ui:include src="Top.xhtml" />
+	<div id="fouc">
+		<div id="mainContainer">
+			
+				<h:form class="viewDetails" >
+					<p:growl id="msgs" />
+					<h3 class="centerText">Additional Services</h3>
+					<h:panelGrid class="additionalPanel" columns="3" style="margin-bottom:10px" cellpadding="5">
+					
+						<h:outputText class="additionalServiceTitle" value="Purchase Meet and Greet: " />
+						<h:outputText value="#{chargesControl.charges.meetAndGreetPrice}" >
+								<f:convertNumber currencyCode="EUR" type="currency" />
+							</h:outputText>
+						<p:selectBooleanButton class="formField" id="value2"
+											   value="#{customer.tempBooking.meetAndGreet}" onLabel="Yes" offLabel="No"
+											   style="width:60px" />
+						<h:outputText class="additionalServiceTitle" value="Purchase Servicing: " />
+						<h:outputText value="#{chargesControl.charges.servicingPrice}" >
+								<f:convertNumber currencyCode="EUR" type="currency" />
+							</h:outputText>
+						
+						<p:selectBooleanButton class="formField" id="value3"
+							value="#{customer.tempBooking.servicing}" onLabel="Yes" offLabel="No"
+							style="width:60px" />
+						<h:outputText class="additionalServiceTitle" value="Purchase Valeting: " />
+						<h:outputText value="#{chargesControl.charges.valetingPrice}">
+							<f:convertNumber currencyCode="EUR" type="currency" />
+						</h:outputText>
+						<p:selectBooleanButton class="formField" id="value4"
+							value="#{customer.tempBooking.valeting}" onLabel="Yes" offLabel="No"
+							style="width:60px" />
+							<f:facet name="footer">
+					<p:commandButton style="width:100%;padding:0px;" class="basicButton" id="submit" value="Confirm"
+						 action="PurchaseComplete.jsf"/>
+						 </f:facet>
+					</h:panelGrid>
+				</h:form>
+			</div>
+			<ui:include src="Bottom.xhtml"/>
+	</div>
+</h:body>
+</html>

@@ -1,0 +1,76 @@
+package javaCode;
+
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+import javax.imageio.ImageIO;
+
+public class MandelbrotSet {
+
+	final static String fileName = "MandleBrot";
+	static double newRealNumber;
+	static double oldRealNumber;
+	static double changeRealNumber;
+	static double newImaginaryNumber;
+	static double oldImaginaryNumber;
+	static double realPixel;
+	static double imaginaryPixel;
+	static double changeImaginaryNumber;
+	static double zoom=1,moveX=0,moveY=0;
+	static int pixelColour;
+	static int maxIterations = 5000;
+	static int screenHeight = 1080;
+	static int screenWidth = 1920;
+
+	public static void main(String[] args) {
+		int type = BufferedImage.TYPE_INT_ARGB;
+		BufferedImage image = new BufferedImage(screenWidth, screenHeight, type);
+		
+		
+		for (int pixelY = 0; pixelY < screenHeight; pixelY++) {
+			for (int pixelX = 0; pixelX < screenWidth; pixelX++) {
+
+				realPixel = 1.5 * (pixelX - screenWidth / 2)/(.5*zoom*screenWidth)+moveX;
+				imaginaryPixel= (pixelY - screenHeight / 2)/(.5*zoom*screenHeight)+moveY;
+				
+				newRealNumber=newImaginaryNumber=oldRealNumber=oldImaginaryNumber=0;
+				
+				int iteration = 0;
+				for (int i= 0; i< maxIterations; i++) {
+				
+					oldRealNumber = newRealNumber;
+					oldImaginaryNumber = newImaginaryNumber;
+
+					newRealNumber = Math.pow(oldRealNumber, 2) - Math.pow(oldImaginaryNumber, 2) + changeRealNumber;
+					newImaginaryNumber = 2 * oldRealNumber * oldImaginaryNumber + changeImaginaryNumber;
+					
+					iteration++;
+					if (Math.pow(newRealNumber, 2) + Math.pow(newImaginaryNumber, 2) > 4) {
+						break;
+					}
+				}
+
+				if ( iteration < maxIterations) {
+					System.out.println("Iterations["+iteration+"]");
+					pixelColour = Color.HSBtoRGB(iteration%256, 255, 255*iteration);
+				}
+				else
+				{
+					System.out.println("Called iterations>=max");
+					pixelColour = Color.HSBtoRGB(0, 0, 0);
+				}
+				image.setRGB(pixelX, pixelY, pixelColour);
+				iteration=0;
+			}
+
+		}
+
+		try {
+			ImageIO.write(image, "png", new File(fileName + ".png"));
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error Writing Image");
+		}
+	}
+}

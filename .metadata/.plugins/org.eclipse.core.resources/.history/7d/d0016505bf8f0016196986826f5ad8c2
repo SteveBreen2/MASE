@@ -1,0 +1,34 @@
+package agileDesignAndTesting;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized.Parameters;
+import static junitparams.JUnitParamsRunner.$;
+
+import junitparams.JUnitParamsRunner;
+
+@RunWith(JUnitParamsRunner.class)
+public class NameValidatorTest {
+
+	@Parameters
+	public static Object[] getParameters() throws Exception {
+		return $($("qwe",true),//3
+				$("qwer",true),//4
+				$("abcdefghijklmnopqrs",true),//19
+				$("abcdefghijklmnopqrst",true),//20
+				$("ab",false),//2
+				$("abcdefghijklmnopqrstu",false)//21
+				
+				);
+	}
+
+	@Test
+	@Parameters(method="getParameters")
+	public void test(String s,boolean answer) {
+		fail("Not yet implemented");
+	}
+
+}

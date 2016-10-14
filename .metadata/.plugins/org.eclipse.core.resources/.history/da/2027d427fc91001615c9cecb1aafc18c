@@ -1,0 +1,32 @@
+package agileDesignAndTesting;
+
+public class GunCommission {
+	
+	final double LOCK_VALUE=45.00;
+	final double STOCK_VALUE=30.00;
+	final double BARRELL_VALUE=25.00;
+	final double AMMO_VALUE=1.00;
+	
+	final double LOW_COMMISSION=.10;
+	final double MID_COMMISSION=.15;
+	final double HIGH_COMMISSION=.20;
+
+	public double calculateCommission(int lock,int stock,int barrel,int ammo){
+		
+		double sum=0;
+		
+		if(lock==0||stock==0||barrel==0){
+			throw new IllegalArgumentException("Too Few Sales");
+		}
+		else if(lock>70||stock>80||barrel>90){
+			throw new IllegalArgumentException("Too Many Sales");
+		}
+		
+		sum+=(lock*LOCK_VALUE+stock*STOCK_VALUE+barrel*BARRELL_VALUE+ammo*AMMO_VALUE);
+		
+		if(sum<1000){
+			return sum*LOW_COMMISSION;
+		}
+		
+	}
+}

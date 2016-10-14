@@ -1,0 +1,109 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">	
+	<p:tab title="Service Providers Tasks" rendered="#{employee.isManager(null)}">
+		<h:panelGrid columns="1" cellpadding="10">
+		
+		 <h3 style="margin: 0 auto; text-align: center">Servicing</h3>
+			<p:dataTable  value="#{taskList.getsTaskList()}" 			var="bq"
+						 styleClass="bookingTable" headerClass="bookingTableHeader"
+						 rowClasses="bookingTableOddRow,bookingTableEvenRow">
+
+				 
+						<p:column>
+					<f:facet name="header">Employee</f:facet>
+					<h:outputText value="#{bq.getAssignedName()}"
+						           />
+					
+				</p:column>	 
+						 
+					 
+						 
+					<p:column>
+					<f:facet name="header">Customer ref</f:facet>
+					<h:outputText value="#{bq.bookingRef}"
+						           />
+					
+				</p:column>	 
+							<p:column>
+					<f:facet name="header">Start date</f:facet>
+					<h:outputText value="#{bq.startDate}"
+						           />
+					
+				</p:column>	 	 
+
+							<p:column>
+					<f:facet name="header">End date</f:facet>
+					<h:outputText value="#{bq.endDate}"
+						           />
+					
+					</p:column>
+					
+						<p:column>
+					<f:facet name="header">Task Status</f:facet>
+					<h:outputText value="#{bq.taskStatus}"
+						           />
+					
+					</p:column>
+					
+					<p:column>
+					<f:facet name="header">Delete</f:facet>
+					<h:commandLink value="Delete"
+								   action="#{taskList.deleteTask(bq)}"
+								   rendered="#{not bq.editable}" />
+					
+					</p:column>
+
+			</p:dataTable>
+
+		</h:panelGrid>
+		
+		
+		
+		<h:panelGrid columns="1" cellpadding="10">
+		
+			<h3 style="margin: 0 auto; text-align: center">Valeting</h3>
+			<p:dataTable value="#{taskList.getvTaskList()}" var="bq"
+				styleClass="bookingTable" headerClass="bookingTableHeader"
+				rowClasses="bookingTableOddRow,bookingTableEvenRow">
+				<p:column>
+					<f:facet name="header">Employee</f:facet>
+					<h:outputText value="#{bq.getAssignedName()}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">Customer ref</f:facet>
+					<h:outputText value="#{bq.bookingRef}" />
+				</p:column>
+		
+
+				<p:column>
+					<f:facet name="header">Start date</f:facet>
+					<h:outputText value="#{bq.startDate}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">End date</f:facet>
+					<h:outputText value="#{bq.endDate}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">Task Status</f:facet>
+					<h:outputText value="#{bq.taskStatus}"  />
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">Delete</f:facet>
+					<h:commandLink value="Delete"
+								   action="#{taskList.deleteTask(bq)}"
+								   rendered="#{not bq.editable}" />
+					
+					</p:column>
+				
+			</p:dataTable>
+		</h:panelGrid>
+		
+		
+	</p:tab>
+</ui:composition>
+		

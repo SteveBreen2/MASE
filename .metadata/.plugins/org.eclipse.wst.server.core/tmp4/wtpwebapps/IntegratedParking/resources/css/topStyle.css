@@ -1,0 +1,19 @@
+@CHARSET "ISO-8859-1";
+
+#top {
+	padding: 10px;
+	background-color: #003366;
+}
+
+#Menu
+{
+	padding: 10px;
+	background-color: #444444;
+}
+
+.ui-clock{
+
+  	color:#CCCC99;
+ background-color: red;
+}
+

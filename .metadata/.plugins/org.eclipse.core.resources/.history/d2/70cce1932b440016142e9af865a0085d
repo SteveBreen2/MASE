@@ -1,0 +1,20 @@
+package week1;
+
+import java.util.Scanner;
+
+public class GradeConverter {
+
+	public static void main(String[] args) 
+	{
+		// TODO Auto-generated method stub
+
+		boolean sentinel=false;
+		
+		//Create a scanner object.
+		Scanner sc=new Scanner(System.in);
+
+		System.out.println("Welcome to the Letter Grade Converter.\n");
+		
+	}
+
+}

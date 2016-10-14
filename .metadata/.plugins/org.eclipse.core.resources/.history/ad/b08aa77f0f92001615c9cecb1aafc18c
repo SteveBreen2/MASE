@@ -1,0 +1,120 @@
+package multicore;
+
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+import javax.imageio.ImageIO;
+
+public class MandleBrotThread implements Runnable {
+
+	final static String fileName = "MandleBrotMultiCore";
+	final static int MAX_ITERATIONS = 5000, SCREEN_HEIGHT = 1080, SCREEN_WIDTH = 1920;
+	private double newRealNumber, oldRealNumber, newImaginaryNumber, oldImaginaryNumber, realPixel, imaginaryPixel;
+	private int pixelColour;
+	private String threadName;
+	private Thread t;
+	static BufferedImage image = new BufferedImage(SCREEN_WIDTH, SCREEN_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+	private int beginX, beginY, endX, endY;
+
+	public MandleBrotThread(String threadName, int beginX, int beginY, int endX, int endY) {
+
+		this.threadName = threadName;
+		this.beginX = beginX;
+		this.beginY = beginY;
+		this.endX = endX;
+		this.endY = endY;
+	}
+
+	@Override
+	public void run() {
+
+		for (int pixelY = beginY; pixelY < endY; pixelY++) {
+			for (int pixelX = beginX; pixelX < endX; pixelX++) {
+
+				realPixel = 1.5 * (pixelX - SCREEN_WIDTH / 2);
+				imaginaryPixel = (pixelY - SCREEN_HEIGHT / 2);
+
+				newRealNumber = newImaginaryNumber = oldRealNumber = oldImaginaryNumber = 0;
+
+				int iteration = 0;
+				for (int i = 0; i < MAX_ITERATIONS; i++) {
+
+					oldRealNumber = newRealNumber;
+					oldImaginaryNumber = newImaginaryNumber;
+
+					newRealNumber = Math.pow(oldRealNumber, 2) - Math.pow(oldImaginaryNumber, 2) + realPixel;
+					newImaginaryNumber = 2 * oldRealNumber * oldImaginaryNumber + imaginaryPixel;
+
+					iteration++;
+					if (Math.pow(newRealNumber, 2) + Math.pow(newImaginaryNumber, 2) > 4) {
+						break;
+					}
+				}
+
+				if (iteration < MAX_ITERATIONS) {
+					System.out.println("Iterations[" + iteration + "]");
+					pixelColour = Color.HSBtoRGB(iteration % 256, 255, 255 * iteration);
+				} else {
+					System.out.println("Called iterations>=max");
+					pixelColour = Color.HSBtoRGB(iteration % 256, 255, 0);
+				}
+				image.setRGB(pixelX, pixelY, pixelColour);
+				iteration = 0;
+
+				// TODO Auto-generated method stub
+
+			}
+		}
+		try {
+			ImageIO.write(image, "png", new File(fileName + ".png"));
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error Writing Image");
+		}
+	}
+
+	public void start() {
+		System.out.println("Starting " + threadName);
+		if (t == null) {
+			t = new Thread(this, threadName);
+			t.start();
+		}
+	}
+
+}
+
+public class multithreaded()
+{
+
+	public static void main(String[] args) {
+
+			// Top Left Quarter
+			MandleBrotThread m1 = new MandleBrotThread("ThreadOne", 0, 0, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+			// Top Right Quarter
+			// MandleBrotThread m2 = new MandleBrotThread("ThreadTwo", SCREEN_WIDTH
+			// / 2, 0, SCREEN_WIDTH, SCREEN_HEIGHT / 2);
+			// // Bottom Left Quarter
+			// MandleBrotThread m3 = new MandleBrotThread("ThreadThree", 0,
+			// SCREEN_WIDTH / 2, SCREEN_WIDTH / 2, SCREEN_HEIGHT);
+			// // Bottom Right Quarter
+			// MandleBrotThread m4 = new MandleBrotThread("ThreadFour", SCREEN_WIDTH
+			// / 2, SCREEN_HEIGHT / 2, SCREEN_WIDTH,
+			// SCREEN_HEIGHT);
+			m1.start();
+			// m2.start();
+			// m3.start();
+			// m4.start();
+
+		
+
+				try {
+					ImageIO.write(image, "png", new File(fileName + ".png"));
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("Error Writing Image");
+				}
+			
+
+		}
+}

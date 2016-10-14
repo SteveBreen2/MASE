@@ -1,0 +1,13 @@
+package agileDesignAndTesting;
+
+public class MarkChecker {
+	
+	public int checkMarks(int[] markerOne,int[] markerTwo){
+		
+		for(int i=0;i<markerOne.length;i++){
+			if Math.abs(markerOne[i]-markerTwo[i]);
+		}
+		
+	}
+
+}

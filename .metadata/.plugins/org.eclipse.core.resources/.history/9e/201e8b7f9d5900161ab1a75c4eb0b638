@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Shopping Cart</title>
+	<h:outputStylesheet name="stylesheet.css" library="css" />
+	<link rel="stylesheet" href="home_page.css" />
+</h:head>
+<h:body>
+<h2 class="heading">Products</h2>
+	<h:form>
+		<h:selectOneListbox id="ProductListBox">
+			<f:selectItem itemLabel="ipod" itemValue="0"/>
+			<f:selectItem itemLabel="istation" itemValue="1"/>
+			<f:selectItem itemLabel="phone" itemValue="2"/>
+			<f:selectItem itemLabel="tv" itemValue="3"/>
+			<f:selectItem itemLabel="speaker" itemValue="4"/>
+			<f:selectItem itemLabel="player" itemValue="5"/>
+
+		</h:selectOneListbox>
+		http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=1617241
+		<h2 class="heading" >Manage My Cart</h2>
+		<h:outputLabel id="ProductID">ProductID:</h:outputLabel>
+		<h:inputText readonly="true"></h:inputText>
+		<h:outputLabel id="Quantity">Quantity:</h:outputLabel>
+		<h:inputText readonly="true"></h:inputText>
+		</h:form>
+		
+		<h:form>
+		<h:commandButton class="ActionButton" id="Add" value="Add"/>
+		<h:commandButton class="ActionButton" id="Remove" value="Remove"/>
+		<h:commandButton class="ActionButton" id="CheckOut" value="Check Out"/>
+	</h:form>
+	
+	<h:form>
+	<h2 class="heading">Contents of cart</h2>
+	<p>Cart contents go here...</p>
+	</h:form>
+</h:body>
+</html>

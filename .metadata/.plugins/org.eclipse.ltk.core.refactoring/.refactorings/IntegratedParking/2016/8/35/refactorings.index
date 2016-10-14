@@ -1,0 +1,24 @@
+1472462206905	Copy compilation unit
+1472468405563	Encapsulate field 'freeSpaces'
+1472469790532	Encapsulate field 'name'
+1472469916785	Encapsulate field 'lot'
+1472478478007	Rename resource 'InitaliseVariables.xml'
+1472478693970	Delete element
+1472479422843	Encapsulate field 'lot1'
+1472553771197	Rename resource 'SpacesChart.xhtml'
+1472555796380	Rename type 'meterGuage'
+1472556348796	Delete element
+1472558279613	Delete element
+1472558285465	Delete element
+1472558607749	Delete element
+1472558623916	Delete element
+1472563211282	Delete element
+1472568522749	Move 'ParkingSpaces.xhtml' to 'staffpages'
+1472629234927	Delete element
+1472639959020	Delete element
+1472639964433	Delete element
+1472640163003	Encapsulate field 'bufferedDates'
+1472659459497	Delete element
+1472659839699	Move 'Login.xhtml' to 'WEB-INF'
+1472659848796	Move 'Login.xhtml' to 'WebContent'
+1472659932824	Move 'Login.xhtml' to 'Unused'

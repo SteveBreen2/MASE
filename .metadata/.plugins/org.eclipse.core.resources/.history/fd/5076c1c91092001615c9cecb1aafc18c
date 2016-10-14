@@ -1,0 +1,87 @@
+package multicore;
+
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+import javax.imageio.ImageIO;
+
+public class MandleBrotThread implements Runnable {
+
+	final static String fileName = "MandleBrotMultiCore";
+	final static int MAX_ITERATIONS = 5000, SCREEN_HEIGHT = 1080, SCREEN_WIDTH = 1920;
+	private double newRealNumber, oldRealNumber, newImaginaryNumber, oldImaginaryNumber, realPixel, imaginaryPixel;
+	private int pixelColour;
+	private String threadName;
+	private Thread t;
+	static BufferedImage image = new BufferedImage(SCREEN_WIDTH, SCREEN_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+	private int beginX, beginY, endX, endY;
+
+	public MandleBrotThread(String threadName, int beginX, int beginY, int endX, int endY) {
+
+		this.threadName = threadName;
+		this.beginX = beginX;
+		this.beginY = beginY;
+		this.endX = endX;
+		this.endY = endY;
+	}
+
+	@Override
+	public void run() {
+
+		for (int pixelY = 0; pixelY < SCREEN_HEIGHT; pixelY++) {
+			for (int pixelX = 0; pixelX < SCREEN_WIDTH; pixelX++) {
+
+				realPixel = 1.5 * (pixelX - SCREEN_WIDTH / 2);
+				imaginaryPixel= (pixelY - SCREEN_HEIGHT / 2);
+				
+				newRealNumber=newImaginaryNumber=oldRealNumber=oldImaginaryNumber=0;
+				
+				int iteration = 0;
+				for (int i= 0; i< MAX_ITERATIONS; i++) {
+				
+					oldRealNumber = newRealNumber;
+					oldImaginaryNumber = newImaginaryNumber;
+
+					newRealNumber = Math.pow(oldRealNumber, 2) - Math.pow(oldImaginaryNumber, 2) + realPixel;
+					newImaginaryNumber = 2 * oldRealNumber * oldImaginaryNumber + imaginaryPixel;
+					
+					iteration++;
+					if (Math.pow(newRealNumber, 2) + Math.pow(newImaginaryNumber, 2) > 4) {
+						break;
+					}
+				}
+
+				if ( iteration < MAX_ITERATIONS) {
+					System.out.println("Iterations["+iteration+"]");
+					pixelColour = Color.HSBtoRGB(iteration%256, 255, 255*iteration);
+				}
+				else
+				{
+					System.out.println("Called iterations>=max");
+					pixelColour = Color.HSBtoRGB(iteration%256, 255, 0);
+				}
+				image.setRGB(pixelX, pixelY, pixelColour);
+				iteration=0;
+			}
+
+		}
+		try {
+			ImageIO.write(image, "png", new File(fileName + ".png"));
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error Writing Image");
+		}
+	}
+
+	public void start() {
+		System.out.println("Starting " + threadName);
+		if (t == null) {
+			t = new Thread(this, threadName);
+			t.start();
+		}
+	}
+
+}
+
+

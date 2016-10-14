@@ -1,0 +1,36 @@
+1471872229278	Copy compilation unit
+1471872234426	Delete element
+1471872241496	Delete element
+1471876641919	Rename type 'ParkingSpot'
+1471877425478	Delete element
+1471877688972	Encapsulate field 'parkingSpotNumber'
+1471878387564	Encapsulate field 'servicing'
+1471878393388	Encapsulate field 'meetAndGreet'
+1471878397649	Encapsulate field 'valeting'
+1471878412975	Delete element
+1471878417146	Delete element
+1471880528884	Rename resource 'ViewBookings.html'
+1471881627684	Delete element
+1471882125024	Encapsulate field 'today'
+1471883069369	Delete element
+1471885191527	Delete element
+1471958410005	Delete elements
+1471959260905	Encapsulate field 'formattedEndDate'
+1471959480309	Delete element
+1471959481554	Delete element
+1472030357783	Rename type 'BookingList'
+1472032963135	Copy compilation unit
+1472032968002	Delete element
+1472036635337	Encapsulate field 'myBookingList'
+1472037608999	Delete element
+1472051294583	Delete element
+1472052309420	Delete element
+1472052313867	Delete element
+1472053580714	Encapsulate field 'BookingRefCounter'
+1472111892981	Delete element
+1472117921406	Move 'OrderingFile.xhtml' to 'WebContent'
+1472120283436	Delete element
+1472120818085	Move 3 resources to 'css'
+1472136454795	Delete element
+1472142082311	Rename resource 'OrdersEditableTableStyle.css'
+1472201421954	Delete elements

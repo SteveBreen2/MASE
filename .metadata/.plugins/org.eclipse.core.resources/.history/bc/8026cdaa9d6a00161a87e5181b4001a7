@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+	<h:head>
+		<title>My Details</title>
+		<h:outputStylesheet name="styles1.css" library="css" />
+	</h:head>
+	<h:body>
+	
+	<ui:include src="Top.xhtml"/>
+	
+		<div id="mainContainer">
+	
+			<div id="bookFormContainer">
+	
+				<h:form>
+	
+					<h3 class="title">Your Details</h3>
+					<p:messages/>
+					
+					<b>Old Email :</b><p:inputText editable="false" size="40" value="#{customer.email}"/><br/>
+					
+					<h:panelGroup rendered="#{detailsControl.editable}">
+						New Email :
+						<p:inputText id="email" 
+				             		 label="email" 
+				             		 size="40" 
+				             		 required="true" 
+				             		 requiredMessage="Email Address Required"
+				             		 validatorMessage="Invalid email format" 
+				             		 value="#{customer.email}">
+							<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						</p:inputText>
+						<p:watermark for="email" 
+				                     value="Email Address *" />
+						<br/>
+					</h:panelGroup>
+					
+					<b>Old Name : </b><p:inputText editable="false" size="40" value="#{customer.name}"/><br/>
+	
+					<h:panelGroup rendered="#{detailsControl.editable}">
+						New Name : 
+						<p:inputText editable="#{detailsControl.editable}" size="40" value="#{detailsControl.name}"/>
+						<br/>
+					</h:panelGroup>
+					
+					<b>Old Visa : </b>
+					<p:inputText editable="false"
+								 size="40" 
+								 value="#{customer.displayCard}"/>
+					<br/>
+	
+					<h:panelGroup rendered="#{detailsControl.editable}">
+						New Card Number : 
+						<p:password required="true"  
+						            id="visa" 
+						            label="visa" 
+						            size="40" 
+						            requiredMessage="Password Required"
+						            validatorMessage="Invalid credit card" 
+						            value="#{detailsControl.newCard}">
+							<f:validateRegex pattern="^4\d{15}$" />
+						</p:password>
+						<p:watermark for="visa" 
+						             value="card number"/>
+						<br/>
+					</h:panelGroup>
+					
+					<h:panelGroup rendered="#{detailsControl.editable}">
+						<b>Password : </b>
+						<p:password feedback="true" 
+									required="true" 
+									requiredMessage="cannot update details without password" 
+									value="#{detailsControl.pass}"/>
+						<br/>
+						New Password : 
+						<p:password required="true"  
+				            id="password" 
+				            label="password" 
+				            size="40" 
+				            requiredMessage="Password Required"
+				            validatorMessage="Invalid password -> 4 - 8 characters, mixture of upper/lower case letters and digits" 
+				            value="#{customer.password}" 
+				            feedback="true">
+							<f:validateRegex pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$" />
+						</p:password>
+						<p:watermark for="password" 
+				             		 value="Password"/>
+						<br/>
+					</h:panelGroup>
+					
+					<h:commandButton value="Edit Details" action="#{detailsControl.setEditable(true)}" ajax="false"/>
+					<h:commandButton value="Submit" action="#{detailsControl.edit()}" ajax="false"/>
+	
+				</h:form>
+			</div>		
+		</div>
+	</h:body>
+</html>

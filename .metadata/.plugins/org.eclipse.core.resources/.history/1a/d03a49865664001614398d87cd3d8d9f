@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    
+<h:head>
+	<title>Correct!</title>
+	<link href="styles.css" rel="stylesheet" type="text/css"/>
+</h:head>
+<body>
+	<f:view>
+	    <h:form>   
+	        <h1>
+	        	<h:outputText value="Correct! Number of guesses: " />
+		       	<h:outputText value="#{numberBean.guesses}" />
+	        </h1>      
+	        <h:commandButton  value="Play Again" action="#{correctGuess.myPlayAgainHandler}" />	        
+	        <h:commandButton  value="Quit" action="#{correctGuess.myQuitHandler}" />
+	        
+	    </h:form>
+
+	</f:view>
+</body>
+</html>

@@ -1,0 +1,128 @@
+package appliedMaths;
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author kfitzgerald
+ */
+
+public class Gabor {
+	CreateImage ci;
+	private double lamda = 0;
+	private double theta = 0;
+	private double varphi = 0;
+	private double upsi = 0;
+	private double bandW = 0;
+	private double B = 0;
+	private double sigma = 0;
+	private double kappa = 0;
+	private static double[][] GaborGrid;
+	private static double[][] GaborNorm;
+
+	int size = 0;
+	double toRadians = 180 / Math.PI, min = 500, max = -500, mean = 0;;
+	int gaussian = 0;
+	double rotation;
+	double GLFmean = 0;
+
+	// Standard Gabor no quantization
+	public Gabor(double l, double t, double v, double u, double b, int sze) {
+		lamda = l;
+		theta = t / toRadians;
+		varphi = v / toRadians;
+		upsi = u;
+		bandW = b;
+		kappa = (2 * Math.PI) / lamda;
+		Calculate_Sigma();
+		size = sze;
+		gaussian = sze / 2;
+		GaborGrid = new double[size][size];
+		GaborNorm = new double[size][size];
+		RunGabor();
+		NormaliseImage();
+	}
+
+	public void RunGabor() {
+		/*
+		 * Use the code provided along with your notes to code the Gabor
+		 * Equation in to generate the correct image
+		 */
+
+		double xApoc=0;
+		double yApoc=0;
+		double gaussianX=-gaussian;
+		double gaussianY=-gaussian;
+		double count=0;
+		double total=0;
+		int dy=0;
+		int ax=0;
+		
+		for (int i = -gaussian; i <= gaussian; i++) {
+			for (int j = -gaussian; j <= gaussian; j++) {
+
+				xApoc= gaussianX*Math.cos(theta)+gaussianY*Math.sin(theta);
+				yApoc= -gaussianX*Math.sin(theta)+gaussianY*Math.cos(theta);
+		
+				 GaborGrid[dy][ax]=(Math.exp(-(Math.pow(xApoc, 2)+(Math.pow(yApoc, 2)*
+	                        Math.pow(upsi,2)))/(2*Math.pow(sigma, 2))))*
+	                        (Math.cos((kappa*xApoc+varphi)));
+	              
+				total+=GaborGrid[dy][ax];
+				count++;
+				gaussianX+=1;
+				ax+=1;
+			}
+			ax=0;
+            dy+=1;
+            gaussianY+=1;
+            gaussianX=-gaussian;
+        }
+        mean=total/count;
+	}
+
+	public void NormaliseImage() {
+		/*
+		 * Your code to normalise the gabor image goes here.
+		 * 
+		 * The last line must be what is below this comment
+		 */
+		double temp=0;
+		
+
+		
+		for (int i = 0; i < GaborGrid.length; i++) {
+			for (int j = 0; j < GaborGrid.length; j++) {
+				if (GaborGrid[i][j] < min) {
+					min = GaborGrid[i][j];
+				}
+				if (GaborGrid[i][j] > max) {
+					max = GaborGrid[i][j];
+				}
+
+			}
+		}
+		
+		for (int i = 0; i < GaborNorm.length; i++) {
+			for (int j = 0; j < GaborNorm[0].length; j++) {
+
+				
+				
+				   temp = ((((double)(GaborGrid[i][j]-min))/((double)(max-min)))*255);
+		             if (temp<=0){
+					temp=0;
+				}
+				GaborNorm[i][j] = temp;
+			}
+		}
+
+		ci = new CreateImage(GaborNorm, "Gabor");
+	}
+
+	private void Calculate_Sigma() {
+		B = (1 / Math.PI) * (0.588705011) * ((Math.pow(2, bandW) + 1) / (Math.pow(2, bandW) - 1));
+		sigma = B * lamda;
+	}
+}

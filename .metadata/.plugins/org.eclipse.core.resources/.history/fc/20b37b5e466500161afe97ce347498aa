@@ -1,0 +1,8 @@
+package com.ait.drinks;
+
+public class Recipe {
+	private int coffee;
+	private int chocolate;
+	private String name;
+	private double price;
+}

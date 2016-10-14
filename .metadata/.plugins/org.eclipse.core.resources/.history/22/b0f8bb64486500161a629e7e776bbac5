@@ -1,0 +1,23 @@
+package com.ait.test;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import com.ait.drinks.CoffeeMachine;
+
+public class CoffeeMachineTest {
+
+	CoffeeMachine coffeeMachine;
+	@Before
+	public void startup(){
+		//assertEquals();
+		coffeeMachine=new coffeeMachine();
+	}
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
+
+}

@@ -1,0 +1,14 @@
+package agileDesignAndTesting;
+
+public class Order {
+
+	
+	
+	public double calculateOrderTotal(int numCartridge){
+	
+	if(numCartridge<5){throw IllegalArgumentException(" ")}	
+		
+		catch(Exception e){}
+		
+	}
+}

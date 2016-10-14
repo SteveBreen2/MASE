@@ -1,0 +1,147 @@
+package javaCode;
+
+import java.io.Serializable;
+import java.text.ParseException;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
+@ManagedBean
+@SessionScoped
+public class Customer implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+
+	private String name;
+	private String password;
+	private String email;
+	private boolean loggedIn=false;
+	private String visa;
+	private String displayCard;
+	private BookingList myBookingList;
+	private boolean goldCustomer;
+
+	public Customer() throws ParseException {
+		this("none", "none", "none");
+	}
+	
+	public Customer(String name, String pass, String email) throws ParseException {
+		this.setName(name);
+		this.setPassword(pass);
+		this.setEmail(email);
+		this.setLoggedIn(false);
+		this.setGoldCustomer(false);
+		setMyBookingList(new BookingList());
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String pass) {
+		this.password = pass;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public boolean isLoggedIn() {
+		return loggedIn;
+	}
+
+	public void setLoggedIn(boolean loggedIn) {
+		this.loggedIn = loggedIn;
+	}
+
+	public String getVisa() {
+		return this.visa;
+	}
+
+	public void setVisa(String visa) {
+		this.visa = visa;
+		this.setDisplayCard("XXXX-XXXX-XXXX-" + this.visa.substring(12));
+	}
+	
+	@Override
+	public String toString() {
+		return "name : " + this.getName() + ", pass : " + this.getPassword() + ", email : " + this.getEmail();
+	}
+	
+	public String checkLoggedInBox() {
+		if(!this.isLoggedIn()) {
+			return "PF('dlg1').show();";
+		} else {
+			return "";
+		}
+	}
+	
+	public String checkBox() {
+		if(!this.isLoggedIn()) {
+			return "PF('dlg2').show();";
+		} else {
+			return "";
+		}
+	}
+	public String checkLoggedIn(int i) {
+		System.out.println("isLoggedin:"+isLoggedIn());
+		if(this.isLoggedIn()) {
+			if(i == 1) {
+				return "ViewBookings.jsf";
+			}
+			else if(i == 2) {
+				return "ViewDetails.jsf";
+			} else {
+				return "";
+			}
+		} else {
+			return "";
+		}
+	}
+
+	public BookingList getMyBookingList() {
+		return myBookingList;
+	}
+
+	public void setMyBookingList(BookingList myBookingList) {
+		this.myBookingList = myBookingList;
+	}
+	
+	public Booking getLastBooking(){
+		return this.myBookingList.getBookings().get(this.myBookingList.getBookings().size()-1);
+	}
+
+	public String remove(){				
+		Booking b = this.getLastBooking();	
+		myBookingList.getBookings().remove(b);
+		return "home.jsf";
+	}
+	
+	public boolean isGoldCustomer() {
+		return goldCustomer;
+	}
+
+	public void setGoldCustomer(boolean goldCustomer) {
+		this.goldCustomer = goldCustomer;
+	}
+	
+	public String getDisplayCard() {
+		return this.displayCard;
+	}
+	
+	public void setDisplayCard(String displayCard) {
+		this.displayCard = displayCard;
+	}
+}

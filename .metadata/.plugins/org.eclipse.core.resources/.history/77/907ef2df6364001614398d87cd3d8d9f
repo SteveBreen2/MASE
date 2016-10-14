@@ -1,0 +1,4 @@
+.nameTable{
+	border-collapse:collapse;
+	border:2px solid #555;
+}

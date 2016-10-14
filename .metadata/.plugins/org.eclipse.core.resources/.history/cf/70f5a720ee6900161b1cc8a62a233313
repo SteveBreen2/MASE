@@ -1,0 +1,110 @@
+package testCode;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import javaCode.Customer;
+import javaCode.Employee;
+import javaCode.RegistrationHandler;
+
+public class RegistrationHandlerTest {
+
+	private Customer c;
+	private Employee e;
+
+	@Before
+	public void setUp() {
+		c = new Customer("name", "pass", "email");
+		e = new Employee("Jeff", 1, "Fladnag");
+	}
+	@Test
+	public void testRegisterCustomerCorrect() {
+		boolean registered = RegistrationHandler.registerCustomer(new Customer("name", "pass", "mail"));
+		assertTrue(registered);
+		Customer c = RegistrationHandler.getCustomer("mail");
+		assertNotNull(c);
+		assertEquals("mail", c.getEmail());
+		assertEquals("pass", c.getPassword());
+		assertEquals("name", c.getName());
+	}
+	
+	@Test
+	public void testRegisterCustomerExistsAlready() {
+		RegistrationHandler.registerCustomer(new Customer("n", "p", "m"));
+		boolean registered = RegistrationHandler.registerCustomer(new Customer("n", "p", "m"));
+		assertFalse(registered);
+	}
+
+	@Test
+	public void testCustomerLoginSuccessful() {
+		RegistrationHandler.registerCustomer(c);
+		boolean loggedIn = RegistrationHandler.login("email", "pass");
+		assertTrue(loggedIn);
+	}
+	
+	@Test
+	public void testCustomerLoginFailureEmail() {
+		RegistrationHandler.registerCustomer(c);
+		boolean loggedIn = RegistrationHandler.login("mail", "pass");
+		assertFalse(loggedIn);
+	}
+	
+	@Test
+	public void testCustomerLoginFailurePass() {
+		RegistrationHandler.registerCustomer(c);
+		boolean loggedIn = RegistrationHandler.login("email", "pss");
+		assertFalse(loggedIn);
+	}
+	
+	@Test
+	public void testReturnValue() {
+		assertEquals("Login.xhtml", RegistrationHandler.returnValue(true));
+		assertNull(RegistrationHandler.returnValue(false));
+	}
+
+	@Test
+	public void testRegisterEmployeeCorrect()
+	{
+		boolean registered = RegistrationHandler.registerEmployee(new Employee("Jeff", 2, "Fladnag"));
+		assertTrue(registered);
+		Employee e = RegistrationHandler.getEmployee(2);
+		assertNotNull(e);
+		assertEquals("Jeff", e.getName());
+		assertEquals(2, e.getIdNumber());
+		assertEquals("Fladnag", e.getPassword());
+	}
+	
+	@Test
+	public void testRegisterEmployeeExistsAlready() 
+	{
+		RegistrationHandler.registerEmployee(e);
+		boolean registered = RegistrationHandler.registerEmployee(e);
+		assertFalse(registered);
+	}
+	
+	@Test
+	public void testEmployeeLoginSuccessful() 
+	{
+		RegistrationHandler.registerEmployee(e);
+		boolean loggedIn = RegistrationHandler.staffLogin(1, "Fladnag");
+		assertTrue(loggedIn);
+	}
+	
+	@Test
+	public void testEmployeeLoginFailureID() 
+	{
+		RegistrationHandler.registerEmployee(e);
+		boolean loggedIn = RegistrationHandler.staffLogin(40, "Fladnag");
+		assertFalse(loggedIn);
+	}
+	
+	@Test
+	public void testEmployeeLoginFailurePass() 
+	{
+		RegistrationHandler.registerEmployee(e);
+		boolean loggedIn = RegistrationHandler.staffLogin(1, "guest");
+		assertFalse(loggedIn);
+	}
+}

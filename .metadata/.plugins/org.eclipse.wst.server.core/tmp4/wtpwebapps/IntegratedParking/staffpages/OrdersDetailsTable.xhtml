@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<p:tab id="Orders" title="Inventory Orders"
+		rendered="#{employee.isManager(null)}">
+
+		<h:panelGrid columns="1" cellpadding="10">
+			<p:dataTable var="thisOrder" value="#{ordersTableData.orders}"
+				styleClass="nameOrdersTable" headerClass="nameOrdersTableHeader"
+				rowClasses="nameOrdersTableOddRow,nameOrdersTableEvenRow" rows="10">
+
+				<p:column>
+					<f:facet name="header">    Order ID </f:facet>
+					<h:outputText value="#{thisOrder.orderID}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">    Item Name </f:facet>
+					<h:inputText value="#{thisOrder.itemName}"
+						rendered="#{thisOrder.canEdit}" />
+					<h:outputText value="#{thisOrder.itemName}"
+						rendered="#{not thisOrder.canEdit}" />
+					<f:facet name="footer">Total</f:facet>
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">    Item Cost </f:facet>
+					<h:inputText value="#{thisOrder.itemCost}"
+						rendered="#{thisOrder.canEdit}" />
+					<h:outputText value="#{thisOrder.itemCost}"
+						rendered="#{not thisOrder.canEdit}" />
+					<f:facet name="footer">
+						<h:outputText value="#{ordersTableData.total}" />
+					</f:facet>
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Delete</f:facet>
+					<h:commandLink value="Delete"
+						action="#{ordersTableData.deleteOrder(thisOrder)}"
+						rendered="#{not thisOrder.canEdit}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Edit</f:facet>
+					<h:commandLink value="Edit" action="#{thisOrder.setCanEdit(true)}"
+						rendered="#{not thisOrder.canEdit}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Save</f:facet>
+					<h:commandLink value="Save" action="#{thisOrder.saveAction}" />
+				</p:column>
+
+			</p:dataTable>
+
+			<h3>Add New Inventory Orders</h3>
+
+			<table align="center">
+
+				<tr>
+					<td>Item Name:</td>
+					<td><h:inputText size="10" value="#{ordersTableData.name}" />
+					</td>
+				</tr>
+
+				<tr>
+					<td>Item Cost:</td>
+					<td><h:inputText size="10" value="#{ordersTableData.price}" />
+					</td>
+				</tr>
+
+				<tr>
+					<td><p:commandButton value="Add Order"
+							action="#{ordersTableData.addNewOrder()}" ajax="false" /></td>
+				</tr>
+
+			</table>
+
+
+		</h:panelGrid>
+
+	</p:tab>
+</ui:composition>

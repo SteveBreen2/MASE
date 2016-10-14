@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+	<h:head>
+		<title>Employees</title>
+		 <link rel="shortcut icon" href="./resources/carIcon.ico" />
+	</h:head>
+	<h:body>
+	NAVIGATION BANNER HERE
+	<h:form>
+		<p:dataTable value="#{employee.employees}" var="employee"
+			styleClass="bookingTable" headerClass="bookingTableHeader"
+			rowClasses="bookingTableOddRow,bookingTableEvenRow">
+			<p:column>
+				<f:facet name="header">Name</f:facet>
+				<h:outputText value="#{employee.name}" rendered="#{not detailsControl.staffEditable}"/>
+				<p:inputText value="#{employee.name}" rendered="#{detailsControl.staffEditable}"/>
+			</p:column>
+			<p:column>
+				<f:facet name="header">ID</f:facet>
+				<h:outputText value="#{employee.idNumber}" rendered="#{not detailsControl.staffEditable}"/>
+				<p:inputText value="#{employee.idNumber}" rendered="#{detailsControl.staffEditable}"/>
+			</p:column>
+			<p:column>
+				<f:facet name="header">Job Title</f:facet>
+				<h:outputText value="#{employee.jobTitle}" rendered="#{not detailsControl.staffEditable}"/>
+				<p:inputText value="#{employee.jobTitle}" rendered="#{detailsControl.staffEditable}"/>
+			</p:column>
+			<h:column>
+			<f:facet name = "header">Delete</f:facet>
+			<h:commandLink value = "Delete" action ="#{employee.deleteEmployee(idNumber)}"
+			rendered = "#{not employee.canEdit}"/>
+			</h:column>
+			
+		</p:dataTable>
+		<h:commandButton value="Edit Details" action="#{detailsControl.setStaffEditable(true)}" rendered="#{not detailsControl.staffEditable}" ajax="false"/>
+		<h:commandButton value="Submit" action="#{detailsControl.setStaffEditable(false)}"  rendered="#{detailsControl.staffEditable}" ajax="false"/>
+	</h:form>	
+	</h:body>	
+</html>

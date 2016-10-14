@@ -1,0 +1,342 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+
+
+<h:head>
+	<title>Administrator Details Editable Table</title>
+	<ui:include src="Top.xhtml" />
+	<h:outputStylesheet name="OrdersEditableTable.css" library="css" />
+	<h:outputStylesheet name="ViewBookings.css" library="css" />
+	<h:outputStylesheet name="styles1.css" library="css" />
+</h:head>
+
+<h:body>
+	<div id="mainContainer">
+
+		<h3 style="margin: 0 auto; text-align: center">Management Centre</h3>
+
+
+		<h:form>
+
+			<div id="bookFormContainer">
+				<p:tabView dynamic="true" effect="fade" effectDuration="slow"
+					orientation="Top">
+					<!-- 						activeIndex="#{some.tabindex}" cache="true" > -->
+					<p:tab id="Charges" title="Set Service Charges">
+
+						<h:panelGrid style="margin: 0 auto" columns="7" border="3">
+
+							<p:dataTable var="name" value="#{charges}"
+								styleClass="bookingTable" headerClass="bookingTableHeader"
+								rowClasses="bookingTableOddRow,bookingTableEvenRow">
+
+								<p:column>
+									<f:facet name="header">    Gold MemberShip </f:facet>
+									<h:inputText value="#{name.goldMemberShipPrice}"
+										rendered="#{name.canEdit}" />
+									<h:outputText value="#{name.goldMemberShipPrice}"
+										rendered="#{not name.canEdit}" />
+								</p:column>
+
+								<p:column>
+									<f:facet name="header">    Meet and Greet </f:facet>
+									<h:inputText value="#{name.meetAndGreetPrice}"
+										rendered="#{name.canEdit}" />
+									<h:outputText value="#{name.meetAndGreetPrice}"
+										rendered="#{not name.canEdit}" />
+								</p:column>
+
+								<p:column>
+									<f:facet name="header">    Valeting</f:facet>
+									<h:inputText value="#{name.valetingPrice}"
+										rendered="#{name.canEdit}" />
+									<h:outputText value="#{name.valetingPrice}"
+										rendered="#{not name.canEdit}" />
+								</p:column>
+
+								<p:column>
+									<f:facet name="header">    Sevicing </f:facet>
+									<h:inputText value="#{name.servicingPrice}"
+										rendered="#{name.canEdit}" />
+									<h:outputText value="#{name.servicingPrice}"
+										rendered="#{not name.canEdit}" />
+								</p:column>
+
+								<p:column>
+									<f:facet name="header">Edit</f:facet>
+									<h:commandLink value="Edit" action="#{name.setCanEdit(true)}"
+										rendered="#{not name.canEdit}" />
+								</p:column>
+								<p:column>
+									<f:facet name="header">Save</f:facet>
+									<h:commandLink value="Save" action="#{name.saveAction}" />
+								</p:column>
+							</p:dataTable>
+						</h:panelGrid>
+					</p:tab>
+
+
+
+
+
+
+					<p:tab id="Bills" title="Customer Billing">
+
+						<p:dataTable var="thisOrder" value="#{billsTableData.bills}"
+							styleClass="bookingTable" headerClass="bookingTableHeader"
+							rowClasses="bookingTableOddRow,bookingTableEvenRow" rows="10">
+
+							<p:column>
+								<f:facet name="header">    Customer </f:facet>
+								<h:inputText value="#{thisOrder.person}"
+									rendered="#{thisOrder.canEdit}" />
+								<h:outputText value="#{thisOrder.person}"
+									rendered="#{not thisOrder.canEdit}" />
+							</p:column>
+
+							<p:column>
+								<f:facet name="header">    Description </f:facet>
+								<h:inputText value="#{thisOrder.type}"
+									rendered="#{thisOrder.canEdit}" />
+								<h:outputText value="#{thisOrder.type}"
+									rendered="#{not thisOrder.canEdit}" />
+								<f:facet name="footer">Total</f:facet>
+							</p:column>
+
+							<p:column>
+								<f:facet name="header">    Cost </f:facet>
+								<h:inputText value="#{thisOrder.cost}"
+									rendered="#{thisOrder.canEdit}" />
+								<h:outputText value="#{thisOrder.cost}"
+									rendered="#{not thisOrder.canEdit}">
+									<f:convertNumber currencyCode="EUR" type="currency" />
+								</h:outputText>
+								<f:facet name="footer">
+									<h:outputText value="#{billsTableData.total}">
+										<f:convertNumber currencyCode="EUR" type="currency" />
+									</h:outputText>
+								</f:facet>
+							</p:column>
+
+							<p:column>
+								<f:facet name="header">Delete</f:facet>
+								<h:commandLink value="Delete"
+									action="#{billsTableData.deleteBill(thisOrder)}"
+									rendered="#{not thisOrder.canEdit}" />
+							</p:column>
+
+							<p:column>
+								<f:facet name="header">Edit</f:facet>
+								<h:commandLink value="Edit"
+									action="#{thisOrder.setCanEdit(true)}"
+									rendered="#{not thisOrder.canEdit}" />
+							</p:column>
+
+							<p:column>
+								<f:facet name="header">Save</f:facet>
+								<h:commandLink value="Save" action="#{thisOrder.saveAction}" />
+							</p:column>
+
+						</p:dataTable>
+
+					</p:tab>
+
+
+
+
+
+					<p:tab id="Orders" title="Inventory Orders">
+						<h:panelGrid columns="1" cellpadding="10">
+							<p:dataTable var="thisOrder" value="#{ordersTableData.orders}"
+								styleClass="bookingTable" headerClass="bookingTableHeader"
+								rowClasses="bookingTableOddRow,bookingTableEvenRow" rows="10">
+
+								<p:column>
+									<f:facet name="header">    Order ID </f:facet>
+
+									<h:outputText value="#{thisOrder.orderID}" />
+								</p:column>
+
+								<p:column>
+									<f:facet name="header">    Item Name </f:facet>
+									<h:inputText value="#{thisOrder.itemName}"
+										rendered="#{thisOrder.canEdit}" />
+									<h:outputText value="#{thisOrder.itemName}"
+										rendered="#{not thisOrder.canEdit}" />
+									<f:facet name="footer">Total</f:facet>
+								</p:column>
+
+								<p:column>
+									<f:facet name="header">    Item Cost </f:facet>
+									<h:inputText value="#{thisOrder.itemCost}"
+										rendered="#{thisOrder.canEdit}" />
+									<h:outputText value="#{thisOrder.itemCost}"
+										rendered="#{not thisOrder.canEdit}" />
+									<f:facet name="footer">
+										<h:outputText value="#{ordersTableData.total}" />
+									</f:facet>
+								</p:column>
+								<p:column>
+									<f:facet name="header">Delete</f:facet>
+									<h:commandLink value="Delete"
+										action="#{ordersTableData.deleteOrder(thisOrder)}"
+										
+										rendered="#{not thisOrder.canEdit}" />
+								</p:column>
+
+								<p:column>
+									<f:facet name="header">Edit</f:facet>
+									<h:commandLink value="Edit"
+										action="#{thisOrder.setCanEdit(true)}"
+										rendered="#{not thisOrder.canEdit}" />
+								</p:column>
+
+								<p:column>
+									<f:facet name="header">Save</f:facet>
+									<h:commandLink value="Save" action="#{thisOrder.saveAction}" />
+								</p:column>
+
+							</p:dataTable>
+
+							<h3 style="margin: 0 auto; text-align: center">Add New
+								Inventory Orders</h3>
+
+							<table align="center">
+
+								<tr>
+									<td>Item Name:</td>
+									<td><h:inputText size="10" value="#{ordersTableData.name}" /></td>
+								</tr>
+
+								<tr>
+									<td>Item Cost:</td>
+									<td><h:inputText size="10"
+											value="#{ordersTableData.price}" /></td>
+								</tr>
+
+								<tr>
+									<td><h:commandButton value="Add Order"
+											action="#{ordersTableData.addNewOrder()}" /></td>
+								</tr>
+							</table>
+
+
+						</h:panelGrid>
+
+
+
+					</p:tab>
+
+
+
+
+					<p:tab title="STAFF - Managment">
+						<h:panelGrid columns="1" cellpadding="10">
+							<p:dataTable value="#{registrationHandler.employees}"
+								var="employee" styleClass="bookingTable"
+								headerClass="bookingTableHeader"
+								rowClasses="bookingTableOddRow,bookingTableEvenRow">
+
+								<h3>Add Employee</h3>
+
+								<p:column>
+									<f:facet name="header">Name</f:facet>
+									<p:inputText value="#{employee.name}"
+										rendered="#{employee.canEdit}" />
+									<h:outputText value="#{employee.name}"
+										rendered="#{not employee.canEdit}" />
+
+								</p:column>
+
+								<p:column>
+									<f:facet name="header">ID</f:facet>
+									<p:inputText value="#{employee.idNumber}"
+										rendered="#{employee.canEdit}" />
+									<h:outputText value="#{employee.idNumber}"
+										rendered="#{not employee.canEdit}" />
+
+								</p:column>
+
+								<p:column>
+									<f:facet name="header">Job Title</f:facet>
+									<p:inputText value="#{employee.jobTitle}"
+										rendered="#{employee.canEdit}" />
+									<h:outputText value="#{employee.jobTitle}"
+										rendered="#{not employee.canEdit}" />
+
+								</p:column>
+
+								<p:column>
+									<f:facet name="header">Edit</f:facet>
+									<h:commandLink value="Edit"
+										action="#{employee.setCanEdit(true)}"
+										rendered="#{not employee.canEdit}" />
+								</p:column>
+
+								<p:column>
+									<f:facet name="header">Delete</f:facet>
+									<h:commandLink value="Delete"
+										action="#{registrationHandler.deleteEmployee(employee)}"
+										rendered="#{not employee.canEdit}" />
+								</p:column>
+								<p:column>
+									<f:facet name="header">Save</f:facet>
+									<h:commandLink value="Save" action="#{employee.saveActions}" />
+								</p:column>
+
+							</p:dataTable>
+
+
+						</h:panelGrid>
+
+						<h3 style="margin: 0 auto; text-align: center">Add Employee</h3>
+						<table align="center">
+
+							<tr>
+								<td>Name:</td>
+								<td><h:inputText size="10" value="#{employee.name}" /></td>
+							</tr>
+							<tr>
+								<td>id Number:</td>
+								<td><h:inputText size="10" value="#{employee.idNumber}" /></td>
+							</tr>
+							<tr>
+								<td>Password:</td>
+								<td><p:password required="true" id="password"
+										label="password" size="10" requiredMessage="Password Required"
+										validatorMessage="Invalid password -> 4 - 8 characters, mixture of upper/lower case letters and digits"
+										value="#{employee.password}" feedback="true">
+										<f:validateRegex
+											pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$" />
+									</p:password></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td><h:commandButton value="Add Employee"
+										action="#{registrationHandler.staffRegister}" /></td>
+							</tr>
+
+						</table>
+					</p:tab>
+
+				</p:tabView>
+			</div>
+		</h:form>
+	</div>
+</h:body>
+</html>
+
+
+
+
+
+

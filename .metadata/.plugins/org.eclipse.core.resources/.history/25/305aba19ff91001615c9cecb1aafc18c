@@ -1,0 +1,58 @@
+package agileDesignAndTesting;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import junitparams.JUnitParamsRunner;
+import static junitparams.JUnitParamsRunner.$;
+import junitparams.Parameters;
+
+
+
+
+@RunWith(JUnitParamsRunner.class)
+public class GunCommissionTest {
+	
+	static GunCommission g;
+	@Before
+	public void setup(){
+		g=new GunCommission();
+	}
+
+	@Parameters
+	public Object[] belowMinParameters() {
+		
+		
+		return $($(0,1,1,1),	//No Locks
+				$(1,0,1,1),	//No Stocks
+				$(1,1,0,1));	//No Barrels
+	}
+	@Parameters
+	public Object[] lockParameters() {
+		
+		
+		return $($(69,1,1,1,3.0),	//69 Locks
+				$(70,1,1,1,3.0),	//70 Locks
+				$(71,1,1,1,3.0));	//71 Locks
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	@Parameters(method="belowMinParameters")
+	public void belowMinTest(int l, int s, int b,int a) {
+		
+		g.calculateCommission(l, s, b, a);
+		
+	}
+	
+	@Test
+	@Parameters(method="lockParameters")
+	public void lockBoundaryTest(int l, int s, int b,int a,double answer) {
+		
+		assertEquals(answer, g.calculateCommission(l, s, b, a),0.00001);
+		
+	}
+
+}

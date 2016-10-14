@@ -1,0 +1,17 @@
+package agileDesignAndTesting;
+
+public class GunCommission {
+	
+	final double LOCK_VALUE=45.00;
+	final double STOCK_VALUE=30.00;
+	final double BARRELL_VALUE=25.00;
+	final double AMMO_VALUE=1.00;
+
+	public double calculateCommission(int lock,int stock,int barrell,int ammo){
+		
+		if(lock==0||stock==0||barrell==0){
+			throw new IllegalArgumentException();
+		}
+		
+	}
+}
